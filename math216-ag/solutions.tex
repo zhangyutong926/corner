@@ -1,0 +1,148 @@
+\documentclass[oneside, openany]{memoir}
+% hyperref must come first
+\usepackage[colorlinks]{hyperref}
+\usepackage{amsfonts}
+\usepackage[leqno]{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{colonequals}
+\usepackage{enumitem}
+\usepackage{mathabx}
+\usepackage{mathtools}
+\usepackage{thmtools}
+\usepackage{tikz}
+\usepackage[textsize=small]{todonotes}
+\usepackage{xspace}
+
+\usepackage{tgpagella}
+%\usepackage[sc]{mathpazo}
+\usepackage{euler}
+\usepackage{microtype}
+
+\chapterstyle{companion}
+
+\usetikzlibrary{arrows, matrix}
+
+\addtolength\headheight{12pt}
+\addtolength\parskip{.7ex}
+\setlength\parindent{0cm}
+
+\relpenalty=10000
+\binoppenalty=10000
+
+\setenumerate[1]{label = (\alph*), fullwidth}
+
+\swapnumbers
+\declaretheoremstyle[headfont = \scshape, bodyfont = \normalfont, qed = \qedsymbol]{foag}
+\declaretheorem[style = foag, numberwithin = section]{exercise}
+\renewcommand{\theexercise}{{\normalfont\textbf{\arabic{chapter}.\arabic{section}.\Alph{exercise}}}}
+
+\newcommand\foreign[1]{\emph{#1}}
+\newcommand\eg{\foreign{e.g.}}
+\newcommand\Eg{\foreign{E.g.}}
+\newcommand\ie{\foreign{i.e.}\xspace}
+\newcommand\Ie{\foreign{I.e.}}
+\newcommand\vs{\foreign{vs.~}}
+\newcommand\cf{\foreign{cf.\xspace}}
+\newcommand\resp{\foreign{resp.}}
+\newcommand\etc{\foreign{etc.}}
+
+\makeatletter
+\newcommand*\map@arrow[1][]{\csname#1rightarrow\endcsname{}}
+ 
+\newcommand*\function@textstyle[4][]{#2\colon#3\map@arrow[#1]#4}
+\newcommand*\function[4][]{%
+  \mathchoice
+  {\function@textstyle[long#1]{#2}{#3}{#4}}
+  {\function@textstyle[#1]{#2}{#3}{#4}}
+  {\function@textstyle[#1]{#2}{#3}{#4}}
+  {\function@textstyle[#1]{#2}{#3}{#4}}
+}
+\newcommand*\map@textstyle[6][]{#2\colon#3\rightarrow#4:#5\mapsto#6}
+\newcommand*\map[6][]{%
+  \mathchoice
+    {#2\colon\
+      \begin{array}{ccc}
+        #3&~\map@arrow[long#1]~&#4 \\
+        #5&~\longmapsto~&#6
+      \end{array}
+    }
+  {\map@textstyle[#1]{#2}{#3}{#4}{#5}{#6}}
+  {\map@textstyle[#1]{#2}{#3}{#4}{#5}{#6}}
+  {\map@textstyle[#1]{#2}{#3}{#4}{#5}{#6}}
+}
+\makeatother
+
+\newcommand\ball{\mathrm{B}}
+\newcommand\category[1]{\mathsf{#1}}
+\newcommand\dd{\;\!\mathrm{d}}
+\newcommand\forgetful{\mathrm{F}}
+\newcommand\groupification{\mathrm{H}}
+\newcommand\identity{\mathrm{id}}
+\newcommand\nil{\mathfrak{N}}
+\newcommand\projection{\pi}
+\newcommand\sections{\Gamma}
+
+\DeclareMathOperator\alg{alg}
+\DeclareMathOperator\coker{coker}
+\DeclareMathOperator\distinguished{D}
+\DeclareMathOperator\Hom{Hom}
+\DeclareMathOperator\homology{H}
+\DeclareMathOperator\ideal{I}
+\DeclareMathOperator\image{im}
+\DeclareMathOperator\Mor{Mor}
+\DeclareMathOperator\pre{pre}
+\DeclareMathOperator\res{res}
+\DeclareMathOperator\sh{sh}
+\DeclareMathOperator\SheafHom{\mathcal{H}om}
+\DeclareMathOperator\Spec{Spec}
+\DeclareMathOperator\Supp{Supp}
+\DeclareMathOperator\vanishing{V}
+
+\title{Solutions to Foundations of Algebraic Geometry}
+\author{Pieter Belmans}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+  These notes contain my solutions to Ravi Vakil's Foundations of Algebraic Geometry. For more information I refer you to the official website/blog (\url{http://math216.wordpress.com/}) and the page with the actual notes (\url{http://math.stanford.edu/~vakil/216blog/}).
+  
+  The solutions are provided as is. I don't claim these to be correct or well written (although I certainly intend them to be for my own benefit). If you encounter any flagrant mistakes, you can contact me by e-mail (\url{pieterbelmans@gmail.com}) or add a patch to the GitHub repository at \url{https://github.com/pbelmans/math216}. Please do so by the way, preferably by submitting patches.
+
+  As the notes are still being written when I started writing up these solutions and there may be changes to the numbering system upcoming: I am using the June 27 version. If I am still interested in these exercises when a final version is posted, I might edit in possible changes.
+\end{abstract}
+
+\clearpage
+
+\tableofcontents*
+
+\listoftodos
+
+
+\chapter{Introduction}
+There are no exercises in this chapter.
+
+
+\part{Preliminaries}
+
+\chapter{Some category theory}
+\input{ch2.tex}
+
+\chapter{Sheaves}
+\input{ch3.tex}
+
+
+\part{Schemes}
+
+\chapter{Toward affine schemes}
+\input{ch4.tex}
+
+\chapter{The structure sheaf and the definition of schemes in general}
+\input{ch5.tex}
+
+\chapter{Some properties of schemes}
+\input{ch6.tex}
+
+\end{document}

@@ -1,0 +1,646 @@
+---
+author:
+- Yutong Zhang
+title: 'Yutong''s Scratchpad'
+---
+
+**Munkres Topology Problem 17.19.** Let $A$ be a open subset of a
+topological space $X$. With $\text{Bd}\,A$ denoting the boundary of $A$,
+as in the problem defined as the subset $\text{Bd}\,A=A\cap X-A$. It is
+easy to see that $\overline{X-A}=X-\text{Int}\,A$ (because
+$\text{Int}\,A$ is the largest open set contained in $A$, and
+$X-\text{Int}\,A$ is the smallest closed set containing $X-A$), so that
+we have
+$$\text{Bd}\,A=\overline{A}\cap(X-\text{Int}\,A)=\overline{A}-\text{Int}\,A.$$
+
+The problem is solved by repeated use of the above equation.
+
+1.  With the above description of $\text{Bd}\,A$, it is clear that
+    $\text{Int}\,A$ is disjoint with $\text{Bd}\,A$. Furthermore, it
+    follows, from the inclusion $\text{Int}\,A\subset\overline{A}$, that
+    $\overline{A}=\text{Int}\,A\cup\text{Bd}\,A$.
+
+2.  It is true that $$\begin{aligned}
+    A\text{ is both open and closed}&\iff A=\text{Int}\,A=\overline{A}\\
+    &\iff\overline{A}\subset\text{Int}\,A\\
+    &\iff\text{Bd}\,A=\emptyset.\end{aligned}$$
+
+3.  It is true that
+    $$U\text{ is open}\iff\text{Int}\,U = U\iff\text{Bd}\,U=\overline{U}-U,$$
+    where the last implication follows from the fact that $U$ and
+    $\text{Int}\,U$ are subsets of $\overline{U}$.
+
+4.  If $U$ is open, $U=\text{Int}\,U\subset\text{Int}\,\overline{U}$ is
+    true, but the reverse inclusion does not necessarily apply. We say,
+    for example, $U=\mathbb{R}\mathbin{\backslash}\{0\}$ gets
+    $\text{Int}\,\overline{U}=\mathbb{R}$.
+
+**Exercise 7.16.** Suppose $\{f_n\}$ is an equicontinuous sequence of
+functions on a compact set $K$, and $\{f_n\}$ converges pointwise on
+$K$. Prove that $\{f_n\}$ converges uniformly on $K$.
+
+For given $\varepsilon$, choose $\delta$ such that $\abs{x-y}<\delta$
+implies $\abs{f_n(x)-f_n(y)}<\frac{\varepsilon}{3}$ where $n=1,2,\dots$
+(this is possible since $\{f_n\}$ is equicontinuous). Define a set
+$S=\{B_\delta(x)\,\big|x\in K\}$, then it forms an open cover of $K$. By
+the compactness of $K$, there exists a finite subcover
+$\{B_\delta(x_1),B_\delta(x_2),\dots,B_\delta(x_k)\}$. Now choose
+$N_i\in\mathbb{N}$ for each $x_i$ such that $m,n>N_i$ implies
+$\abs{f_m(x_i)-f_n(x_i)}<\frac{\varepsilon}{3}$ (this is possible since
+$\{f_n\}$ converges pointwise, which suggests that each
+$\{f_n(x)\}_{n=1}^\infty$ is a Cauchy sequence). For each $x\in K$,
+choose $x_i$ such that $x\in B_\delta(x_i)$, then if $m,n>\max_i N_i$,
+$$\abs{f_m(x)-f_n(x)}\leq\abs{f_m(x)-f_m(x_j)}+\abs{f_m(x_j)-f_n(x_j)}+\abs{f_n(x_j)-f_n(x)}<\frac{\varepsilon}{3}+\frac{\varepsilon}{3}+\frac{\varepsilon}{3}=\varepsilon.$$
+
+**Exercise 7.18.** Let $\{f_n\}$ be a uniformly bounded sequence of
+functions which are Riemann-integrable on $[a,b]$, and put
+$$F_n(x)=\int_a^xf_n(t)\operatorname{d}t\quad(a\leq x\leq b).$$ Prove
+that there exists a subsequence $\{F_{n_k}\}$ which converges uniformly
+on $[a,b]$.
+
+Since $\{f_n\}$ is uniformly bounded, there exists $M$ such that
+$\abs{f_n(x)}<M$ for all $x\in[a,b]$ and $n=1,2,\dots$. It is clear that
+$$\abs{F_n(x)}=\left|\int_a^xf_n(t)\operatorname{d}t\right|\leq\int_a^x\abs{f_n(t)}\operatorname{d}t\leq\int_a^xM\operatorname{d}t\leq\int_a^bM\operatorname{d}t=M(a-b),$$
+which suggests that $F_n(x)$ is uniformly bounded. Now for any
+$\varepsilon$, there exists $\delta=\frac{\varepsilon}{M}$, such that
+for any $x,y\in[a,b]$, $\left|x-y\right|<\delta$ implies
+$$\abs{F_n(x)-F_n(y)}=\left|\int_a^xf_n(t)\operatorname{d}t-\int_a^yf_n(t)\operatorname{d}t\right|=\left|\int_y^xf_n(t)\operatorname{d}t\right|\leq\left|\int_y^xM\operatorname{d}t\right|=\abs{x-y}M<\varepsilon,$$
+and this means that function family $\{F_n(x)\}$ is equicontinuous. The
+functions are clearly defined on a compact set, then by Arzelà-Ascoli
+Theorem (Theorem 7.25(b)), there exists a uniformly convergent
+subsequence of $\{F_n\}$.
+
+**第一题**
+
+1.  试叙述$\mathbb{R}^n$中的一个集合为连通集的定义：
+
+    拓扑空间$\mathbb{R}^n$的子集$A$被称为连通集当且仅当$A$不能被分割成两个在$A$的子空间拓扑上的非空不交开子集。
+
+2.  试证明$\mathbb{R}^n$中的集合$D$不是连通集当且仅当存在连续映射$f:D\to\{0,1\}$使得$f$为一满射：
+
+    首先证明$(\impliedby)$方向。对$D$使用$X=\mathbb{R}^n$的通常拓扑在$D$上的子空间拓扑，对$\{0,1\}$使用离散拓扑。因为$f$为连续映射，开集$\{0\}$的原像是开集，又因$f$是满射，$f^{-1}(\{0\})\neq\emptyset$；同样的性质对$\{1\}$也成立。由于$f$是映射，$\lnot\exists x\in D.\, f(x)=0\land f(x)=1$，换句话说，$f^{-1}(\{0\})\cap f^{-1}(\{1\})=\emptyset$。$D$的子集$f^{-1}(\{0\})$和$f^{-1}(\{1\})$分割集合$D$、是开集、非空、不交，由此说明$D$不是一个连通集。
+
+    再证明$(\implies)$方向。使用的拓扑与前文相同。$D$不是连通集意味着存在两个非空不交开集$A,B\subset D$使得$D=A\cup B$。定义映射
+    $$f(x)=\begin{cases}
+    0\quad x\in A\\
+    1\quad x\in B
+    \end{cases}，$$
+    明显$\text{Dom}(f)=D$；由于$A,B\neq\emptyset$，$\text{Range}(f)=\{0,1\}$，即$f$是满射；所有开集的原像
+    $$\begin{aligned}
+    f^{-1}(\{0\})&=A\\
+    f^{-1}(\{1\})&=B\\
+    f^{-1}(\emptyset)&=\emptyset\\
+    f^{-1}(\{0,1\})&=D\end{aligned}$$
+    均为开集，即$f$连续，$f$即为所需函数。
+
+3.  设$E\subset\mathbb{R}^n$为一连通集，试证明其闭包$\overline{E}$也是连通集：
+
+    证明此命题的逆否命题，即证明若$\overline{E}$不是连通集，则$E$不是连通集。根据前提，存在连通不交开集（相对于$\overline{E}$的子空间拓扑）$A,B\subset\overline{E}$使得$\overline{E}=A\cup B$。对于任意$x\in A$，$x\in E$或$x$是$E$的极限点。记$S_A=\{x\in E\,\big|\,x\in A\}$，则$S_A\neq\emptyset$，因为若$x\in A$是$E$的极限点，开集$A$包括$x$，则存在$y\in A$使得$y\in E$；同理可构造$S_B$。此时记$S_A=A\cap E$，$S_B=B\cap E$，即$S_A,S_B$为$E$的子空间拓扑中的开集；根据构造，$S_A,S_B$不交且非空，由此证明了$E$不是连通集。
+
+**第四题**
+
+设$f:\mathbb{R}^2\to\mathbb{R}$为一连续可微函数。试证存在连续可微的单射$\phi:(0,1)\to\mathbb{R}^2$使得$f\circ\phi$为$(0,1)$上的常值函数。
+
+**第五题**
+
+给定$\mathbb{R}^n$中的有界开集$\Omega$及其紧致子集$D$。设$f:\Omega\to\mathbb{R}^n$为一连续可微映射，$f$在$D$上的限制为一单射并且对任意$x\in D$有$\det(f'(x))\neq0$。
+
+1.  证明$d(D,\partial\Omega)>0$：
+
+    首先证明$\Omega$与$\partial\Omega$不交，即与$D$不交。记拓扑空间$\mathbb{R}^n=X$根据边界的定义，$\partial\Omega=\overline{\Omega}\cap\overline{(X\mathbin{\backslash}\Omega)}$，即$\partial\Omega\subset\overline{(X\mathbin{\backslash}\Omega)}$。因$\Omega$是开集，其补集$X\mathbin{\backslash}\Omega$为闭集，根据闭包定义，$\overline{X\mathbin{\backslash}\Omega}=X\mathbin{\backslash}\Omega$。因此，$\partial\Omega\subset X\mathbin{\backslash}\Omega$，即$\partial\Omega\cap\Omega=\emptyset$。
+
+    假设$d(D,\partial\Omega)=0$，即$\inf\{d(x,y)\,\big|\,x\in D,y\in\partial\Omega\}=0$，即对于任意$\varepsilon>0$，存在$x\in D,\,y\in\partial\Omega$使得$\abs{x-y}<\varepsilon$，其中$y\notin D$。定义集合$S_{\frac{1}{n}}=\{x\in D\,\big|\,d(x,\partial\Omega)>\frac{1}{n}\}$，根据先前论证，若$\frac{1}{m}<\frac{1}{n}$，$S_{\frac{1}{n}}\subset S_{\frac{1}{m}}$，且$\bigcup_{n\in\mathbb{Z}^+}S_{\frac{1}{n}}=D$。此时集合族$S=\{S_{\frac{1}{n}}\}_{n\in\mathbb{Z}^+}$构成集合$D$的一个开覆盖，但这个开覆盖没有有限子覆盖，因为对于$S$的任何有限子集$S'=\{S_{\frac{1}{n_k}}\}_{k=1}^N$，都可找到一个$x\in D$使得$d(x,\partial\Omega)<\min\{\frac{1}{n_k}\}_{k=1}^N$，即$x\notin\bigcup_{k=1}^N S_{\frac{1}{n_k}}$，则$S‘$不是$D$的有限子覆盖，由此与前提$D$的紧致性矛盾。
+
+**Theorem (Lagrange's Mean Value Theorem).** For any real function
+$f:I\to\mathbb{R}$ that is continuous on $[a,b]\subset I$ and
+differentiable on $(a,b)$, there exists $\xi\in(a,b)$ such that
+$$f'(\xi)=\frac{f(b)-f(a)}{b-a}.$$
+
+**Question.** For any function $f$ satisfying the premises of the
+Lagrange's Mean Value Theorem, namely continuous on $[a,b]$ and
+differentiable on $(a,b)$, show that if $f(a)=f(b)=0$, then there exists
+$\xi\in(a,b)$ such that $$f'(\xi)+f(\xi)=0.$$
+
+**Solution.** Apply the Lagrange's Mean Value Theorem on function
+$f(x)e^x$, then there exists $\xi\in(a,b)$ such that
+$$f'(\xi)e^\xi+f(\xi)e^\xi=\frac{f(b)e^b-f(a)e^a}{b-a}.$$ Since
+$f(a)=f(b)=0$, $$f'(\xi)e^\xi+f(\xi)e^\xi=0.$$ Since $e^\xi\neq0$ for
+all real $\xi$, $$f'(\xi)+f(\xi)=0.$$
+
+**Question (Integrability and Integral of Thomae Function).** Define
+function $f:[0,1]\to\mathbb{R}$ as $$\begin{aligned}
+f(x)=\begin{dcases}
+\frac{1}{q}&x=\frac{p}{q},\,p,q\in\mathbb{N},\,(p,q)=1\\
+0&x\in\mathbb{R}\mathbin{\backslash}\mathbb{Q}
+\end{dcases},\end{aligned}$$ decide whether $f$ is Darboux-integrable;
+if so, prove it so and calculate its integral; if not, prove it
+otherwise.
+
+**Solution.** It is obvious that $L(f,\Delta)=0$ for any partition
+$\Delta$, since any closed interval contains both rational and
+irrational number, thus $\displaystyle\sup_\Delta L(f,\Delta)=0$. It is
+also clear that for any $\Delta$, $U(f,\Delta)>0$, again, since rational
+numbers exists in any closed interval.
+
+For $\varepsilon>0$, choose $m$ such that
+$\frac{1}{m}<\frac{\varepsilon}{2}$, then for any partition
+$\Delta_1=\{x_0,x_1,\dots,x_k\}$ such that each rational number
+$\frac{1}{n}$ where $n<m$ is contained in exactly one subinterval, i.e.
+not on the endpoint of any subinterval, each subinterval $[x_{i-1},x_i]$
+of partition containing $\frac{1}{n}$ where $n\geq m$ and no rational
+number with denominator less than $m$ will have a supremum less than
+$\frac{1}{m}$. Denote the set of indices of the right endpoints of these
+subintervals as $S_1$, and sum them up,
+$$\sum_{i\in S_1}\sup f(x)\cdot(x_i-x_{x-1})<\sum_{i\in S_1}\frac{1}{m}\cdot(x_i-x_{x-1})<\sum_{i=1}^k\frac{1}{m}\cdot(x_i-x_{x-1})=\frac{1}{m}=\frac{\varepsilon}{2}.$$
+
+For those subintervals that contains the rest of the rational numbers,
+i.e. those with denominator less than $m$, choose partition $\Delta_2$
+such that the length (right endpoint minus left endpoint) of each
+subinterval containing these rational numbers is less than
+$\displaystyle l=\frac{\varepsilon}{2\cdot\frac{(m-1)^2}{2}}$. Denote
+the set of indices of the right endpoints of these subintervals as
+$S_2$, and observe the cardinality of $S_2$. List possible fractions
+$\frac{p}{q}$ as
+$$\frac{1}{1},\frac{1}{2},\frac{2}{2},\cdots,\frac{1}{m-1},\frac{2}{m-1},\cdots,\frac{m-1}{m-1},$$
+it is clear there are duplication, and thus
+$|S_2|\leq\frac{(m-1)^2}{2}$. Sum them up,
+$$\sum_{i\in S_2}\sup f(x)\cdot(x_i-x_{x-1})<\sum_{i\in S_2}\sup f(x)\cdot l\leq\sum_{i\in S_2}l=|S_2|\cdot l\leq\frac{(m-1)^2}{2}\cdot\frac{\varepsilon}{2\cdot\frac{(m-1)^2}{2}}=\frac{\varepsilon}{2}.$$
+
+Now find the common partition of the two previously mentioned
+partitions, i.e. $\Delta=\Delta_1\cup\Delta_2$, then
+$$U(f,\Delta)=\sum_{i\in S_1}\sup f(x)\cdot(x_i-x_{x-1})+\sum_{i\in S_2}\sup f(x)\cdot(x_i-x_{x-1})<\varepsilon.$$
+And this shows that $\displaystyle\inf_\Delta U(f,\Delta)=0$, which
+decides that $f$ is Darboux-integrable with integral $0$.
+
+**Lemma.** For matrix $A=(a_{i,j})_{n\times n}$,
+$B=(b_{i,j})_{n\times n}$, $AB=c_{i,j}$ satisfying properties
+$$a_{i,j}=0\quad\text{for}\quad j<i+r\quad(r\geq1)$$ and $$\label{2}
+b_{i,j}=0\quad\text{for}\quad j<i+1,$$ it is guaranteed that for
+$j<i+r+1$ $$c_{i,j}=0.$$
+
+For $j<i+r$, by (1) we have $$\label{3}
+\sum_{k=1}^na_{i,k}b_{k,j}=0\cdot b_{k,j}=0.$$
+
+For $j=i+r$, perform case analysis on $k$. If $k<i+r$, by (1) we have
+$$\label{4}
+\sum_{k=1}^{i+r-1}a_{ik}b_{k,j}=0\cdot b_{k,j}=0.$$
+
+If $k\geq i+r$, then $j=i+r<i+r+1=k+1$, thus by (2) we have $$\label{5}
+\sum_{k=i+r}^{n}a_{ik}b_{k,j}=a_{i,k}\cdot0=0.$$
+
+Combine (4) and (5), we have for $j=i+r$, $c_{i,j}=0$. Combine this with
+(3), we have for $j<i+r+1$, $c_{i,j}=0$, as desired.
+
+**Theorem.** For square strictly upper triangular matrix $S$,
+$(S^k)_{i,j}=0$ for $j<i+k$ ($1\geq k\geq n$).
+
+Prove by induction on $k$. From the definition of strictly upper
+triangular matrix and the previous proven lemma, base case $k=1$ holds.
+For the induction case, the induction hypothesis is that $(S^k)_{i,j}=0$
+for $j<i+k$. Write $S^{k+1}=S^k\cdot S$, which again satisfies the
+premises of the lemma, thus $(S^{k+1})_{i,j}=0$ for $j<i+k+1$
+
+**Corollary.** For $n\times n$ strictly upper triangular matrix $S$,
+$S^n=(0)_{n\times n}$.
+
+By the previous theorem, $(S^n)_{i,j}=0$ for $j<i+n$, thus
+$(S^n)_{i,j}=0$ for all $1\geq i,j\geq n$.
+
+**Question from Kristall.** Let $A$ be an $n\times n$ square matrix and
+suppose $x$ and $y$ are non-zero $n$-vectors satisfying $Ax = x$ and
+$Ay = \gamma y$, where $\gamma\neq1$. Show that $\{x, y\}$ is a linearly
+independent set in $\mathbb{R}^n$.
+
+**Solution.** Suppose the contrary, i.e. $\{x,y\}$ is linearly dependent
+in $\mathbb{R}^n$, which is to say that there exists $\alpha_1,\alpha_2$
+such that $$\alpha_1x+\alpha_2y=0.$$ Then by the property of the
+underlying field $\mathbb{R}$ of the vector space $\mathbb{R}^n$,
+$$y=-\frac{\alpha_1}{\alpha_2}x.$$ By the premise $Ay=\gamma y$,
+$$A\left(-\frac{\alpha_1}{\alpha_2}x\right)=\gamma\left(-\frac{\alpha_1}{\alpha_2}x\right).$$
+By property of linear transformation,
+$$\left(-\frac{\alpha_1}{\alpha_2}\right)(Ax)=\left(-\frac{\alpha_1}{\alpha_2}\right)\gamma x.$$
+By the cancellative property of $\mathbb{R}$, $$Ax=\gamma x,$$ which,
+together with the premise $\gamma\neq1$, contradicts the premise $Ax=x$,
+and this establishes the proposition.
+
+**Lemma.** For a sequence $\{a_n\}$, if
+$$\lim_{k\to\infty}\frac{1}{k}\sum_{n=1}^ka_n=A,$$ then
+$\displaystyle\lim_{n\to\infty}a_n=A$.
+
+**Proof to Lemma.** By the definition of limit, the premise can be
+explicitly written as
+$$\forall\varepsilon>0.\,\exists K\in\mathbb{N}.\,\forall k>K.\,\left|\frac{1}{k}\sum_{n=1}^{k}a_n-A\right|<\varepsilon.$$
+Expand the absolute value and move terms, we have
+$$kA-k\varepsilon<\sum_{n=1}^ka_n<kA+k\varepsilon;$$ since $k$ can be
+any number greater than $K$, the condition still holds for $k=k+1$, i.e.
+$$(k+1)A-(k+1)\varepsilon<\sum_{n=1}^{k+1}a_n<(k+1)A+(k+1)\varepsilon.$$
+Subtracting the $k$ case from the $k+1$ case, we have
+$$A-\varepsilon<a_{k+1}<A+\varepsilon,$$ which in turn gives the desired
+conclusion, i.e. $|a_{k+1}-A|<\varepsilon$.
+
+**Lemma.** For continuously differentiable function
+$f:[a,b]\to\mathbb{R}$, there exists $\xi\in(a,b)$ such that
+$$\int_a^bf(x)\operatorname{d}x=f(\xi)(b-a).$$
+
+**Proof to Lemma.** Apply Lagrange's Mean Value Theorem to the function
+$F(x)$ where $F'(x)=f(x)$, then the result is obvious.
+
+**Proposition.** For continuous function $f$ such that
+$\displaystyle\lim_{a\to\infty}I_a=A$ where
+$$I_a=\frac{1}{a}\int_0^af(x)\operatorname{d}x,$$ there exists a
+strictly monotonically increasing sequence $\{x_n\}$ such that
+$\displaystyle\lim_{n\to\infty}x_n=\infty$ and
+$\displaystyle\lim_{n\to\infty}f(x_n)=A$.
+
+**Proof to Proposition.** Construct the sequence $\{x_n\}$ with
+following step. First, for $a\in\mathbb{N}$, write
+$$I_a=\frac{1}{a}\sum_{n=1}^a\int_{n-1}^nf(x)\operatorname{d}x.$$ Apply
+the previous lemma, we have that
+$$\lim_{n\to\infty}\int_{n-1}^nf(x)\operatorname{d}x=A.$$ The previous
+lemma gives rise to the existence of the desired sequence.
+
+**Ben Andrews Lecture on Differential Geometry - Exercise 1.1.1**
+
+**Exercise.** Define $\mathbb{C}P^n$ to be
+$(\mathbb{C}^{n+1}\mathbin{\backslash}\{0\})/\sim$, where $x\sim y$ if
+and only if $x=\lambda y$ for some
+$\lambda\in\mathbb{C}\mathbin{\backslash}\{0\}$. Find a differentiable
+atlas which makes $\mathbb{C}P^n$ a $2n$-dimensional smooth manifold.
+
+**Solution.** Inspired by observing the case for the real projective
+plane $\mathbb{R}P^n$, we proceed with the following construction. First
+define the homeomorphisms $f_i$ from a subset of the complex projective
+hyperplane to the complex Euclidean space of dimension $n$ as
+$$\begin{aligned}
+f_i:U_i=\{x\,\big|\,x\in\mathbb{C}P^n,x_i\neq0\}\subset\mathbb{C}P^n&\to\mathbb{C}^n\\\lbrack x\rbrack&\mapsto\frac{1}{x_i}\langle x_1,\dots,\widehat{x_i},\dots,x_{n+1}\rangle,\end{aligned}$$
+which are well-defined since under a change of representative, i.e. for
+any $y=\lambda x$,
+$$\frac{1}{y_i}\cdot y=\frac{1}{\lambda x_i}\cdot\lambda x=\frac{1}{x_i}\cdot x.$$
+
+We claim that
+$\{(U_i,\mathbb{1}^{n\to2n}_{\mathbb{C}\to\mathbb{R}}\circ f_i)\}_{i=1,\dots,n+1}$
+is an atlas contained in the differentiable structure of
+$\mathbb{C}P^n$; it's easy to verify that is does cover $\mathbb{C}P^n$,
+and now we will verify other properties.
+
+For any $i$, we prove the injectivity of $f_i$ as follows. A complex
+vector $\tilde{x}\in\mathbb{C}^n$ to differ from
+$\tilde{y}\in\mathbb{C}^n$, it must differ therefrom in at least one
+component; assume those components are $\tilde{x}_j\neq\tilde{y}_j$,
+then for any representative
+$x=\lambda_1\langle\tilde{x}_1,\dots,1,\dots,\tilde{x}_{n+1}\rangle$
+(the $1$ is at the $i$-th position) of $f_i^{-1}(\tilde{x})$ and any
+representative
+$y=\lambda_2\langle1,\tilde{y}_1,\dots,\tilde{y}_{n+1}\rangle$ of
+$f_i^{-1}(y')$, for any $\lambda\in\mathbb{C}\mathbin{\backslash}\{0\}$,
+in order for the $j$-th component ($j=1,\dots,i-1,i+1,\dots,n$) of $x$
+and $y$ to agree, one must have
+$\lambda=\frac{\lambda_1x_i}{\lambda_2y_i}$, and for the $i$-th
+component to agree, $\lambda=\frac{\lambda_1}{\lambda_2}$, and thus
+$x_i=y_i$, which contradicts the premise that $x_i\neq y_i$ and disprove
+the existence of such $\lambda$ and in turn gives
+$f_i^{-1}(\tilde{x})\neq f_i^{-1}(\tilde{y})$ and thus the injectivity.
+
+Surjectivity is trivial since for any
+$x=\langle x_1,\dots,x_n\rangle\in\mathbb{C}^n$, we have
+$f_i(\lbrack\langle x_1,\dots,1,\dots,x_n\rangle\rbrack)=x$.
+
+For continuity, we immediately notice that the function
+$$g_i:\langle x_1,\dots,x_i,\dots,x_{n+1}\rangle\mapsto\frac{1}{x_i}\langle x_1,\dots,\widehat{x_i},\dots,x_{n+1}\rangle$$
+is continuous since $x_i\neq0$. But $f_i$ is just the quotient induced
+map $\overline{g}_i$ such that $\overline{g}_i\circ\pi=g_i$ and is
+continuous since $\pi$ and $g_i$ are both continuous. For inverse
+continuity, we observe that $f^{-1}_i=\pi\circ h_i$ where
+$$h_i:\langle x_1,\dots,x_n\rangle\mapsto\langle x_1,\dots,x_{i-1},1,x_{i},\dots,x_n\rangle$$
+which is continuous when the codomain is
+$\{x\in\mathbb{C}^n\,\big|\,x_i=1\}$ with its subspace topology; and
+this proves the inverse continuity. Since
+$\mathbb{1}^{n\to2n}_{\mathbb{C}\to\mathbb{R}}$ is a homeomorphism, we
+have thus shown that
+$\mathbb{1}^{n\to2n}_{\mathbb{C}\to\mathbb{R}}\circ f_i$ are
+homeomorphisms.
+
+To prove that the aforementioned atlas is a part of the differentiable
+structure on $\mathbb{C}P^n$, we need to show the transition maps
+$$\begin{aligned}
+\varphi^i_j=(\mathbb{1}^{n\to2n}_{\mathbb{C}\to\mathbb{R}}\circ f_j)\circ(f^{-1}_i\circ\mathbb{1}^{2n\to n}_{\mathbb{R}\to\mathbb{C}})\end{aligned}$$
+are smooth. By basic complex analysis, the components of this function
+is
+$$\frac{x_kx_j+x_{k+1}x_{j+1}}{x_j^2+x_{j+1}^2},\frac{x_{k+1}x_j-x_kx_{j+1}}{x_j^2+x_{j+1}^2}$$
+for $k=1,\dots,n$; there are two groups of $1,0$, one of which (the one
+at position $2j$ and $2j+1$) is to be omitted; and this leaves us with
+exactly $2n$ components. These components are all smooth since
+$(x_j,x_{j+1})\neq(0,0)$; we have proven the smoothness of transition
+maps, and thus the atlas being contained in the differentiable
+structure.
+
+**UIUC Math 525 Spring 2018 Homework 1**
+
+**Problem 1.** Let $X$ and $Y$ be topological spaces. Suppose $A_1$ and
+$A_2$ are closed subsets of $X$ such that $X=A_1\cap A_2$. If
+$f_i:A_i\to Y$ are continuous functions that agree on $A_1\cap A_2$,
+show that the function
+$$f:X\to Y,\quad f(x)=\begin{cases}f_1(x)\quad\text{if }x\in A_1\\f_2(x)\quad\text{if }x\in A_2\end{cases}$$
+is continuous.
+
+**Solution.** \[This is sometimes referred to as the pasting lemma, and
+it's of theoretical significance in the studies of algebraic topology.\]
+For closed set $U$ in $Y$, its preimages $f_1^{-1}(U)$ and $f_2^{-1}(U)$
+are closed respectively in $A_1$ and $A_2$ since these functions are
+continuous; and they are closed in $X$ since $A_1$ and $A_2$ are closed
+in $X$. By basic set theory, $f^{-1}(U)=f_1^{-1}(U)\cup f_2^{-1}(U)$,
+and the union of two closed sets are closed, thus the function $f$ is
+continuous.
+
+**Problem 2.** Show that a space $X$ is contractible iff every map
+$f:X\to Y$, for arbitrary $Y$, is nullhomotopic. Similarly, show $X$ is
+contractible iff every map $f:Y\to X$ is nullhomotopic.
+
+**Solution.** $(\impliedby)$ Take the map $f:X\to X$; by premise it's
+nullhomotopic, i.e. there exists a homotopy $f_t(x)$ from $\mathbb{1}_X$
+to constant map $x\mapsto x_0$; this implies precisely that $X$ is
+contractible. $(\implies)$ If $X$ is contractible, then there exists a
+homotopy between the identity map $\mathbb{1}_X$ and a constant map
+$x\mapsto x_0$; denote it $A_t(x)$. For any function $f:X\to Y$, define
+the homotopy $B_t(x)=f(A_t(x))$, then it is a homotopy between $f$ and
+the constant map $x\mapsto f(x_0)$. The other statement can be proven
+similarly.
+
+**Problem 3.** Show that $f:X\to Y$ is a homotopy equivalence if there
+exist maps $g,h:Y\to X$ such that $f\circ g\simeq\mathbb{1}_Y$ and
+$h\circ f\simeq\mathbb{1}_X$. More generally, show that $f:X\to Y$ is a
+homotopy equivalence if there exist $g,h:Y\to X$ such that $f\circ g$
+and $h\circ f$ are homotopy equivalences.
+
+**Solution.** Define function $\phi=h\circ f\circ g$. Denote the
+homotopy $f\circ g\simeq\mathbb{1}_Y$ as $A_t(y)$ and
+$h\circ f\simeq\mathbb{1}_X$ as $B_t(x)$. For the latter statement, if
+there exists $\alpha:Y\to Y$ and $\beta:X\to X$ such that
+$\alpha\circ f\circ g\simeq\mathbb{1}_Y\simeq f\circ g\circ\alpha$ and
+$\beta\circ h\circ f\simeq\mathbb{1}_X\simeq h\circ f\circ\beta$, then
+$g\circ\alpha$ would be the new $g$ and $\beta\circ h$ the new $h$ in
+the previous statement, thus the latter statement is a corollary.
+
+**Problem 4.** Show that the number of path components is a homotopy
+invariant.
+
+**Solution.** Let $X$ and $Y$ be two topological spaces, and $f:X\to Y$
+and $g:Y\to X$ two maps such that $f\circ g\simeq\mathbb{1}_X$ with
+homotopy $A_t(x)$ and $g\circ f\simeq\mathbb{1}_Y$ with $B_t(y)$. We now
+define the bijection between the path components of $X$ and of $Y$ by
+$h([x])=[f(x)]$; this is well-defined since under a change of
+representative $x\sim y$, i.e. a path $p$ from $x$ to $y$, for we have
+path $f\circ p$ in $Y$ connecting $f(x)$ and $f(y)$. We claim that $h$
+is injective, for if $h([x])=h([y])$, that is, $f(x)$ is connected with
+$f(y)$ by path $q$, then
+$$(t\mapsto B_{(1-t)}(x))*(g\circ q)*(t\mapsto B_t(y))$$ is a path from
+$x$ through $(g\circ f)(x)$ then $(g\circ f)(y)$ to $y$ thus asserting
+$x\sim y$ thus $[x]=[y]$. We then claim $h$ is surjective. For a path
+component $[z]$ in $Y$, that $[z]=[f(g(z))]$ is proven by constructing
+the path $r(t)=A_t(z)$, and $[z]=h([g(z)])=[f(g(z))]$, thus the
+surjectivity.
+
+**Problem 5.** Show that for a space $X$, the following three conditions
+are equivalent:
+
+1.  Every map $\mathbb{S}^1\to X$ \[is\] homotopic to a constant map,
+    with image a point.
+
+2.  Every map $\mathbb{S}^1\to X$ extends to a map $\mathbb{D}^2\to X$.
+
+3.  $\pi_1(X,x_0)=0$ for all $x_0\in X$.
+
+Deduce that a space $X$ is simply connected iff all maps
+$\mathbb{S}^1\to X$ are homotopic.
+
+**Solution.** (a)$\implies$(b) Parameterize the $1$-sphere by angle
+$\theta$. Denote the homotopy between the map and constant map as
+$f_t(\theta)$. This map extends to the map $$\begin{aligned}
+g:\mathbb{D}^2&\to X\\(r,\theta)&\mapsto f_{1-t}(\theta),\end{aligned}$$
+as desired. (b)$\implies$(c) For any given loop $f$ in $X$ starting and
+ending at $x_0$, we prove that it is path homotopic to the constant map
+to $x_0$. Define $g:\mathbb{S}^1\to X$ by
+$\theta\to f(\frac{\theta}{2\pi})$. Then by (b) there exists map
+$h:\mathbb{D}^2\to X$ that extends continuously the map $g$. Define the
+coordinate transformation map $$\begin{aligned}
+\phi:\mathbb{R}^2&\to\mathbb{D}^2\\(x,y)&\mapsto\left(\sqrt{x^2+y^2},\begin{dcases}\lim_{x'\to x^+}\arctan\left(\frac{y}{x'}\right)\text{ if }y\geq0\\\lim_{x'\to x^-}\arctan\left(\frac{y}{x'}\right)\text{ if }y<0\end{dcases}\right).\end{aligned}$$
+Define a map that shrinks the circle to a point at $(1,0)$ continuously
+as $$\begin{aligned}
+\psi:[0,1]\times\mathbb{S}^1&\to\mathbb{R}^2\\(t,\theta)&\mapsto((1-t)\cos\theta+t,(1-t)\sin\theta).\end{aligned}$$
+Now define the desired homotopy $A_t(s)=h(\phi(\psi_t(2\pi s)))$.
+(c)$\implies$(a) Trivial by definition.
+
+**Problem 6.** Given a space $X$, a path connected subspace $A$, and a
+point $x_0\in A$, show that the map $\pi_1(A,x_0)\to\pi_1(X,x_0)$
+induced by the inclusion $A\hookrightarrow X$ is surjective iff every
+path in $X$ with endpoints in $A$ is homotopic, relative to its
+endpoints, to a path in $A$.
+
+**Solution.** $(\impliedby)$ Denote the map as $f$. For
+$[x]\in\pi_1(X,x_0)$, it is a path in $X$ with endpoints in $A$, so it
+is path homotopic to a path $a$ in $A$, and since $x$ is a loop, so is
+$a$, thus $[a]\in\pi_1(A,x_0)$, and by the aforementioned path homotopy,
+$[a]=[x]$, so that $f([a])=[a]=[x]\in\pi_1(X,x_0)$. $(\implies)$ Suppose
+there exists a path $p$ in $X$ with endpoints $a,b$ in $A$ that is not
+path homotopic to any path in $A$. Since $A$ is path connected, there
+exists a path $q$ from $b$ to $a$ in $A$. We claim that
+$[p*q]\in\pi_1(X,x_0)$ and $[p*q]\notin\pi_1(A,x_0)$, i.e. $f$ defined
+above is not surjective. The former statement is trivial; the latter
+statement is true, for if not, that is $p*q\simeq a$ for some path $a$
+in $A$, then $p\simeq a*\overline{q}$ would be a path in $A$,
+contradicting the premise.
+
+**New Mathematics, Gaokao, and the School of Bourbaki**
+
+**1 (Set Theory and Function).**
+
+-   $f(f^{-1}(Y))\subset Y$ (equality when $f$ is surjective)
+
+-   $X\subset f^{-1}(f(X))$ (equality when $f$ is injective)
+
+**2 (Set Theory and Basic Topology).** For $f:A\times B\to C$, define
+$f_{1,a_0}(b)=f(a_0,b)$ and $f_{2,b_0}(a)=f(a,b_0)$. For $V\subset C$
+and $(a_0,b_0)\in V$,
+
+-   $(\checkmark)$
+    $\{(a_0,b)\,|\,b\in f_{1,a_0}^{-1}(V)\}\cup\{(a,b_0)\,|\,a\in f_{2,b_0}^{-1}(V)\}\subset f^{-1}(V)$
+
+-   $(\times)$
+    $\{(a_0,b)\,|\,b\in f_{1,a_0}^{-1}(V)\}\cup\{(a,b_0)\,|\,a\in f_{2,b_0}^{-1}(V)\}\underset{\text{open}}{\subset}A\times B$
+
+-   $(\checkmark)$
+    $f_{2,b_0}^{-1}(V)\times f_{1,a_0}^{-1}(V)\underset{\text{open}}{\subset}A\times B$
+
+-   $(\times)$
+    $f_{2,b_0}^{-1}(V)\times f_{1,a_0}^{-1}(V)\subset f^{-1}(V)$
+
+**3 (Trigonometry and Calculus).** Every map $\mathbb{S}^1\to X$ extends
+to a map $\mathbb{D}^2\to X$ $\implies$ $\pi_1(X,x_0)=0$ for all
+$x_0\in X$. \[The concept of fundamental group of a topological space
+can be replaced by something more elementary, or the basic idea of
+homotopy can be introduce on the go.\] $$\begin{aligned}
+\phi:\mathbb{R}^2&\to\mathbb{D}^2\\(x,y)&\mapsto\left(\sqrt{x^2+y^2},\begin{dcases}\lim_{x'\to x^+}\arctan\left(\frac{y}{x'}\right)\text{ if }y\geq0\\\lim_{x'\to x^-}\arctan\left(\frac{y}{x'}\right)\text{ if }y<0\end{dcases}\right).\end{aligned}$$
+$$\begin{aligned}
+\psi:[0,1]\times\mathbb{S}^1&\to\mathbb{R}^2\\(t,\theta)&\mapsto((1-t)\cos\theta+t,(1-t)\sin\theta).\end{aligned}$$
+$$A_t(s)=h(\phi(\psi_t(2\pi s)))$$
+
+**4 (Trigonometry or Calculus).** Determine the area of the intersection
+of a unit circle and the area swiped by a vertical line from $x=-1$ to
+$x=a$ where $-1\leq a\leq 1$, i.e. determine the area surrounded by the
+circle and the chord.
+
+**5 (Algebra).** A certain grassroots mathematician claims that $0$ can
+be a divider. Show them that there exists not any field with distinct
+additive and multiplicative identity that includes the inverse of the
+additive identity.
+
+https://www.zhihu.com/question/317892880/answer/638183808
+
+**6 (Sequence and Series).**
+$\displaystyle\sum_{k=0}^\infty \frac{k}{2^k}$
+
+![image](Capture){width="0.9\\linewidth"}
+
+**7 (Calculus).**
+
+![image](photo_2019-06-01_00-00-41){width="0.95\\linewidth"}
+
+**Hachette Aleph0 CDE Translation**
+
+**NEW PROGRAM**\
+Edition of May 14, 1971
+
+**SECTION A**
+
+OBLIGATORY SECTION
+
+**Exponential and Logarithmic Functions**
+
+**I.** Review of the notion related to continuity, limit, derivative,
+and real functions with one real variable. Derivative of composite
+functions.
+
+One will admit without proof that if one numeric function is
+differentiable on an interval, and if its derivative is positive or zero
+on that interval, then it's growing in the broad sense on that interval,
+and that the image of a interval is an interval.
+
+Geometric interpretation of the derivative.
+
+Application on the study and the graphic representation of some simple
+functions (only on the numeric examples).
+
+Function $x\mapsto x^n\,(n\in\mathbb{Z})$.
+
+(One will not demand the candidates of baccalaureate to demonstrate
+directly the continuity of a function, nor to find directly a limit; one
+limit themselves only to utilize the general theorems and statements
+without proofs, and to talk about limits of sums, products, and
+quotients of functions).
+
+**II.1.** Examples, taken from social and natural sciences, of functions
+whose increment on the whole interval $[x,x+l]$, for a given $l$, is
+proportional to the value of the function at the point $x$.
+
+**2.** Study of sequences $n\mapsto f(n)$ such as $f(n+1)-f(n)=kf(n)$,
+$n\in\mathbb{N}$, calculation of $f(n)$, monotonicity of $f(n)$; limit
+of $f$ when $n$ tends to $+\infty$.
+
+**3.** One will admit the existence, for all strictly positive real $a$,
+of a unique continuous and differentiable function $f_a$ defined on
+$\mathbb{R}$, such that for all tuple of real numbers $(x,y)$ one has
+$f_a(x+y)=f_a(x)f_a(y)$ and $f_a(1)=a$. Calculation of $f_a(x)$ for
+$x\in\mathbb{Z}$ and $x\in\mathbb{Q}$. (One can admit the existence of
+an n-th root for all positive real numbers and all positive integer
+$n$).\
+Calculation of $f_a'(x)$ according to $f'_a(0)$.\
+Notation $a^x$ (exponential function of base $a$), properties of the
+exponents: $(a^b)^c=a^{bc}$, $(ab)^c=a^cb^c$. The sign and monotonicity
+of $f_a$, the limit of $f_a$ pour $x$ tends to $\pm\infty$
+
+**Beijing LGBT Center Presentation - Algebraic Topology and its
+Application in Modern Algebra**
+
+**Admitted Fact (Fundamental Group of Circle).**
+$$\pi_1(S^1)\simeq\mathbb{Z}$$
+
+**Theorem (Fundamental Theorem of Algebra, Topological Approach).**
+Every non-constant polynomial with coefficient in $\mathbb{C}$ has a
+root in $\mathbb{C}$.
+
+Without loss of generality we may assume that the polynomial we are
+dealing with is monic, i.e. it's of the form
+$$p(z)=z^n+a_1z^{n-1}+\cdots a_n.$$ Suppose this polynomial has no root
+in $\mathbb{C}$, then for each real $\r\geq0$ we may define a loop
+$$f_{r}(s)=\frac{p\left(r e^{2 \pi i s}\right) / p(r)}{\left|p\left(r e^{2 \pi i s}\right) / p(r)\right|}$$
+in the unit circle with basepoint $1$. As $r$ varies, $f_r(s)$ is a path
+homotopy of loops with basepoint $1$. Since $f_0$ is a trivial loop
+$s\mapsto1$ and $f_r$ are in the same class of the fundamental group, we
+deduce that this equivalent class $[f_r]\in\pi_1(S^1)$ is zero up to
+isomorphism. Now fix a large value $r$, bigger than $|a_1|+\cdots+|a_n|$
+and bigger than $1$. Then for a $z$ such that $|z|=r$ we have
+$$\begin{aligned}
+|z^n|=|z||z^{n-1}|&>(|a_1|+\cdots+|a_n|)|z^{n-1}|=|a_1||z^{n-1}|+\cdots+|a_n||z^{n-1}|\\&>|a_1z^{n-1}|+|a_2z^{n-2}|+\cdots+|a_n|\\&\geq|a_1z^{n-1}+a_2z^{n-2}+\cdots+a_n|.\end{aligned}$$
+Define a new polynomial $$p_t(z)=z^n+t(a_1z^{n-1}+\cdots+a_n).$$ By the
+previous inequality $p_t(z)$ has no root on the circle $|z|=r$ for
+$0\leq t\leq 1$. Define
+$$g_t(s)=\frac{p_t\left(r e^{2 \pi i s}\right) / p_t(r)}{\left|p_t\left(r e^{2 \pi i s}\right) / p_t(r)\right|};$$
+this is a homotopy from the loop $\omega_n(s)=e^{2\pi ins}$ to $f_r$. By
+the admitted fact, $\omega_n$ is $n$ up to isomorphism. Since we have
+shown that $[\omega_n]=[f_r]=0$ up to isomorphism, we may conclude
+$n=0$, and thus the polynomial is constant.
+
+**Algebraic Topology**
+
+**MIT 18.905 Fall 2016 Lecture 1** **Theorem 1.5.** Any boundary is a
+cycle; that is, $d^2=0$.
+
+Let $\vec{t}=\langle t_0,\dots,t_{n-2}\rangle\in\Delta^{n-2}$, and
+$\displaystyle\sigma=\sum_{i=1}^ka_i\sigma_i$, then we have
+$$\begin{aligned}
+d(d\sigma)(\vec{t})&=d\left(\sum_{i=1}^ka_i\sum_{j=0}^n(-1)^jd_j\sigma_i\right)(\vec{t})\\&=\left(\sum_{i=1}^ka_i\sum_{j=0}^n(-1)^jd(\sigma_i\circ d^j)\right)(\vec{t})\\&=\sum_{i=1}^ka_i\sum_{j=0}^n\sum_{r=0}^{n-1}(-1)^{j+r}\sigma_i\circ d^j\circ d^r(\vec{t})\\&=\sum_{i=1}^ka_i\left(\sum_{j=0}^n\sum_{r=0}^{j-1}(-1)^{j+r}\sigma_i\circ d^j\circ d^r(\vec{t})+\sum_{j'=0}^{n-1}\sum_{r'=j'}^{n-1}(-1)^{j'+r'}\sigma_i\circ d^{j'}\circ d^{r'}(\vec{t})+\sum_{j=n}^n\sum_{r=0}^{n-1}(-1)^{j+r}\sigma_i\circ d^j\circ d^r(\vec{t})\right)\\&=\sum_{i=1}^ka_i\left(\sum_{j=0}^n\sum_{r=0}^{j-1}(-1)^{j+r}\sigma_i\circ d^j\circ d^r(\vec{t})+\sum_{j'=0}^{n-1}\sum_{r'=j'}^{n-1}(-1)^{j'+r'}\sigma_i\circ d^{j'}\circ d^{r'}(\vec{t})\right).\end{aligned}$$
+Now
+$$d^j\circ d^r(\vec{t})=\langle\dots,\underbrace{0}_{r},\dots,\underbrace{0}_{j},\dots\rangle\text{ for }0\leq r<j\leq n$$
+and
+$$d^{j'}\circ d^{r'}(\vec{t})=\langle\dots,\underbrace{0}_{j},\dots,\underbrace{0}_{r+1},\dots\rangle\text{ for }0\leq j'\leq r'\leq n-1.$$
+There clearly exists a bijection between the index pair $(j,r)$ and
+$(j',r')$, namely $j'=r$ and $r'=j-1$ with inverse $r=j'$ and $j=r'+1$,
+and for these pairs of index pairs, the value of $(-1)^{j+r}$ and
+$(-1)^{j'+r'}$ differs by a sign, as desired.
+
+**TIMS Lecture Algebraic Topology Lecture 2** For every topological
+space $X$, establish a group isomorphism
+$$\mathbb{Z}\pi_0(X)\simeq H_0(X,\mathbb{Z}),$$ where
+$\pi_0(-):(\mathbf{Top})\to(\mathbf{Grp})$ is the zeroth homotopy group
+functor, aka the path-connected component functor;
+$\mathbb{Z}[-]:(\mathbf{Set})\to(\mathbf{Ab})$ the free abelian group
+functor; and $H_0(-,\mathbb{Z}):(\mathbf{Top})\to(\mathbf{Ab})$ the
+zeroth homology group functor with integer coefficients.
+
+**Solution.** First we proceed with the $\rightarrow$ direction. For
+each path-connected component $A\subset X$ we appeal to the axiom of
+choice and pick an arbitrary point $a\in A$. Observe that
+$a\in Z_0(X)=\ker\partial_0$ since the kernel of a constant zero map is
+its entire domain and that $a\notin B_0(X)=\operatorname{im}\partial_1$
+since there are only two possibilities of boundary for a $1$-simplex:
+either $0$ if it is a cycle, or two distinct points with opposite signs,
+and none of the linear combinations of each can produce a singularity
+$+a$. Note that if the coefficient before $A$ is negative, then we will
+associate a $-a$ to it instead of a $+a$. This association extends via
+linearity: for $\sum_i\phi(A_i)A_i$, we pick $a_i\in A_i$ and associate
+$\sum_i\phi(A_i)a_i$ to it. Notice that this association is well-defined
+since for a change of picked point $a\in A$ to $a'\in A$ does not change
+the coset associated to it: let the original coset associated to it be
+$B=[+a]$, since $A$ is path-connected we can produce a $1$-simplex
+$\sigma$ with $\sigma\circ\iota_0=a'$ and $\sigma\circ\iota_1=a$, and
+its boundary will thus be $+a'-a$, and this, added to $B$, is exactly
+what we need---a representative of coset in $B$ that have a singularity
+$+a'$. It's trivial to check that this association, denoted $\chi$, is a
+group homomorphism. Now we proceed with the $\leftarrow$ direction. For
+each path-connected component $A$ and coset $B\in H_0(X)$, we reduce the
+coset to its canonical form by adding inverse $1$-simplexes to cancel
+the $(+,-)$ pairs, then we count the remaining points with sign as $k$
+and associate $kA$ to $B$. It is also trivially verified that this,
+denoted $\psi$ is a group homomorphism, and that
+$\chi\circ\psi=\mathbb{1}$ and $\psi\circ\chi=\mathbb{1}$, and we have
+the desired isomorphism.

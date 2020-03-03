@@ -1,0 +1,14 @@
+This is BibTeX, Version 0.99dThe top-level auxiliary file: Transgender HIV Literature Review.aux
+The style file: model5-names.bst
+Database file #1: bibfile.bib
+I was expecting a `,' or a `}'---line 70 of file bibfile.bib
+ :   
+ :   journal={IJT},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Repeated entry---line 75 of file bibfile.bib
+ : @article{baral2013
+ :                   ,
+I'm skipping whatever remains of this entry
+Warning--empty journal in clements1999
+(There were 2 error messages)

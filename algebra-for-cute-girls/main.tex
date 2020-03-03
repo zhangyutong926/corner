@@ -1,0 +1,47 @@
+\providecommand{\main}{.}
+\documentclass[cite=authoryear,cyan,cn,11pt,base=hide,twoside]{\main/elegantbook}
+\usepackage{graphicx}
+\graphicspath{{./}{../}{images/}{../images/}}
+\usepackage{subfiles}
+\usepackage{multicol}
+\usepackage{imakeidx}
+\usepackage{tikz-cd}
+\usepackage{tikz}
+\setlength{\parskip}{0cm}
+\setlength{\parindent}{4ex}
+\let\kaishu\relax
+\newCJKfontfamily\kaishu{KaiTi}[AutoFakeBold]
+\geometry{a4paper,top=18mm,bottom=10mm,headheight=2.17cm,headsep=4mm,footskip=12mm,left=20mm,right=20mm}
+\makeatletter
+\ifcsname f@nch@setoffs\endcsname\else%
+\let\f@nch@setoffs\fancy@setoffs
+\fi
+\f@nch@setoffs
+\title{给萌妹子看的代数书}
+\subtitle{Galois男神我爱你}
+\author{Sayako Hoshimiya}
+\institute{Sayako的文学和数学社}
+\date{\today}
+\extrainfo{L'algèbre est genereuse, elle donne souvent plus qu'on lui demande. --- Jean le Rond d'Alembert}
+\logo{logo.png}
+\cover{cover.jpg}
+\makeindex[columns=3, title=Alphabetical Index, intoc]
+\input{\main/predefs/predefs}
+\def\biblio{\nocite{*}\bibliography{\main/bibliography/bibliography}}
+\raggedbottom
+\begin{document}
+\def\biblio{}
+\maketitle
+\subfile{./preface/preface.tex}
+\tableofcontents
+\mainmatter
+\hypersetup{pageanchor=true}
+\subfile{./outline/outline.tex}
+\subfile{./chapter1-introduction/chapter1-introduction.tex}
+\subfile{./chapter2-category-theory/chapter2-category-theory.tex}
+\subfile{./chapter3-linear-algebra/chapter3-linear-algebra.tex}
+\subfile{./chapter4-group-theory/chapter4-group-theory.tex}
+\nocite{*}
+\bibliography{\main/bibliography/bibliography}
+\printindex
+\end{document}

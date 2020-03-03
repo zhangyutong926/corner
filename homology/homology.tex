@@ -1,0 +1,1241 @@
+\documentclass[10pt]{report}
+\usepackage{xeCJK}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{enumitem}
+\usepackage{tikz-cd}
+\usepackage{array}
+\usepackage{makecell}
+\usepackage{tabularx}
+\usepackage[citestyle=authoryear,bibstyle=authortitle,sorting=ynt,backend=bibtex]{biblatex}
+\usepackage{geometry}
+\usepackage{multicol}
+\usepackage{titling}
+\usepackage{kbordermatrix}
+\usepackage[ruled,vlined]{algorithm2e}
+\addbibresource{template}
+\geometry{a4paper,scale=0.9}
+\newcounter{counter}
+\newcommand{\counter}[1]{\refstepcounter{counter}\label{#1}\thecounter}
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{remark}{Remark}
+\newtheorem{fact}{Fact}
+\newtheorem{example}{Example}
+
+\setlength{\parindent}{0cm}
+\setlength{\parskip}{1em}
+\newcommand*{\qedfill}{\hfill\ensuremath{\blacksquare}}
+\newcommand{\hookdoubleheadrightarrow}{%
+  \hookrightarrow\mathrel{\mspace{-15mu}}\rightarrow
+}
+\newcommand{\hookdoubleheadleftarrow}{%
+  \leftarrow\mathrel{\mspace{-15mu}}\hookleftarrow
+}
+
+\title{Mathematical Minimum}
+\author{Sayako Hoshimiya}
+\begin{document}
+\maketitle
+\renewcommand{\setminus}{\mathbin{\backslash}}
+
+\chapter{Linear and Commutative Algebra}
+\section{Finitely Generated Modules over Principal Ideal Domains}
+In this section, all modules are finitely generated and all rings are principal ideal domains.
+
+\subsection{Decomposition of Cyclic Module}
+\begin{fact}\leavevmode
+\begin{itemize}
+\item {} [Cyclic $R$-Mods over PID are iso to $R$ modulo ann.]
+Let $M=\langle\langle v\rangle\rangle$ be a cyclic $R$-module with annihilator $(\alpha)$ (annihilators are ideals, and ring is PID), then the multiplication map by $v$, $\tau:R\to M$ is an epimorphism with kernel $(\alpha)$. By the first isomorphism theorem, the induced map $R/(a)\to M$ is an isomorphism.
+\item {} [Cyclicity is submodule inheriting (over PID)]
+Any submodule $N\subseteq M$ of a cyclic $R$-module is again cyclic.
+\item {} [$\operatorname{ord}(\langle\langle r\cdot v\rangle\rangle)=\operatorname{ord}(v)/\gcd(r,\operatorname{ord}(v))$]
+\end{itemize}
+\end{fact}
+
+\begin{theorem}[Composition and Decomposition of Cyclic Module over PID]\leavevmode
+\begin{enumerate}
+\item {} [Order op is exponential on elements with RP orders]
+Let $u_1,\dots,u_n\in M$, if $\operatorname{ord}(u_1)$ are relatively prime, then $$\operatorname{ord}(u_1+\cdots+u_n)=\operatorname{ord}(u_1)\cdots\operatorname{ord}(u_n).$$
+\item {} [Mod gen op is directly additive on elements with RP orders]
+Let $u_i$ be as aforementioned, then $$\langle\langle u_1\rangle\rangle\oplus\cdots\oplus\langle\langle u_n\rangle\rangle=\langle\langle u_1+\cdots+u_n\rangle\rangle.$$
+\item {} [Submodules with relative prime orders that composes module directly composes it]
+If $M=A_1+\cdots+A_n$ and $\operatorname{ord}(A_i)$ are relatively prime, then the sum is direct.
+\item {} [Pairwise relatively prime decomp of order corresponds an add-decomp of mod]
+If $\operatorname{ord}(v)=\alpha_1\cdots\alpha_n$ where $\alpha_i$ are pairwise relatively prime, then $v$ takes the form $v=u_1+\cdots+u_n$ where $\operatorname{ord}(u_i)=\alpha_i$.
+\item {} [Cyclic mods decomp directly into mods with PRP orders]
+Let $u_i$ be as aforementioned, then $$\langle\langle v\rangle\rangle=\langle\langle u_1+\cdots+u_n\rangle\rangle=\langle\langle u_1\rangle\rangle\oplus\cdots\oplus\langle\langle u_n\rangle\rangle.$$
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+Let $\alpha_i=\operatorname{ord}(u_i)$ (relatively prime), $\mu=\alpha_1\cdots\alpha_n$, and $v=u_1+\cdots+u_n$. Then since $\mu$ annihilates $v$, $\operatorname{ord}(v)\mathop{|}\mu$. If $\mu=a\cdot\operatorname{ord}(v)$ where $a\neq1$, then primely decompose $a=q_1^{e_1}\cdots q_m^{e_m}$, which results in an $j$ such that $q_j\big|\alpha_i$ for some $i$, such that $\mu/q_j$ annihilates $v$. On the other hand, by definition of $\mu$, $\mu/q_j$ annihilates each $u_k$ except for possibly $u_i$, which means it must also annihilate $u_i$. Notice that $\alpha_i=\operatorname{ord}(u_i)$ is relatively prime to $\mu/\alpha_i$, which gives $\operatorname{ord}(u_i\cdot\mu/\alpha_i)=\operatorname{ord}(u_i)=\alpha_i$, which contradicts the fact that $$0=\frac{\mu}{q_j}v=\frac{\mu}{q_j}u_i=\frac{\alpha_i}{q_j}\cdot\frac{\mu}{\alpha_i}\cdot u_i\implies\operatorname{ord}(u_i\cdot\mu/\alpha_i)=\alpha_i/q_j\neq\alpha_i.$$ Thus $a=1$ and $\mu=\operatorname{ord}(v)$, which is (1). It is clear that $\langle\langle u_1+\cdots+u_n\rangle\rangle\subseteq\langle\langle u_1\rangle\rangle\oplus\cdots\oplus\langle\langle u_n\rangle\rangle$ since $u_1+\cdots+u_n\in\langle\langle u_1\rangle\rangle\oplus\cdots\oplus\langle\langle u_n\rangle\rangle$. Now for the reverse inclusion, we appeal to the fact that $\alpha_i$ and $\mu/\alpha_i$ are relatively prime for arbitrary $i$, that is, there exists $r,s\in R$ for which $r\alpha_i+s\cdot\mu/\alpha_i=1.$ We may compute $$u_i=\left(r\alpha_i+s\frac{\mu}{\alpha_i}\right)u_i=s\cdot\frac{\mu}{\alpha_i}u_i=s\cdot\frac{\mu}{\alpha_i}(u1+\cdots+u_n)\in\langle\langle u_1+\cdots+u_n\rangle\rangle$$ and acquire the desired inclusion, which give (2). For (3), we note that if $v_1+\cdots+v_n=0$ where $v_i\in A_i$, then $v_i=0$ for all $i$, for otherwise taking the order on both sides would give different result. We know that if $A_i$ are not pairwise disjoint, this is not the case, thus give (3). Provided the assumption in (4), now the scalars $\beta_i=\mu/\alpha_i$ are relative prime, so there exist $a_i\in R$ such that $a_1\beta_1+\cdots+a_n\beta_n=1$, and hence $$v=(a_1\beta_1+\cdots+a_n\beta_n)v=a_1\beta_1v+\cdots+a_n\beta_nv.$$ Since $\operatorname{ord}(\beta_iv)=\mu/\gcd(\mu,\beta_i)=\alpha_i$ and $a_i$ are relatively prime to $\alpha_i$, we have $\operatorname{ord}(a_i\alpha_iv)=\alpha_i$. Now (4) is established and (5) follows from (2) with $u_i=a_i\beta_iv$.
+\end{proof}
+
+\begin{theorem}[Direct Sum Complement of Some Submodules]
+\begin{enumerate}
+\item {} [Kernel of epi to free mod is complemented]
+\end{enumerate}
+\end{theorem}
+
+\begin{lemma}\label{lemma:quotiet_free}
+Every module $M$ is a quotient of a free module $F$. Furthermore, if $M$ is finitely generated, then $F$ is also.
+\end{lemma}
+\begin{proof}
+Let $F$ be the free module generated by the a spanning set $X$ of $M$. Then the inclusion map $X\to M$ induces an epimorphism
+\begin{align*}
+f:F&\twoheadrightarrow M\\
+\sum_{x\in X}r_xx&\mapsto\sum_{x\in X}r_xx.
+\end{align*}
+But this gives $M\simeq F/\ker f$.
+The latter statement is trivial.
+\end{proof}
+
+\begin{theorem}\label{submodule_free}
+Let $M$ be a finitely generated free module over a principal ideal domain $R$, then any submodule $S$ of $M$ is also free.
+\end{theorem}
+\begin{proof}
+Let us set $N=R^{n=\operatorname{rank}M}$ without loss of generality. For each $1\leq i\leq n$ and $r\in R$, let $$J^r_i=\{v\in S\,\big|\,v=(a_1,\dots,a_{i-1},r,0,\dots,0)\text{ for some }a_1,\dots,a_n\in R\}$$ which is an ideal of $R^n$, which is itself again a principal ideal domain, so $J^r_i=(p^r_i=(b_1,\dots,b_{i-1},r,0,\dots,0))$ and
+$$I_i=\{r\in R\,\big|\,(a_1,\dots,a_{i-1},r,0,\dots,0)\in S\text{ for some }a_1,\dots,a_n\in R\},$$
+which is an ideal of $R$, so $I_i=(r_i)$ for some $r_i\in R$.
+Let $$u_i=(b_1,\dots,b_{i-1},r_i,0,\dots,0)\in S,$$ and let $$\mathcal{B}=\{u_i\,\big|\,i=1,\dots,n\text{ and }r_i\neq0\},$$ which spans $S$.
+Suppose that $\mathcal{B}$ comprises $u_{i_1},\dots,u_{i_m}$ and $$v=a_{j_1}u_{j_1}+\cdots+a_{j_s}u_{j_s}=0,$$ then consider $v_{j_s}$ which is necessarily $r_{j_s}$; since it's nonzero and $R$ is a domain, $a_{j_s}=0$. Perform an reverse induction on $k=s,\dots,1$, the induction hypothesis being $a_{j_l}=0$ for all $l>k$, we may use the similar argument to deduce $a_{j_k}=0$, which shows that $\mathcal{B}$ is indeed a basis of $S$, as desired.
+\end{proof}
+
+\begin{theorem}[Prime Diagonalization of PID Matrix]\label{theorem:diagonalize}
+Let $A_{m\times n}$ be a matrix with entries in a PID $R$. There exist $A'=Q^{-1}AP$ which is diagonal and similar to $A$ and satisfies the following condition: For $1\leq l\leq k\leq\min\{m,n\}$, $A'=d_l$, all other entries are zero, and $d_1\mathbin{|}\cdots\mathbin{|}d_k$.
+\end{theorem}
+\begin{proof}
+If $A=0$, it's diagonalized already. Assume the contrary, $P=\mathrm{Diagonalize^1_1(A_{(m\times n)})}$ and $Q=P$.
+
+\begin{algorithm}[H]
+\caption{Diagonalize$^l_1$}
+\SetAlgoLined
+\KwIn{$A_{(m\times n)},P_{(n\times n)}$}
+\KwResult{$P_{(n\times n)}$}
+$(i,j)\gets\mathrm{DMinimalPos}_{m,n}(B_{m\times n})$\;
+$P\gets\mathrm{EORSwitchRow}_{m,n}(l,i)\cdot P$\;
+$P\gets\mathrm{EORSwitchCol}_{m,n}(l,j)\cdot P$\;
+$P\gets\mathrm{Diagonalize}^l_2(A_{(m\times n)},P_{(n\times n)})\cdot P$\;
+\end{algorithm}
+
+\begin{algorithm}[H]
+\caption{Diagonalize$^l_2$}
+\SetAlgoLined
+\KwIn{$A_{(m\times n)},P_{(n\times n)}$}
+\KwResult{$P_{(n\times n)}$}
+
+\ForEach{$f$\textbf{ where }$l+1\leq f\leq m$}{
+  \If{$A_{f,l}\neq0$}{
+    $(r,s)\gets\mathrm{B\'ezout}(A_{f,l},A_{l,l})$\;
+    $\beta\gets\gcd(A_{f,l},A_{l,l})$\;
+    $P\gets
+    \kbordermatrix{
+    & \cdots & l & \cdots & f & \cdots \\
+    \vdots & {} & {} & {} & {} & {} \\
+    l & {} & r & {} & A_{f,l}/\beta & {} \\
+    \vdots & {} & {} & {} & {} & {} \\
+    f & {} & s & {} & A_{l,l}/\beta & {} \\
+    \vdots & {} & {} & {} & {} & {}
+    }
+    \cdot P$\;
+
+    $P\gets\mathrm{EORMultRow}_{m,n}(l,-1)\cdot P$\;
+    $P\gets\mathrm{EORAddRow}_{m,n}(f,l)\cdot P$\;
+    $P\gets\mathrm{EORMultRow}_{m,n}(l,-1)\cdot P$\;
+
+    \If{$\gcd(A_{f,l},A_{l,l})\neq A_{l,l}$}{$P\gets\mathrm{Diagonalize}^l_1(A_{(m\times n)},P_{(n\times n)})\cdot P$\;}
+  }
+}
+
+\ForEach{$g$\textbf{ where }$l+1\leq g\leq n$}{
+  \If{$A_{l,g}\neq0$}{
+    $(r,s)\gets\mathrm{B\'ezout}(A_{l,g},A_{l,l})$\;
+    $\beta\gets\gcd(A_{f,l},A_{l,l})$\;
+    $P\gets
+    \kbordermatrix{
+    & \cdots & l & \cdots & g & \cdots \\
+    \vdots & {} & {} & {} & {} & {} \\
+    l & {} & r & {} & s & {} \\
+    \vdots & {} & {} & {} & {} & {} \\
+    g & {} & A_{f,l}/\beta & {} & A_{l,l}/\beta & {} \\
+    \vdots & {} & {} & {} & {} & {}
+    }
+    \cdot P$\;
+
+    $P\gets\mathrm{EORMultCol}_{m,n}(l,-1)\cdot P$\;
+    $P\gets\mathrm{EORAddCol}_{m,n}(g,l)\cdot P$\;
+    $P\gets\mathrm{EORMultCol}_{m,n}(l,-1)\cdot P$\;
+
+    \If{$\gcd(A_{l,g},A_{l,l}\neq A_{l,l}$}{$P\gets\mathrm{Diagonalize}^l_1(A_{(m\times n)},P_{(n\times n)})\cdot P$\;}
+  }
+}
+
+$P\gets\mathrm{Diagonalize}^l_3(A_{(m\times n)},P_{(n\times n)})\cdot P$\;
+\end{algorithm}
+
+\begin{algorithm}[H]
+\caption{Diagonalize$^l_3$}
+\SetAlgoLined
+\KwIn{$A_{(m\times n)},P_{(n\times n)}$}
+\KwResult{$P_{(n\times n)}$}
+\If{$l>\min\{m,n\}$}{\Return{1}\;}
+\ForEach{$f,g$\textbf{ where }$l+1\leq f\leq m$\textbf{ and }$l+1\leq g\leq n$}{
+  $(q,r)\gets\mathrm{Div}(A_{f,g},A_{l,l})$\;
+  \If{$r\neq0$}{
+    $P\gets\mathrm{EORAddCol}(l,g)\cdot P$\;
+    $P\gets\mathrm{Diagonalize}^l_2(A_{(m\times n)},P_{(n\times n)})\cdot P$\;
+  }
+}
+$(i,j)\gets\mathrm{DMinimalPos}_{m,n}(A_{(m\times n)})$\;
+\If{$i\neq l$\textbf{ or }$j\neq l$}{$P\gets\mathrm{Diagonalize}^l_1(A_{(m\times n)},P_{(n\times n)})\cdot P$\;}
+
+$P\gets\mathrm{Diagonalize}^{l-1}_1(A_{(m\times n)},P_{(n\times n)})\cdot P$\;
+\end{algorithm}
+\end{proof}
+
+\begin{fact}\leavevmode\label{fact:still_presentation}
+\begin{enumerate}
+\item If a column of zeros are deleted from a finite presentation matrix for a module, it's still a presentation thereof.
+\item If the column and the row, the intersection of which is a unit, is deleted simultaneously from a finite presentation matrix for a module, it's still a presentation thereof.
+\end{enumerate}
+\end{fact}
+
+\begin{theorem}[Structure Theorem for Finitely Generated Modules over PID]
+A finitely generated $R$-module $V$ with $R$ a PID is a direct sum of cyclic submodules $C_{d_1},\dots,C_{d_k}$ and a free module $L$, where the $\operatorname{ord}(C_{d_i})=d_i$ is not a unit and $d_i\mathbin{|}d_{i+1}$ for $i=1,\dots,k-1$.
+\end{theorem}
+\begin{proof}
+Write an exact sequence of module
+$$
+K=\ker g\overset{f}{\to}F\overset{g}{\to}M\to0,
+$$
+the second being free, which exists by Lemma \ref{lemma:quotiet_free}, and the first being free by \ref{submodule_free}.
+Picking a basis for each of them, $\mathcal{B}_K$ for $K$ and $\mathcal{B}_F$ for F, we arrive at a matrix presentation $A$ of the map $f$ with respect to these two bases, $A$ being finite since $K$ and $F$ are finitely generated. Apply the algorithm described in Theorem \ref{theorem:diagonalize} and delete the rows and the columns, the intersection of which is a unit, then delete all column of zeros; the resulting matrix $B_{(m,k)}$ would still be a presentation for the module since the operation applied are change of bases and Fact \ref{fact:still_presentation} and is a diagonal matrix with zeros only on the bottom but not right, i.e. a matrix with dimension $m\geq k$ that is diagonal. In addition, the conditions $B_{1,1}>1$ and $d_1=B_{1,1}\mathbin{|}\cdots\mathbin{|}d_k=B_{k,k}$ also hold.
+Consider the relations defined by this matrix: for a specific basis of $K$, $\mathcal{B}_K=\{b^K_1,\dots,b^K_k\}$ and a specific basis of $F$, $\mathcal{B}_F=\{b^F_1,\dots,b^F_m\}$, which generates $M$, the module $M$ satisfies the relation $$d_ib^F_i=0$$ for $i=1,\dots,k$ and them only. Let $C_j$ denote the cyclic $R$-module generated by $b^F_i$ with the condition that
+$$\operatorname{ord}(C_j)=\begin{cases}d_j&j\leq k\\0&\mbox{otherwise}.\end{cases}$$
+We claim that $M$ is the direct sum of these modules. Since $\mathcal{B}_F$ generates $M$, we have $M=C_1+\cdots+C_m$ at least. Suppose a relation $w_1+\cdots+w_m=0$ with each $w_j\in C_j$ given. Represent each $w_j$ with the corresponding generator $b^F_j$, that is $w_j=y_jb^F_j$ for some $y_j\in R$, and the relation becomes $y_1b^F_1+\cdots+y_mv_m=0$. This means $y_1b^F_1+\cdots+y_mv_m\in\ker g$, and thus a vector\footnote{maybe a bad word choice...} with entries in $R$ for which $Y=AX$, where $Y=(y_j)^\mathrm{T}$, can be chosen. From the form of the matrix $A$, we may deduce that if $j\leq k$, then $y_j$ is a multiple of $d_j$, which means $w_j=0$, and if $j>k$ then $y_j=0$, which also gives $w_j=0$. This cannot be the case if $C_j$ are not pairwise disjoint, and thus the sum is direct. Notice that $L=C_{k+1}\oplus\cdots\oplus C_m$, and we are done.
+\end{proof}
+
+\newpage
+\textbf{Chapter 4 - 3.4.} Let $B$ be a complex $n \times n$ matrix. Prove or disprove: The linear operator $T$ on the space of all $n \times n$ matrices defined by $T(A)=A B-B A$ is singular.
+\begin{proof}
+Let $(a_{i,j})\in\ker T$, then it is true that $$\sum_{m=1}^n(a_{i,m}b_{m,j}-b_{i,m}a_{m,j})=0$$ for all $1\leq i,j\leq n$.
+Consider the coefficient matrix
+$$x_{i,j;k,l}=\begin{cases}
+b_{j,j}-b_{i,i}&i=k,j=l\\
+b_{l,j}&i=k\\
+b_{i,k}&j=l\\
+0&\mbox{otherwise}
+\end{cases}$$
+for this system of linear equations in the variables $a_{i,j}$.
+The $n$ columns $1,1;\cdots;n,n$ are linearly dependent by induction.
+Thus the matrix $(x_{i,j;k,l})$ is singular, which gives a non-trivial solution to the system, which means $\ker T$ is non-trivial, which concludes $T$ being singular.
+\end{proof}
+
+\textbf{Chapter 4 - 4.1.} Let $T$ be a linear operator on a vector space $V,$ and let $\lambda$ be a scalar. The eigenspace $V^{(\lambda)}$ is the set of eigenvectors of $T$ with eigenvalue $\lambda,$ together with $0 .$ Prove that $V^{(\lambda)}$ is a T-invariant subspace.
+\begin{proof}
+Eigenvectors are intrinsic to the linear map, i.e., they're invariant under change of basis. Thus the subspace they span are also intrinsic to the linear map.
+\end{proof}
+
+\textbf{Chapter 4 - 4.2.}
+\begin{enumerate}[label=(\alph*)]
+\item Let $T$ be a linear operator on a finite-dimensional vector space $V,$ such that $T^{2}$ is the identity operator. Prove that for any vector $v$ in $V, v-T v$ is either an eigenvector with eigenvalue $-1,$ or the zero vector. With notation as in Exercise $4.1,$ prove that $V$ is the direct sum of the eigenspaces $V^{(1)}$ and $V^{(-1)}$.
+\item Generalize this method to prove that a linear operator $T$ such that $T^{4}=I$ decomposes a complex vector space into a sum of four eigenspaces.
+\end{enumerate}
+\begin{proof}\leavevmode
+\begin{enumerate}[label=(\alph*)]
+\item If $v\neq0$, then $T(v-Tv)=Tv-v=-(v-Tv)$. Now compute the eigenvalues of $T$:
+$$Tx=\lambda x\Leftrightarrow TTx=x=\lambda Tx=\lambda^2x\Leftrightarrow(1-\lambda^2)x=0\Leftrightarrow\lambda=\pm1$$
+Notice that $v=(v-Tv)+Tv$. Take a basis $\{b_i\}$ and produce a set $\{b_i-Tb_i,Tb_i\}$, then reduce it to a basis, which is possible since the base ring is a field. This basis consist of only the eigenvectors with eigenvalues $\pm1$, so a group them according to that and we arrive at the desired decomposition.
+\item A similar computation gives $\lambda=\sqrt[4]{x}$ which there are four in $\mathbb{C}$, with appropriate inner product chosen, spectral theorem gives the desired basis and thus decomposition.
+\end{enumerate}
+\end{proof}
+
+\textbf{Chapter 4 - 4.3.} Let $T$ be a linear operator on a vector space $V .$ Prove that if $W_{1}$ and $W_{2}$ are $T$ -invariant subspaces of $V,$ then $W_{1}+W_{2}$ and $W_{1} \cap W_{2}$ are $T$ -invariant.
+\begin{proof}
+$T(w_1+w_2\in W_1+W_2)=T(w_1)+T(w_2)\in W_1+W_2$ and $T(w_12\in W_1\cap W_2)\in W_1\cap W_2$.
+\end{proof}
+
+\textbf{Chapter 4 - 4.4.} $\mathrm{A} 2 \times 2$ matrix $A$ has an eigenvector $v_{1}=(1,1)^{t}$ with eigenvalue 2 and also an eigenvector $v_{2}=(1,2)^{t}$ with eigenvalue $3 .$ Determine $A$.
+\begin{proof}
+By solving the system of linear equations
+$$\begin{cases}
+a_{1,1}+a_{1,2}=2\\
+a_{2,1}+a_{2,2}=2\\
+a_{1,1}+2a_{1,2}=3\\
+a_{2,1}+2a_{2,2}=6\\
+\end{cases}$$
+we have
+$$
+A=\begin{pmatrix}
+1&1\\-2&4
+\end{pmatrix}
+$$.
+\end{proof}
+
+\textbf{Chapter 4 - 4.5.} Find all invariant subspaces of the real linear operator whose matrix is
+$(\mathbf{a})\left[\begin{array}{ll}{1} & {1} \\ {} & {1}\end{array}\right], \quad(\mathbf{b})\left[\begin{array}{lll}{1} \\ {} & {2} \\ {} & {} & {3}\end{array}\right]$
+\begin{proof}
+The coefficient representation of vectors are all with respect to the basis with respect to which the matrices themselves are represented. The vector space itself is denoted as $V$.
+$$(a):0,\langle\langle1,0\rangle\rangle,V\quad\quad
+(b):0,\langle\langle1,0,0\rangle\rangle,\langle\langle0,1,0\rangle\rangle,\langle\langle0,0,1\rangle\rangle,
+\langle\langle1,0,0\rangle\rangle\oplus\langle\langle0,1,0\rangle\rangle,\langle\langle1,0,0\rangle\rangle\oplus\langle\langle0,0,1\rangle\rangle,\langle\langle0,1,0\rangle\rangle\oplus\langle\langle0,0,1\rangle\rangle,V$$
+\end{proof}
+
+\textbf{Chapter 4 - 4.6.} Let $P$ be the real vector space of polynomials $p(x)=a_{0}+a_{1}+\cdots+a_{n} x^{n}$ of degree at most $n,$ and let $D$ denote the derivative $\frac{d}{d x},$ considered as a linear operator on $P .$\\
+(a) Prove that $D$ is a nilpotent operator, meaning that $D^{k}=0$ for sufficiently large $k$\\
+(b) Find the matrix of $D$ with respect to a convenient basis.\\
+(c) Determine all $D$ -invariant subspaces of $P$.\\
+\begin{proof}\leavevmode
+\begin{enumerate}[label=(\alph*)]
+\item Each application of $D$ strictly decreases $\deg p$.
+\item The basis element $e_i=x^i$, $i$ ranging from $0$ to $n$, and
+$$D_{i,j}=\begin{cases}
+i&j=i+1\\
+0&\text{otherwise}
+\end{cases}.$$
+\item
+Define $\deg X$ to be the degree of the element of $X$ with highest degree.
+For a subspace to be an invariant subspace, the $n$-fold image of an element must still be an element thereof, i.e.,
+$$\underbrace{D\cdots D}_{n\text{ times}}(v)\subseteq X\quad\text{ for }\quad v\in X.$$
+We claim that the spaces $P_i$ of the polynomials of degree at most $i$ for $i=1,\dots,n$ are the only degree $i$ invariant subspace of $P$.
+Let $X$ be a invariant subspace of degree $i$, then pick a polynomial element $u\in X$ such that $\deg u=i$, and by the invariance of the space
+$$u_j=\underbrace{D\cdots D}_{j\text{ times}}(u)\in X,\deg u_j=i-j\quad\text{ for }\quad j=1,\dots,i$$. But a sequence of polynomials each of degree $i-j$, $i-j$ ranging from $i$ to $0$ is necessarily a basis for the space $P_i$, so $X=P_i$, which means $P_i$ are the only invariant subspaces there exist.
+
+
+%Perform column Gaussian elimination on the matrix $D$ aforementioned in (b) we have a matrix
+%$$(D'_{i,j})=DP=\begin{cases}1&i=j\neq n\\0&\mbox{otherwise}\end{cases}\quad\text{ where }\quad (P_{i,j})=\begin{cases}1&i=n\text{ and }j=1\\\frac{1}{j}&j=i+1\\0&\mbox{otherwise}\end{cases}.$$
+%The eigenvectors of $D'$ are the standard Euclidean vectors $E_i$ for $i=1,\dots,n$, applied with change of basis matrix $P$ to make them with respect to the basis $e_i$ defined in (b), we have coordinate vectors
+%$$(v_i)_j=(PE_i)_j=\begin{cases}1&i=1\text{ and }j=n\\\frac{1}{i}&i\neq1\text{ and }j=i-1\\0&\mbox{otherwise}\end{cases}.$$
+
+
+%Define $\deg X$ be the degree of the element of $X$ with highest degree.
+%Henceforth denote $X'$ the direct complement space of $X$ in $P$.
+%For $v\in P$, define $\int v=\{u\in X\cup X'\,\big|\,Du=v\}$. We claim that a subspace $X$ is invariant if and only if $$\{D(v)\,\big|\,v\in X,\deg v=1\}\subseteq X\text{ and }\forall v\in X.\deg v<\deg X\Rightarrow\int v\subseteq X.$$
+%If the former doesn't hold, then $X$ is not invariant.
+%If there exists $v\in X$ with $\deg v<\deg X$ such that there exists $u\in\int v$ and $u\notin X$, then $u\in X'$ and $X'$ isn't invariant for $Du\notin X'$. Since $P$ itself is invariant and $X\oplus X'=P$, $X$ cannot be invariant.
+%If $X$ is not invariant, then there exists $w\in X$ such that $Dw\notin X$.
+%Notice that $0\leq\deg Dw<\deg w\leq\deg X$, so a case analysis is in order.
+%If $\deg Dw=0$, then the first part of above condition doesn't hold.
+%Otherwise, take a basis for $X$ and $X'$ simultaneously, and use the direct summed basis formed by these two basis to represent $Dw$ as
+%$$Dw=\underbrace{a_1v_1+\cdots+a_sv_s}_{A\in X}+\underbrace{b_1u_1+\cdots+b_tu_t}_{B\in X'}.$$
+%Case analysis on whether $DA\in X$. If positive, then we have find a
+%
+%
+%
+% which means that $\int Dw\not\subseteq X$, and this concludes the aforementioned logical equivalence.
+%Let $P_i\subseteq P$ be the space of all polynomials with degree less or equal than $i$. Notice that $P_i$ is the largest subspace with degree $i$.
+%We claim that $P_i$ is the only subspace of degree $i$ that satisfies the above condition.
+%Firstly, $P_i$ satisfies the above condition.
+%Secondly, Let $Y$ be a subspace of degree $i$ that is not $P_i$. Since $Y\subseteq P_i$ we may consider the a set $Q=P_i-Y$. Assume $1\in Y$, then take $q\in Q$ as the element there is with the lowest degree. By assumption, $\deg q\neq0$, and since $q$ is such an element with lowest degree, $Dq$ with degree less than it cannot be in $Q$ and also $\deg Dq<\deg q\leq\deg Y$, which means $\int Dq\not\subseteq Y$.
+%So $P_i$ for $i=0,\dots,n$ are the only invariant spaces.
+\end{enumerate}
+\end{proof}
+
+\textbf{Chapter 4 - 4.8.} Let $T$ be a linear operator on a finite-dimensional vector space for which every nonzero vector is an eigenvector. Prove that $T$ is multiplication by a scalar.
+\begin{proof}
+Consider the contrapositive. If $T$ is not a multiplication by a scalar, then there exists a $v$ such that $Tv\neq\alpha v$ for all field element $\alpha$, then $v$ is not an eigenvector.
+\end{proof}
+
+\textbf{Chapter 4 - 5.1.} Compute the characteristic polynomials and the complex eigenvalues and eigenvectors of
+\[
+\begin{array}{lll}
+{\text { (a) }\left[\begin{array}{cc}
+{-2} & {2} \\
+{-2} & {3}
+\end{array}\right], \quad \text { (b) }\left[\begin{array}{cc}
+{1} & {i} \\
+{-i} & {1}
+\end{array}\right], \quad \text { (c) }\left[\begin{array}{cc}
+{\cos \theta} & {-\sin \theta} \\
+{\sin \theta} & {\cos \theta}
+\end{array}\right]}
+\end{array}
+\]
+\begin{proof}{}\leavevmode{}
+\begin{enumerate}[label=(\alph*)]
+\item $t^2-t-2$ with eigenvalues $-1,2$ and eigenvectors $(2,1),(1,2)$;
+\item $t^2-2t$ with eigenvalues $0,2$ and eigenvectors $(-i,1),(i,1)$;
+\item $t^2-2t\cos\theta+1$ with eigenvalues $e^{i\theta},e^{-i\theta}$ and eigenvectors $(i,1),(-i,1)$.
+\end{enumerate}
+\end{proof}
+
+\colorbox{red!30}{\textbf{Chapter 4 - 5.2.}} The characteristic polynomial of the matrix below is $t^{3}-4 t-1 .$ Determine the missing entries.
+\[
+\left[\begin{array}{lll}
+{0} & {1} & {2} \\
+{1} & {1} & {0} \\
+{1} & {*} & {*}
+\end{array}\right]
+\]
+
+\textbf{Chapter 4 - 5.3.} What complex numbers might be eigenvalues of a linear operator $T$ such that\\
+(a) $T^{r}=I$\\
+(b) $T^{2}-5 T+6 I=0 ?$
+\begin{proof}{}\leavevmode{}
+\begin{enumerate}[label=(\alph*)]
+\item the $r$-th root of unity, in total $r+1$ eigenvalues;
+\item $2$ and $3$.
+\end{enumerate}
+\end{proof}
+
+\textbf{Chapter 4 - 5.7.} Do $A$ and $A^{t}$ have the same eigenvectors? the same eigenvalues?
+\begin{proof}
+They never have the same eigenvectors since the domain of the former is the vector space $V$ and of the latter the dual vector space $V^*$ and while there are natural isomorphisms between finite-dimensional $V$ and $V^*$, none of them are canonical; and if $V$ is infinite-dimensional, then generally there isn't an isomorphism (consider $V=\mathbb{R}^\infty$ and $V^*=\mathbb{R}^\aleph$). But they always have the same eigenvalues, since $$\det(\lambda I-A)=\det(\lambda I-A)^T=\det((\lambda I)^T-A^T)=\det(\lambda I-A^T).$$
+\end{proof}
+
+\textbf{Chapter 4 - 6.1.} Let $A$ be an $n \times n$ matrix whose characteristic polynomial factors into linear factors:
+$p(t)=\left(t-\lambda_{1}\right) \cdots\left(t-\lambda_{n}\right) .$ Prove that trace $A=\lambda_{1}+\cdots+\lambda_{n},$ that $\operatorname{det} A=\lambda_{1} \cdots \lambda_{n}$
+\begin{proof}
+For the first part, compare the coefficient of the term $t^{n-1}$ on the left in
+$$\det(tI-A)=(t-\lambda_1)\cdots(t-\lambda_n),$$
+which is $(-1)^{n-1}(a_{1,1}+\cdots+a_{n,n})=(-1)^{n-1}\operatorname{tr}A;$
+then on the right, it's $(-1)^{n-1}(\lambda_1+\cdots+\lambda_n),$
+which gives $\operatorname{tr}A=\lambda_1+\cdots+\lambda_n$, as desired.
+For the second part, let $t=0$ in the following
+$$\det(tI-A)=(t-\lambda_1)\cdots(t-\lambda_n).$$
+\end{proof}
+
+\textbf{Chapter 4 - 6.2.} Suppose that a complex $n \times n$ matrix $A$ has distinct eigenvalues $\lambda_{1}, \ldots, \lambda_{n},$ and let $v_{1}, \ldots, v_{n}$ be eigenvectors with these eigenvalues.\\
+(a) Show that every eigenvector is a multiple of one of the vectors $v_{i}$.\\
+(b) Show how one can recover the matrix from the eigenvalues and eigenvectors.
+\begin{proof}{}\leavevmode{}
+\begin{enumerate}[label=(\alph*)]
+\item
+Distinct eigenvalues gives linearly independent corresponding eigenvectors. In an $n$-dimensional vector space every length $n$ sequence of linearly independent vectors forms a basis. Let $v$ be another eigenvector of eigenvalue $\lambda_i$ and represented it with $v=a_1v_1+\cdots+a_nv_n$, thus
+$$Av=a_1\lambda_1v_1+\cdots+a_n\lambda_nv_n=\lambda_iv=a_1\lambda_iv_1+\cdots+a_n\lambda_iv_n.$$
+Since $v_i$ are linearly independent, $a_j\lambda_j=a_j\lambda_i$ for all $j$. If $a_j\neq0$ for some $j\neq i$, then $\lambda_j=\lambda_i$, which contradicts the premise that $\lambda_j$ and $\lambda_i$ are distinct. So $a_j=0$ for $j\neq0$, and $v=a_iv_i$.
+\item
+Take a change of basis $A'=QAP$ such that in both the domain and codomain, $v_i$ are the basis. Now the matrix becomes
+$$A'_{i,j}=\begin{cases}\lambda_i&i=j\\0&\mbox{otherwise}\end{cases}.$$
+So $A=Q^{-1}A'P^{-1}$, and is recovered.
+\end{enumerate}
+\end{proof}
+
+\textbf{Chapter 4 - 6.3.} Let $T$ be a linear operator that has two linearly independent eigenvectors with the same eigenvalue $\lambda .$ Prove that $\lambda$ is a multiple root of the characteristic polynomial of $T .$
+\begin{proof}
+Let $v_1,v_2$ be linearly independent eigenvectors with the same eigenvalue $\lambda$. Expand $v_1,v_2$ to a basis of the vector space and make a change of basis $T'=QTP$ such that $T_{1,1}=T_{2,2}=\lambda$, i.e., the first two basis element are exactly $v_1,v_2$, and that $T$ is an upper triangular matrix. Now split the matrix $tI-T'$ to blocks and compute the determinant:
+$$\det (tI-T')=\det\begin{pmatrix}[A]=\begin{pmatrix}t-\lambda&0\\0&t-\lambda\end{pmatrix}&[B]\\ [0]&[D]\end{pmatrix}=\det\begin{pmatrix}t-\lambda&0\\0&t-\lambda\end{pmatrix}\cdot\det(D).$$
+This means that the characteristic polynomial have at least a multiplicity of $2$ for the root $\lambda$, as desired.
+\end{proof}
+
+\textbf{Chapter 4 - 6.4.} Let $A=\left[\begin{array}{ll}{2} & {1} \\ {1} & {2}\end{array}\right] .$ Find a matrix $P$ such that $P^{-1} A P$ is diagonal, and find a formula for the matrix $A^{30}$
+\begin{proof}
+$$
+P=\begin{pmatrix}1&-1\\1&1\end{pmatrix}\quad A^{n}=\begin{pmatrix}2^n&1\\1&2^n\end{pmatrix}\text{ so that }A^{30}=\begin{pmatrix}1073741824&1\\1&1073741824\end{pmatrix}.
+$$
+\end{proof}
+
+\textbf{Chapter 4 - 6.5.} In each case, find a complex matrix $P$ such that $P^{-1} A P$ is diagonal.\\
+(a) $\left[\begin{array}{cc}{1} & {i} \\ {-i} & {1}\end{array}\right],$ (b) $\left[\begin{array}{lll}{0} & {0} & {1} \\ {1} & {0} & {0} \\ {0} & {1} & {0}\end{array}\right],(\mathbf{c})\left[\begin{array}{cc}{\cos \theta} & {-\sin \theta} \\ {\sin \theta} & {\cos \theta}\end{array}\right]$
+\begin{proof}{}\leavevmode{}
+\begin{enumerate}[label=(\alph*)]
+\item $
+\begin{pmatrix}
+i&-i\\1&1
+\end{pmatrix}
+$;
+\item
+This matrix does not have a group of linearly independent eigenvectors of length $3$ and thus is not diagonalizable;
+\item $
+\begin{pmatrix}
+-i&i\\1&1
+\end{pmatrix}
+$.
+\end{enumerate}
+\end{proof}
+
+\textbf{Chapter 4 - 6.6.} Suppose that $A$ is diagonalizable. Can the diagonalization be done with a matrix $P$ in the special linear group?
+\begin{proof}
+Yes. Let $Q$ denote the diagonalizing matrix such that $A'=Q^{-1}AQ$ is diagonal, then let $P=(\det Q)^{-\frac{1}{n}}Q$. Now $$P^{-1}AP=((\det Q)^{-\frac{1}{n}}Q)^{-1}A((\det Q)^{-\frac{1}{n}}Q)=Q^{-1}AQ=A'$$ and $\det P=((\det Q)^{-\frac{1}{n}})^n\det Q=1$
+\end{proof}
+
+\textbf{Chapter 4 - 6.7.} Prove that if $A$ and $B$ are $n \times n$ matrices and $A$ is nonsingular, then $A B$ is similar to $B A .$
+\begin{proof}
+$$AB=ABAA^{-1}=A(BA)A^{-1}.$$
+\end{proof}
+
+\textbf{Chapter 4 - 6.8.} A linear operator $T$ is nilpotent if some positive power $T^{k}$ is zero. Prove that $T$ is nilpotent if and only if there is a basis of $V$ such that the matrix of $T$ is upper triangular, with diagonal entries zero.
+\begin{proof}
+For the $\Leftarrow$ direction, notice that for each iteration, the "zero diagonal line" (the line of entries parallel to the main diagonal from whose below the entries are all zero, inclusive) moves up an entries. For the $\Rightarrow$ direction, notice that the only upper triangular matrices that are nilpotent are those that are strict, and since any matrix is similar to an upper triangular matrix, this concludes the proposition.
+\end{proof}
+
+\textbf{Chapter 4 - M.10.} Let $A$ and $B$ be $m \times n$ and $n \times m$ real matrices.\\
+(a) Prove that if $\lambda$ is a nonzero eigenivalue of the $m \times m$ matrix $A B$ then it is also an eigenvalue of the $\boldsymbol{n} \times \boldsymbol{n}$ matrix $\boldsymbol{B} A$. Show by example that this need not be true if
+\[
+\lambda=0
+\]
+(b) Prove that $I_{m}-A B$ is invertible if and only if $I_{n}-B A$ is invertible.
+\begin{proof}{}\leavevmode{}
+\begin{enumerate}[label=(\alph*)]
+\item
+Assume in addition that $A$ and $B$ both have either maximal row rank or column rank.
+Assume also without loss of generality that we're dealing with the maximal row rank case, the other case being similar.
+Henceforce let $X^+$ denote the Moore–Penrose pseudoinverse of the matrix $X$ and $\det^+X$ the generalized pseudodeterminant for non-square matrix $X$ defined as the product of all nonzero singular values of $X$.
+These generalized notions coincide with the usual ones when they apply.
+Choose an inner product for the domain and codomain of $A$ such that $A,B$ are orthogonal transformations.
+We may compute
+$$\det(\lambda I-AB)=0\implies\operatorname{det}^+BAA^+\operatorname{det}^+(\lambda I-AB)\operatorname{det}^+B^+=0.$$
+Since left- and right-multiplication by a unitary (in terms of $\mathbb{R}$, orthogonal) matrix does not change singular values and thus our generalized pseudodeterminant, we have
+$$\operatorname{det}^+(\lambda BAA^+B^+-BAA^+ABB^+)=0.$$
+Now by the first condition of Moore-Penrose and the fact that $A$ and $B$ have maximal row rank,
+$$\operatorname{det}^+(\lambda I-BA)=0,$$
+as desired.
+\item Consider the geometric series
+$$(I_m-AB)^{-1}=\sum_{i=0}(AB)^i=I_m+AB+ABAB+\cdots=I_m+A(I_n+BA+\cdots)B=I_m+A(I_n-BA)^{-1}B,$$
+the penultimate equality being possible due to the absolute convergence of the series.
+So that
+$$(I_n-BA)^{-1}=A^{-1}((I_m-AB)^{-1}-I_m)B^{-1},$$
+as desired.
+\end{enumerate}
+\end{proof}
+
+\textbf{Chapter 4 - M.10.} Let $A$ and $B$ be $m \times n$ and $n \times m$ real matrices.\\
+(a) Prove that if $\lambda$ is a nonzero eigenivalue of the $m \times m$ matrix $A B$ then it is also an eigenvalue of the $\boldsymbol{n} \times \boldsymbol{n}$ matrix $\boldsymbol{B} A$. Show by example that this need not be true if
+\[
+\lambda=0
+\]
+(b) Prove that $I_{m}-A B$ is invertible if and only if $I_{n}-B A$ is invertible.
+\begin{proof}{}\leavevmode{}
+\begin{enumerate}[label=(\alph*)]
+\item
+Let $v$ be such that $ABv=\lambda v$, then $BABv=\lambda Bv$, and thus by that $\lambda\neq0$, $\lambda$ is an eigenvalue of $BA$ with eigenvector $Bv$.
+\item Consider a rather heuristic computation:
+$$(I_m-AB)^{-1}=\sum_{i=0}(AB)^i=I_m+AB+ABAB+\cdots=I_m+A(I_n+BA+\cdots)B=I_m+A(I_n-BA)^{-1}B.$$
+So that
+$$(I_n-BA)^{-1}=A^{-1}((I_m-AB)^{-1}-I_m)B^{-1}.$$
+We may verify this is surprisingly the inverse by
+$$A^{-1}((I_m-AB)^{-1}-I_m)B^{-1}(I_n-BA)=I.$$
+\end{enumerate}
+\end{proof}
+
+\begin{proposition}[Continuity of Roots]
+Henceforth the field nominated are all algebraically closed unless stated otherwise.
+Choose an absolute value for the field $k$ and endow it with the topology induced by the metric, which is induced from the absolute value.
+Let $p_{k}(t)$ be a sequence of monic polynomials of degree $\leq n,$ and let $p(t)$ be another monic polynomial of degree $n .$ Let $\alpha_{k, 1}, \ldots, \alpha_{k, n}$ and $\alpha_{1}, \ldots \alpha_{n}$ denote the roots of these polynomials.
+\begin{enumerate}
+\item
+If $\alpha_{k, \nu} \rightarrow \alpha_{\nu}$ for $\nu=1, \ldots, n,$ then $\lim_{k\to\infty}p_k=p$;
+\item
+Conversely, if $\lim_{k\to\infty}p_{k}=p,$ the roots $\alpha_{k, \nu}$ of $p_{k}$ can be numbered in such a way that $\lim_{k\to\infty}\alpha_{k, \mu^k_\nu}=\alpha_{\nu}$ for each $\nu=1, \ldots, n$.
+\end{enumerate}
+\end{proposition}
+\begin{proof}{}\leavevmode{}
+Since the field are algebraically closed, we may reduce the polynomials to linear components, i.e.
+$$p_{k}(t)=\left(t-\alpha_{k, 1}\right) \cdots\left(t-\alpha_{k, n}\right)\quad\text { and }\quad p(t)=\left(t-\alpha_{1}\right) \cdots\left(t-\alpha_{n}\right).$$
+Now (a) then follows from the fact that the coefficients of $p(t)$ are all continuous functions of its roots.
+
+For all $k$, let $\alpha_{k, \nu}$ be a root of $p_{k}$ nearest to $\alpha_{1},$ i.e., such that $\left|\alpha_{k, v}-\alpha_{1}\right|$ is minimal among $\alpha_{k,1},\dots,\alpha_{k,n}$. We renumber the roots of $p_{k}$ so that this root becomes $\alpha_{k, 1}$, that is to say, let $\mu^k_1=\nu$ and the rest arbitrary for now. Then
+\[
+\left|\alpha_{1}-\alpha_{k, \mu^k_1}\right|^{n} \leq\left|\left(\alpha_{1}-\alpha_{k, 1}\right) \cdots\left(\alpha_{1}-\alpha_{k, n}\right)\right|=\left|p_{k}\left(\alpha_{1}\right)\right|
+\]
+Take the limit $k\to\infty$ on both sides, we have $\lim_{k\to\infty}\alpha_{k,\mu^k_1}=\alpha_1$.
+
+Put the $(t-\alpha_{k,\mu^k_1})$ term and $(t-\alpha_1)$ in front and write $p_k(t)=(t-\alpha_{k,\mu^k_1})q_k(t)$ and $p(t)=\left(t-\alpha_{1}\right) q(t)$. By the premise that $p_k(t)$ and $p(t)$ are monic, $q_k(t)$ and $q(t)$ are monic also, with roots $\alpha_{k,\mu^k_2},\dots,\alpha_{k,\mu^k_n}$ and $\alpha_2,\dots,\alpha_n$ respectively.
+
+We claim that $\lim_{k\to\infty}q_k=q$, for if so then we may repeat the previous process to assure that $\lim_{k\to\infty}\alpha_{k,\mu^k_\nu}=\alpha_\nu$ by a inductive process, which terminates since the number of such roots is finite.
+
+To show that $\lim_{k\to\infty}q_k=q$, we carry out the above factorization of $p(t)$ explicitly. Let
+\begin{align*}
+p(t)&=t^n+a_{n-1}t^{n-1}+\cdots+a_0\\
+q(t)&=t^{n-1}+b_{n-2}t^{n-2}+\cdots+b_0\\
+p_k(t)&=t^n+a^k_{n-1}t^{n-1}+\cdots+a^k_0\\
+q_k(t)&=t^{n-1}+b^k_{n-2}t^{n-2}+\cdots+b^k_0.
+\end{align*}
+The equation $p(t)=(t-\alpha_1)q(t)$ and $p_k(t)=(t-\alpha_{k,\mu^k_1})q_k(t)$ implies that
+$$
+\begin{aligned}
+b_{n-2}&=\alpha_1+a_{n-1}\\
+b_{n-2}&=\alpha_1^2+\alpha_1+a_{n-2}\\
+&{ }\mathbin{\vdots}{ }\\
+b_0&=\alpha_1^{n-1}+\alpha_1^{n-2}a_{n-1}+\cdots+\alpha_1a_2+a_1
+\end{aligned}\quad
+\begin{aligned}
+b^k_{n-2}&=\alpha_{k,\mu^k_1}+a^k_{n-1}\\
+b^k_{n-2}&=\alpha_{k,\mu^k_1}^2+\alpha_{k,\mu^k_1}+a^k_{n-2}\\
+&{ }\mathbin{\vdots}{ }\\
+b^k_0&=\alpha_{k,\mu^k_1}^{n-1}+\alpha_{k,\mu^k_1}^{n-2}a^k_{n-1}+\cdots+\alpha_{k,\mu^k_1}a^k_2+a^k_1
+\end{aligned}.
+$$
+Since $\lim_{k\to\infty}\alpha_{k,\mu^k_1}=\alpha$ and $\lim_{k\to\infty}a^k_i=a_i$ for all $i$, we have $\lim_{k\to\infty}b^k_i=b_i$ for all $i$ and thus $\lim_{k\to\infty}q_k=q$.
+\end{proof}
+
+\begin{proposition}[Artin Algebra 5.2.2]
+Let $A$ be an $n\times n$ matrix with entries in algebraically closed field.
+\begin{enumerate}
+\item
+There is a sequence of matrices $A_{k}$ that converges to $A,$ and such that for all $k$ the characteristic polynomial $p_{k}(t)$ of $A_{k}$ has distinct roots;
+\item
+If a sequence $A_{k}$ of matrices converges to $A,$ the sequence $p_{k}(t)$ of its characteristic polynomials converges to the characteristic polynomial $p(t)$ of $A$;
+\item
+Let $\lambda_{i}$ be the roots of the characteristic polynomial $p .$ If $\lim_{k\to\infty}A_k=A$, the roots $\lambda_{k, i}$ of $p_{k}$ can be numbered so that $\lambda_{k, i} \rightarrow \lambda_{i}$ for each $i$.
+\end{enumerate}
+\end{proposition}
+\begin{proof}{}\leavevmode{}
+\begin{enumerate}
+\item
+All matrices with entries in an algebraically closed field are triangularizable, i.e. $A'=P^{-1}AP$ is upper triangular. The eigenvalues of $A'$ is the diagonal entries of it. Let $A_k'$ be a sequence of matrices that converges to $A'$ as $k\to\infty$ such that the off-diagonal entries of $A_k'$ are same as $A'$ for all $k$ and the diagonal entries are all distinct. $A'_k$ are upper triangular and their characteristic polynomials have distinct roots. Let $Ak=PA'_kP^{-1}$. Notice that matrix multiplication is always continuous with respect to the topology chosen (recall that we've chosen an absolute value function for the field, and thus a topology therefor, and thus a topology for the space of matrix thereover), and thus $\lim_{k\to\infty}A_k=A$. Since matrix similarity guarantees identicality of characteristic polynomials, $A_k$ also have distinct roots, as desired.
+\item
+follows from (a) because the coefficients of the characteristic polynomial depend continuously on the matrix entries.
+\item
+follows from the previous proposition.
+\end{enumerate}
+\end{proof}
+
+\textbf{Cayley-Hamilton Theorem.} Let $P(X)$ be the characteristic polynomial of an $n\times n$ matrix $A$ with entries in an algebraically closed field, then $p(A)=0$.
+\begin{proof}{}\leavevmode{}
+\begin{enumerate}
+\item {} [$A$ is a diagonal matrix]
+Let the diagonal entries be $\lambda_{1}, \ldots, \lambda_{n} .$ The characteristic polynomial is
+\[
+p(t)=\left(t-\lambda_{1}\right) \cdots\left(t-\lambda_{n}\right)
+\]
+Here $p(A)$ is also a diagonal matrix, and its diagonal entries are $p\left(\lambda_{i}\right)$. Since $\lambda_{i}$ are the roots of $p$, $p\left(\lambda_{i}\right)=0$ and $p(A)=0$.
+\item {} [$A$ has distinct eigenvalues.]
+In this case, $A$ is diagonalizable: say $A^{\prime}=P^{-1} A P$ is diagonal. Then the characteristic polynomial of $A^{\prime}$ is the same as the characteristic polynomial $p(t)$ of $A,$ and moreover,
+\[
+A=PAP^{-1}\implies p(A)=P p\left(A^{\prime}\right) P^{-1}
+\]
+By step $1, p\left(A^{\prime}\right)=0,$ so $p(A)=0$.
+\item
+Apply the previous proposition.
+We let $A_{k}$ be a sequence of matrices with distinct eigenvalues that converges to $A$.
+Let $p_{k}$ be the characteristic polynomial of $A_{k}$.
+Since the sequence $p_{k}$ converges to the characteristic polynomial $p$ of $A$, $p_{k}\left(A_{k}\right) \rightarrow p(A)$. Then (2) tells us that $p_{k}\left(A_{k}\right)=0$ for all $k$. Therefore $p(A)=0$
+\end{enumerate}
+\end{proof}
+
+
+\chapter{Homological Algebra}
+
+\section{Categorical Language}
+
+\subsection{Tensor Product \& Monoidal Category}
+
+\subsection{Abelian Category}
+\subsection{Triangulated Category}
+\subsection{Derived Category}
+
+\section{Homology \& Cohomology}
+\subsection{Eilenberg-Steenrod Axiomatized (Co)homology Theory}
+\begin{definition}[Eilenberg-Steenrod Axioms for Ordinary Homology]
+
+\end{definition}
+
+\begin{theorem}[Existence of Eilenberg-Steenrod Ordinary Homology and Coincidence with Singular Homology]
+\end{theorem}
+
+\begin{definition}[Eilenberg-Steenrod Axioms for Ordinary Cohomology]
+
+\end{definition}
+
+\begin{theorem}[Existence of Eilenberg-Steenrod Ordinary Cohomology and Coincidence with Singular Cohomology]
+\end{theorem}
+
+\begin{definition}[Coefficient of Homology]
+
+\end{definition}
+
+\begin{definition}[Coefficient of Cohomology]
+
+\end{definition}
+
+\section{Derived Functors}
+
+\subsection{Derived Functors and Tor \& Ext Functor}
+
+\subsubsection{Derived Functors in Abelian Categories}
+
+\begin{definition}[Derived Functor]
+The functor we are talking here are between Abelian categories, and if we mention projective or injective objects, we assume that there're enough of them.
+\begin{enumerate}
+\item For a \textbf{covariant right exact} functor $F:\mathcal{C}\to\mathcal{D}$, there exists functors $\underset{\leftarrow}{D}^{(n)}F$ indexed by $n\in\mathbb{Z}_0$ that are called the left derived functors, or left derivatives, of $F$, which satisfies the characterization axioms:
+\begin{enumerate}
+\item $\underset{\leftarrow}{D}^{(0)}F=F$;
+\item If $0\to A\to B\to C\to 0$ is a short exact sequence in $\mathcal{C}$, then there exists a long exact sequence $$\cdots\overset{\delta^{(2)}}{\to}D^{(1)}F(A)\to D^{(1)}F(B)\to D^{(1)}F(C)\overset{\delta^{(1)}}{\to}D^{(0)}F(A)\to D^{(0)}F(B)\to D^{(0)}F(C)\overset{\delta^{(0)}}{\to}0$$
+
+\item The aforementioned long exact sequence is natural in the sense that with known morphism of short exact sequence from $0\to A\to B\to C\to0$ to $0\to A'\to B'\to C'\to0$, the $\delta$-morphisms in $\mathcal{D}$ aforementioned give rise to the following commutative diagram:
+        $$
+        \begin{tikzcd}
+D^{(n)}F(C) \arrow[rr, "\delta^{(n)}"] \arrow[dd] &  & D^{(n-1)}F(A) \arrow[dd] \\
+                                                                         &  &                                                 \\
+D^{(n)}F(C') \arrow[rr, "{\delta'^{(n)}}"']       &  & D^{(n-1)}F(A')
+\end{tikzcd};
+        $$
+\item If $P$ is an projective object in the $\mathcal{C}$, that is for any morphism $f:P\to X$ to any $X$, it factors through epimorphism to $X$, i.e. the diagram
+    $$
+    \begin{tikzcd}
+                                     & E \arrow[d, two heads] \\
+P \arrow[r, "f"'] \arrow[ru, dotted] & X
+\end{tikzcd}
+    $$
+    commutes, then $D^{(n)}F(P)=0$ for all $n>0$.
+\end{enumerate}
+
+\item For a \textbf{contravariant left exact} functor $F:\mathcal{C}\to\mathcal{D}$, there exists functors $D^{(n)}F$ indexed by $n\in\mathbb{Z}_0$ that are called the left derived functors, or left derivatives, of $F$, which satisfies the characterization axioms:
+\begin{enumerate}
+\item $D^{(0)}F=F$;
+\item If $0\to A\to B\to C\to 0$ is a short exact sequence in $\mathcal{C}$, then there exists a long exact sequence $$0\overset{\delta^{(0)}}{\to}D^{(0)}F(C)\to D^{(0)}F(B)\to D^{(0)}F(A)\overset{\delta^{(1)}}{\to}D^{(1)}F(C)\to D^{(1)}F(B)\to D^{(1)}F(A)\overset{\delta^{(1)}}{\to}\cdots$$
+
+\item The aforementioned long exact sequence is natural in the sense that with known morphism of short exact sequence from $0\to A\to B\to C\to0$ to $0\to A'\to B'\to C'\to0$, the $\delta$-morphisms in $\mathcal{D}$ aforementioned give rise to the following commutative diagram:
+        $$
+        \begin{tikzcd}
+D^{(n)}F(A) \arrow[rr, "\delta^{(n)}"] \arrow[dd] &  & D^{(n+1)}F(C) \arrow[dd] \\
+                                                  &  &                          \\
+D^{(n)}F(A') \arrow[rr, "\delta'^{(n)}"']         &  & D^{(n+1)}F(C')
+\end{tikzcd};
+        $$
+\item If $P$ is an projective object in the $\mathcal{C}$, that is for any morphism $f:P\to X$ to any $X$, it factors through epimorphism to $X$, i.e. the diagram
+    $$
+    \begin{tikzcd}
+                                     & E \arrow[d, two heads] \\
+P \arrow[r, "f"'] \arrow[ru, dotted] & X
+\end{tikzcd}
+    $$
+    commutes, then $D^{(n)}F(P)=0$ for all $n>0$.
+\end{enumerate}
+\item For a \textbf{covariant left exact} functor $F:\mathcal{C}\to\mathcal{D}$, there exists functors $D^{(n)}F$ indexed by $n\in\mathbb{Z}_0$ that are called the left derived functors, or left derivatives, of $F$, which satisfies the characterization axioms:
+\begin{enumerate}
+\item $D^{(0)}F=F$;
+\item If $0\to A\to B\to C\to 0$ is a short exact sequence in $\mathcal{C}$, then there exists a long exact sequence $$0\overset{\delta^{(0)}}{\to}D^{(0)}F(A)\to D^{(0)}F(B)\to D^{(0)}F(C)\overset{\delta^{(1)}}{\to}D^{(1)}F(A)\to D^{(1)}F(B)\to D^{(1)}F(C)\overset{\delta^{(1)}}{\to}\cdots$$
+
+\item The aforementioned long exact sequence is natural in the sense that with known morphism of short exact sequence from $0\to A\to B\to C\to0$ to $0\to A'\to B'\to C'\to0$, the $\delta$-morphisms in $\mathcal{D}$ aforementioned give rise to the following commutative diagram:
+        $$
+        \begin{tikzcd}
+D^{(n)}F(C) \arrow[rr, "\delta^{(n)}"] \arrow[dd] &  & D^{(n+1)}F(A) \arrow[dd] \\
+                                                  &  &                          \\
+D^{(n)}F(C') \arrow[rr, "\delta'^{(n)}"']         &  & D^{(n+1)}F(A')
+\end{tikzcd};
+        $$
+\item If $I$ is an injective object in the $\mathcal{C}$, that is for any morphism $f:X\to I$ from any $X$, it factors through monomorphism from $X$, i.e. the diagram
+    $$
+    \begin{tikzcd}
+E \arrow[rd, dotted]              &   \\
+X \arrow[r, "f"'] \arrow[u, hook] & I
+\end{tikzcd}
+    $$
+    commutes, then $D^{(n)}F(P)=0$ for all $n>0$.
+\end{enumerate}
+
+\item For a \textbf{contravariant right exact} functor $F:\mathcal{C}\to\mathcal{D}$, there exists functors $D^{(n)}F$ indexed by $n\in\mathbb{Z}_0$ that are called the left derived functors, or left derivatives, of $F$, which satisfies the characterization axioms:
+\begin{enumerate}
+\item $D^{(0)}F=F$;
+\item If $0\to A\to B\to C\to 0$ is a short exact sequence in $\mathcal{C}$, then there exists a long exact sequence $$\cdots\overset{\delta^{(2)}}{\to}D^{(1)}F(C)\to D^{(1)}F(B)\to D^{(1)}F(A)\overset{\delta^{(1)}}{\to}D^{(0)}F(C)\to D^{(0)}F(B)\to D^{(0)}F(A)\overset{\delta^{(0)}}{\to}0$$
+
+\item The aforementioned long exact sequence is natural in the sense that with known morphism of short exact sequence from $0\to A\to B\to C\to0$ to $0\to A'\to B'\to C'\to0$, the $\delta$-morphisms in $\mathcal{D}$ aforementioned give rise to the following commutative diagram:
+        $$
+        \begin{tikzcd}
+D^{(n)}F(A) \arrow[rr, "\delta^{(n)}"] \arrow[dd] &  & D^{(n-1)}F(C) \arrow[dd] \\
+                                                                         &  &                                                 \\
+D^{(n)}F(A') \arrow[rr, "{\delta'^{(n)}}"']       &  & D^{(n-1)}F(C')
+\end{tikzcd};
+        $$
+\item If $I$ is an injective object in the $\mathcal{C}$, that is for any morphism $f:X\to I$ from any $X$, it factors through monomorphism from $X$, i.e. the diagram
+    $$
+    \begin{tikzcd}
+E \arrow[rd, dotted]              &   \\
+X \arrow[r, "f"'] \arrow[u, hook] & I
+\end{tikzcd}
+    $$
+    commutes, then $D^{(n)}F(P)=0$ for all $n>0$.
+\end{enumerate}
+\end{enumerate}
+\end{definition}
+
+\begin{proposition}[Uniqueness]
+The left and right derived functors of covariant and contravariant functors, should they exists, are unique up to unique natural isomorphism of functors.
+\end{proposition}
+\begin{proof}
+We give the proof for the first one, the uniqueness of left derived functors of a covariant right exact functor; the others are similar. We proceed by induction on $n$. By (a), the base case $n=0$ is true. For the inductive case, we have assumed that there're enough projectives, i.e. there is $P\overset{\phi}{\twoheadrightarrow}A$ where $P$ is projective. Now let $K=\ker\phi$; it is obvious that $$0\to K\to P\to A\to 0$$ is an short exact sequence. Applying (b) produces the long exact sequence $$\cdots\overset{\delta^{(2)}}{\to}D^{(1)}F(K)\to D^{(1)}F(P)\to D^{(1)}F(A)\overset{\delta^{(1)}}{\to}D^{(0)}F(K)\to D^{(0)}F(P)\to D^{(0)}F(A)\overset{\delta^{(0)}}{\to}0.$$ Note that since $P$ is projective, (d) tells us that $D^{(n)}F(P)=0$ for $n>0$, i.e. $$\begin{aligned}{}&\cdots\overset{\delta^{(n+2)}}{\to}D^{(n+1)}F(K)\to0\to D^{(n+1)}F(A)\overset{\delta^{(n+1)}}{\to}D^{(n)}F(K)\to0\to D^{(n)}F(A)\overset{\delta^{(n)}}{\to}\\{}&\cdots\overset{\delta^{(2)}}{\to}D^{(1)}F(K)\to0\to D^{(1)}F(A)\overset{\delta^{(1)}}{\to}F(K)\overset{\alpha}{\to}F(P)\to F(A)\overset{\delta^{(0)}}{\to}0\end{aligned}.$$ Now since all Abelian categories are balanced categories, we have an isomorphism $$D^{(n+1)}F(A)\simeq D^{(n)}F(K)$$ for $n>0$. Note that also $\ker\delta^{(1)}=0$ and recall the short exact sequence (which goes by the name first isomorphism theorem in elementary algebra) $$0\to\ker\delta^{(1)}=0\to D^{(1)}F(A)\to\operatorname{im}\delta^{(1)}=\ker\alpha\to0.$$ From that we acquire another isomorphism $$D^{(1)}F(A)\simeq\ker(\alpha:F(K)\to F(P)).$$ Since $F(K), F(P), \alpha$ are all known, $D^{(1)}F(A)$ is then fixed. By the induction hypothesis that $D^{(N)}F$ is unique and the previous two isomorphisms, we may conclude that the value of $D^{(n+1)}F(X)$ of any $X$ depends only on the choice of $K$ for $X$.
+\end{proof}
+
+\begin{example}[The $R\text{-}\mathbf{Mod}$]
+
+\end{example}
+
+\begin{proposition}[Existence]
+\end{proposition}
+
+\subsubsection{Derived Functors in Modern Languages}
+
+\subsection{Resolution}
+
+\section{Product in (Co)homology}
+
+\section{Exercises in Homological Algebra}
+\begin{definition}[Set-theoretic Pullback and Pushout]
+$$
+\begin{tikzcd}
+A \arrow[r, "f"] \arrow[d, "g"'] & B \arrow[d, "\mu"] \\
+C \arrow[r, "\nu"']              & D
+\end{tikzcd}
+$$
+\begin{itemize}
+\item The above diagram is a set-theoretic pullback if $A\subseteq B\times C$ with projection $f$ and $g$, and for all $a\in A$, $(\mu\circ f)(a)=(\nu\circ g)(a)$;
+\item The above diagram is a set-theoretic pushout if $D=(B\sqcup C)/\mathrm{\sim}$, in which $\sim$ is the finest equivalence relation such that $f(a)\sim g(a)$ for all $a\in A$, with the natural quotient map $\mu$ and $\nu$.
+\end{itemize}
+\end{definition}
+
+\begin{proposition}
+Consider
+$$
+\begin{tikzcd}
+0 \arrow[r] & \operatorname{ker}f \arrow[r, "\alpha"] \arrow[d, "\phi"'] & A \arrow[r, "f"] \arrow[d, "g"'] & B \arrow[r, "\beta"] \arrow[d, "\mu"] & \operatorname{coker}f \arrow[r] \arrow[d, "\psi"] & 0 \\
+0 \arrow[r] & \operatorname{ker}\nu \arrow[r, "\gamma"']                 & C \arrow[r, "\nu"']              & D \arrow[r, "\delta"']                & \operatorname{coker}\nu \arrow[r]                 & 0
+\end{tikzcd},
+$$
+with the map $\phi$ and $\psi$ is defined by
+$$\begin{aligned}
+\phi:\ker f&\to\ker\nu\\
+(b,c)&\mapsto g(b,c)=c\in\ker\nu
+\end{aligned}\quad\quad\begin{aligned}
+\psi:\operatorname{coker}f=B/\operatorname{im}f&\to\operatorname{coker}\nu=D/\operatorname{im}\nu\\
+[b]&\mapsto[\mu(b)]
+\end{aligned},$$
+the latter being well-defined since for all $d\in D$, $d\in\operatorname{im}\nu$ by premise and for $b\in\operatorname{im}f$, $\mu(b)\in D$, thus $\mu(b)\in\operatorname{im}\nu$.
+\begin{itemize}
+\item If the central square is a pullback, then $\ker f\simeq\ker\nu$ and $\operatorname{coker}f\hookrightarrow\operatorname{coker}\nu$;
+\item If the central square is a pushout, then $\ker f\twoheadrightarrow\ker\nu$ and $\operatorname{coker}f\simeq\operatorname{coker}\nu$.
+\end{itemize}
+\end{proposition}
+\begin{proof}\leavevmode
+\begin{enumerate}
+\item Pullback, $\ker f\simeq\ker\nu$:
+The inverse map $\phi^{-1}$ is defined as
+$$\begin{aligned}
+\phi:\ker\nu&\to\ker f\\
+c&\mapsto\text{the sole element of }U=\{a\in f^{-1}(\{0\})\text{ where }f:B\times C\to B\,\big|\,g(a)=c\}
+\end{aligned},$$
+which is well-defined since (1) $f,g$ are projections of the product $B\times C$ and $A\subseteq B\times C$ so the condition forced upon determines a unique element, should it exist, and (2) $f^{-1}(\{0\})=\{0\}\times C$ so there exists at least an element in $U$.
+\item Pullback, $\operatorname{coker}f\hookrightarrow\operatorname{coker}\nu$:
+Our goal is to prove that if $\mu(b)\in\operatorname{im}\nu$ then $b\in\operatorname{im}f$. Define $U=\nu^{-1}(\{\mu(b)\})$, which is nonempty by the assumption that $\mu(b)\in\operatorname{im}\nu$, then define $V=(g:B\times C\to C)^{-1}(U)=B\times U$ which is also nonempty. Define also $W=(f:B\times C\to B)^{-1}(\{b\})=\{b\}\times C$. Consider the intersection $X=V\cap W$, which is necessarily non-empty; we have $X\subseteq A$ since for all $x\in X$, $(\mu\circ f)(x)=(\nu\circ g)(x)=\mu(b)$, and thus have successfully established that $b\in\operatorname{im}f$.
+
+\item Pushout, $\ker f\twoheadrightarrow\ker\nu$:
+Our goal is to, for each $c\in C$ with $\nu(c)=0$, find a $a\in A$ such that $g(a)=c$ and $f(a)=0$. We proceed with considering the equivalent class $[0]\in D$. We may notice that $[c]=[0]$, that is $C\ni c\sim0\in B$, which results in an $a$ with $f(a)=0$ and $g(a)=c$, as desired.
+
+\item Pushout, $\operatorname{coker}f\simeq\operatorname{coker}\nu$:
+For the injectivity of $\psi$, we wish to prove that if $\mu(b)\in\operatorname{im}\nu$ then $b\in\operatorname{im}f$. Observe the structure of the equivalent class $\mu(b)=[b]$; since the union is taken disjointly, the only possibility of $[b]\in\operatorname{im}\nu$ is for it to have a representative $c\in C$ such that $b\sim c$. By the assumption of $\sim$ we may deduce that there exists $a$ such that $b=f(a)$ and $c=g(a)$, and thus $b\in\operatorname{im}f$. Now for the surjectivity of $\psi$, we want the surjectivity of $\mu$, which is obvious for being a quotient map.
+\end{enumerate}
+\end{proof}
+
+\begin{theorem}[The Snake Lemma]
+In any abelian category, consider a commutative diagram
+$$
+\begin{tikzcd}
+            & A \arrow[r, "f"] \arrow[d, "a"] & B \arrow[r, "g"] \arrow[d, "b"] & C \arrow[r] \arrow[d, "c"] & 0 \\
+0 \arrow[r] & A' \arrow[r, "f'"']             & B' \arrow[r, "g'"']             & C'                         &
+\end{tikzcd}
+$$
+where the two rows are exact. There is an exact sequence
+$$\ker a\to\ker b\to\ker c\overset{d}{\to}\operatorname{coker}a\to\operatorname{coker}b\to\operatorname{coker}c$$
+where $d$ is a homomorphism.
+Furthermore, if the morphism $A\to B$ is monic, then so is the morphism $\ker a\to\ker b$, which means a $0$ can be augmented towards the left of the resulting sequence; similar result works for epic $B'\to C'$ and the $0$ augmented towards the right.
+\end{theorem}
+
+\begin{proposition}
+The short exact sequence of cochain complex $0\to A^\bullet\to B^\bullet\to C^\bullet\to0$ induces long exact sequence of cohomology.
+\end{proposition}
+\begin{proof}
+Consider the following two commutative diagrams which satisfy the premises of the snake lemma:
+$$
+\begin{tikzcd}
+            0 \arrow[r] & A^{n-1} \arrow[r] \arrow[d, "d^{n-1}_A"] & B^{n-1} \arrow[r] \arrow[d, "d^{n-1}_B"] & C^{n-1} \arrow[r] \arrow[d, "d^{n-1}_C"] & 0 \\
+0 \arrow[r] & A^n \arrow[r]                            & B^n \arrow[r]                            & C^n                                      \arrow[r] & 0
+\end{tikzcd}
+$$
+$$
+\begin{tikzcd}
+           0 \arrow[r] & A^{n+1} \arrow[r] \arrow[d, "d^{n+1}_A"] & B^{n+1} \arrow[r] \arrow[d, "d^{n+1}_B"] & C^{n+1} \arrow[r] \arrow[d, "d^{n+1}_C"] & 0 \\
+0 \arrow[r] & A^{n+2} \arrow[r]                        & B^{n+2} \arrow[r]                        & C^{n+2}                                 \arrow[r] & 0
+\end{tikzcd}
+$$
+They give rise to the following two exact sequence:
+$$
+0\to\ker d^{n-1}_A\to\ker d^{n-1}_B\to\ker d^{n-1}_C\to\operatorname{coker}d^{n-1}_A=\frac{A^n}{\operatorname{im}d^{n-1}_A}\to\operatorname{coker}d^{n-1}_B=\frac{B^n}{\operatorname{im}d^{n-1}_B}\to\operatorname{coker}d^{n-1}_C=\frac{C^n}{\operatorname{im}d^{n-1}_C}\to0
+$$
+$$
+0\to\ker d^{n+1}_A=\frac{A^{n+1}}{\operatorname{coim}d^{n+1}_A}\to\ker d^{n+1}_B=\frac{B^{n+1}}{\operatorname{coim}d^{n+1}_B}\to\ker d^{n+1}_C=\frac{C^{n+1}}{\operatorname{coim}d^{n+1}_C}\to\operatorname{coker}d^{n+1}_A\to\operatorname{coker}d^{n+1}_B\to\operatorname{coker}d^{n+1}_C\to0
+$$
+Define the maps
+$\overline{d}^n_X:[x]\mapsto[d^{n}_X(x)],$
+which are well-defined since $\overline{d}^n_X(\operatorname{im}d^{n-1}_X)=0$ by the property of cochain complex.
+By using these maps, we obtain a diagram
+$$
+\begin{tikzcd}
+            & \frac{A^n}{\operatorname{im}d^{n-1}_A} \arrow[d, "\overline{d}^{n}_A"] \arrow[r] & \frac{B^n}{\operatorname{im}d^{n-1}_B} \arrow[d, "\overline{d}^{n}_B"] \arrow[r] & \frac{A^n}{\operatorname{im}d^{n-1}_A} \arrow[d, "\overline{d}^{n}_C"] \arrow[r] & 0 \\
+0 \arrow[r] & \frac{A^{n+1}}{\operatorname{coim}d^{n+1}_A} \arrow[r]                           & \frac{B^{n+1}}{\operatorname{coim}d^{n+1}_B} \arrow[r]                           & \frac{C^{n+1}}{\operatorname{coim}d^{n+1}_C}                                     &
+\end{tikzcd}.
+$$
+By applying the snake lemma again and noticing that
+$$
+\ker\overline{d}^n_X=\frac{\ker d^n_X}{\operatorname{im}d^{n-1}_X}=H^n(X)\quad\text{ and }\quad\operatorname{coker}\overline{d}^n_X=\frac{\operatorname{coker}d^n_X}{\operatorname{coim}d^{n+1}_X}=H^{n+1}(X),
+$$
+we obtain the desired long exact sequence of cohomology.
+\end{proof}
+
+\begin{theorem}
+Consider the diagram
+$$
+\begin{tikzcd}
+\cdots \arrow[r] & P_1 \arrow[r, "f_1"] & P_0 \arrow[r, "\phi"] & A \arrow[r] \arrow[d, "\alpha"] & 0 \\
+\cdots \arrow[r] & Q_1 \arrow[r, "g_1"] & Q_0 \arrow[r, "\psi"] & B \arrow[r]                     & 0
+\end{tikzcd}
+$$
+where $P_\bullet$ and $Q_\bullet$ are chain complexes, $P_\bullet$ is a projective resolution of $A$, and $Q_\bullet$ is acyclic over $B$, i.e. becoming exact with $B$ augmented by $\psi$.
+\end{theorem}
+\begin{proof}
+Proceed with induction on the index $i$. First, $\alpha\circ\phi$ is a morphism to the codomain of the epimorphism $\psi$, that is, we have the following triangle:
+$$
+\begin{tikzcd}
+                                                                 & Q_0 \arrow[d, "\psi", two heads] \\
+P_0 \arrow[r, "\alpha\circ\phi"'] \arrow[ru, "\alpha_0", dashed] & B
+\end{tikzcd}
+$$
+which results in the lifting morphism $\alpha_0$ that gives rise to the commutative diagram
+$$
+\begin{tikzcd}
+\cdots \arrow[r] & P_1 \arrow[r, "f_1"] & P_0 \arrow[r, "\phi"] \arrow[d, "\alpha_0", dashed] & A \arrow[r] \arrow[d, "\alpha"] & 0 \\
+\cdots \arrow[r] & Q_1 \arrow[r, "g_1"] & Q_0 \arrow[r, "\psi"]                               & B \arrow[r]                     & 0
+\end{tikzcd};
+$$
+this is the base case of induction.
+Now comes the inductive case: Consider the diagram
+$$
+\begin{tikzcd}
+\cdots \arrow[r] & P_{n+1} \arrow[r, "f_{n+1}"]  & P_n \arrow[d, "\alpha_n"] \arrow[r, "f_n"] & P_{n-1} \arrow[r] \arrow[d, "\alpha_{n-1}"] & \cdots \\
+\cdots \arrow[r] & Q_{n+1} \arrow[r, "g_{n+1}"'] & Q_n \arrow[r, "g_n"']                      & Q_{n-1} \arrow[r]                           & \cdots
+\end{tikzcd}.
+$$
+Notice that by commutativity and the nature of chain complex, $g_n\circ\alpha_n\circ f_{n+1}=\alpha_{n-1}\circ f_n\circ f_{n+1}=\alpha_{n-1}\circ0=0$, that is $\operatorname{im}(\alpha_n\circ f_{n+1})\subseteq\ker g_n$, and thus the commutativity of the diagram
+$$
+\begin{tikzcd}
+\cdots \arrow[r] & P_{n+1} \arrow[r, "f_{n+1}"] \arrow[rdd]            & P_n \arrow[d, "\alpha_n"] \arrow[r, "f_n"]        & P_{n-1} \arrow[r] \arrow[d, "\alpha_{n-1}"] & \cdots \\
+\cdots \arrow[r] & Q_{n+1} \arrow[r, "g_{n+1}"'] \arrow[rd, two heads] & Q_n \arrow[r, "g_n"']                             & Q_{n-1} \arrow[r]                           & \cdots \\
+                 &                                                     & \ker g_n=\operatorname{im}g_{n+1} \arrow[u, hook] &                                             &
+\end{tikzcd}
+$$
+where the map $Q_{n+1}\to\operatorname{im}g_{n+1}$ is an epimorphism given by $g_{n+1}$.
+Here comes the lifting triangle we desire:
+$$
+\begin{tikzcd}
+                                                     & Q_{n+1} \arrow[d, two heads]                      &     \\
+P_{n+1} \arrow[r] \arrow[ru, "\alpha_{n+1}", dashed] & \ker g_n=\operatorname{im}g_{n+1} \arrow[r, hook] & Q_n
+\end{tikzcd},
+$$
+which results in the desired $\alpha_{n+1}$ and completes the induction.
+\end{proof}
+
+\begin{theorem}
+Consider the diagram
+$$
+\begin{tikzcd}
+\cdots \arrow[r] & P_1 \arrow[r, "f_1"] \arrow[d, "\alpha_1"] \arrow[d, shift left, "\beta_1"'] & P_0 \arrow[r, "\phi"] \arrow[d, "\alpha_0"] \arrow[d, shift left, "\beta_0"'] & A \arrow[r] & 0 \\
+\cdots \arrow[r] & Q_1 \arrow[r, "g_1"']                      & Q_0 \arrow[r, "\psi"']                      & B \arrow[r]                     & 0
+\end{tikzcd}
+$$
+with the same assumptions as before, i.e. $P_\bullet,Q_\bullet$ chain complexes, $P_\bullet$ projective resolution, $Q_\bullet$ acyclic over $B$. In this setting, the chain maps $\alpha_*$ and $\beta_*$ with $\alpha_{-1}=\beta_{-1}=0:A\to B$ are chain homotopic.
+\end{theorem}
+\begin{proof}
+$$
+\begin{tikzcd}
+\cdots \arrow[r] & P_2 \arrow[r, "f_2"] \arrow[d, "\alpha_2"] \arrow[d, shift left, "\beta_2"'] & P_1 \arrow[r, "f_1"] \arrow[d, "\alpha_1"] \arrow[d, shift left, "\beta_1"'] \arrow[dl, dotted, "h_1"] & P_0 \arrow[r, "\phi"] \arrow[d, "\alpha_0"] \arrow[d, shift left, "\beta_0"'] \arrow[dl, dotted, "h_0"] & A \arrow[r] \arrow[d, "0"] \arrow[dl, dotted, "h_{-1}=0"] & 0 \\
+\cdots \arrow[r] & Q_2 \arrow[r, "g_2"'] & Q_1 \arrow[r, "g_1"']                      & Q_0 \arrow[r, "\psi"']                      & B \arrow[r]                     & 0
+\end{tikzcd}
+$$
+For $i=-1$, the case is trivial (with $0:0\to B$). Starting by induction with case $i=0$: we wish to find a map $h_0:P_0\to Q_1$ such that $\beta_0-\alpha_0=g_1\circ h_0$. By commutativity of diagram, $\psi\circ\alpha_0=\psi\circ\beta_0=0\circ\phi=0$, which means $\operatorname{im}(\beta_0-\alpha_0)\subseteq\ker\psi$, and thus gives a factor thereof through $\ker\psi=\operatorname{im}g_1$, i.e.
+$$
+\begin{tikzcd}
+\cdots \arrow[r] & P_2 \arrow[r, "f_2"] \arrow[d, "\alpha_2"] \arrow[d, shift left, "\beta_2"'] & P_1 \arrow[r, "f_1"] \arrow[d, "\alpha_1"] \arrow[d, shift left, "\beta_1"'] \arrow[dl, dotted, "h_1"] & P_0 \arrow[dd, bend right, dashed, "\gamma_0"'] \arrow[r, "\phi"] \arrow[d, "\alpha_0"] \arrow[d, shift left, "\beta_0"'] \arrow[dl, dotted, "h_0"] & A \arrow[r] \arrow[d, "0"] \arrow[dl, dotted, "h_{-1}=0"] & 0 \\
+\cdots \arrow[r] & Q_2 \arrow[r, "g_2"'] & Q_1 \arrow[rd, two heads] \arrow[r, "g_1"']                      & Q_0 \arrow[r, "\psi"']                      & B \arrow[r]                     & 0\\
+{} & {} & {} & \ker\psi=\operatorname{im}g_1 \arrow[u, hook] & {} & {}
+\end{tikzcd}
+$$
+Zoom in the lifting triangle,
+$$
+\begin{tikzcd}
+                                                    & Q_1 \arrow[d, two heads]      \\
+P_0 \arrow[r, "\gamma_0"'] \arrow[ru, "h0", dotted] & \ker\psi=\operatorname{im}g_1
+\end{tikzcd},
+$$
+we acquire the desired $h_0$.
+For the purpose of proving the inductive case, we proceed with the $i$ case with the induction hypothesis for $i-1$ case. We wish to find a $h_i$ such that $g_{i+1}\circ h_i=\beta_i-\alpha_i-h_{i-1}\circ f_i$. By the induction hypothesis, we have $\beta_{i-1}-\alpha_{i-1}=g_{i}\circ h_{i-1}+h_{i-2}\circ f_{i-1}$. Proceed with the following computation:
+\begin{align*}
+g_i\circ(\beta_i-\alpha_i)-g_i\circ h_{i-1}\circ f_i&=g_i\circ(\beta_i-\alpha_i-h_{i-1}\circ f_i)\\
+&=g_i\circ g_{i+1}\circ h_i\\
+&=0\circ h_i=0
+\end{align*}
+Hence $\operatorname{im}(\beta_i-\alpha_i-h_{i-1}\circ f_i)\subseteq\ker g_i$, and we can let it factor through $\ker g_i=\operatorname{im}g_{i+1}$, thus through $g_{i+1}$ by lifting triangle
+$$
+\begin{tikzcd}
+                                                                                  & Q_{i+1} \arrow[d, two heads] \arrow[rd, "g_{i+1}"] &     \\
+P_{i+1} \arrow[r, "\beta_i-\alpha_i-h_{i-1}\circ f_i"'] \arrow[ru, "h_i", dashed] & \ker g_i=\operatorname{im}g_{i+1} \arrow[r, hook]  & Q_i
+\end{tikzcd},
+$$
+which also provides the desired morphism $h_i$.
+\end{proof}
+
+\chapter{Algebraic Topology}
+
+\begin{proposition}\leavevmode
+\begin{itemize}
+\item For a set $X$ endowed with discrete topology,
+$$H^n(X;R)=H_n(X;R)=\begin{cases}\bigoplus_{x\in X}R&n=0\\0& \mbox{otherwise};\end{cases}$$
+\end{itemize}
+\end{proposition}
+
+\begin{example}[$\{p\}$]
+By the previous proposition, $$H^n(\{x\};R)=H_n(\{x\};R)=\begin{cases}R&n=0\\0& \mbox{otherwise};\end{cases}$$
+\end{example}
+
+\begin{theorem}[Poinca\'e Duality]
+Let $M$ be a (boundary-less) $n$-topological manifold, $R$ a commutative ring with identity, and $G$ an $R$-module. If $M$ is $R$-orientable, that is to say, for ring $R$ with $1+1=0$, all $M$, or for otherwise, orientable $M$, the map
+\begin{align*}
+D_M:H^p_\mathrm{c}(M;G)&\to H_{n-p}(M;G)\\
+\omega&\mapsto\omega\frown\mu_M
+\end{align*}
+where $\mu_M$ is the one of the two sections of generator of the $R$-orientation bundle $$\bigsqcup_{x\in M}H^n(M,M-\{x\};R)$$ (topologized appropriately, cf. Hatcher p.234), is a $G$-graded module isomorphism.
+\end{theorem}
+
+\begin{theorem}[Poinca\'e Duality*]
+Let $M$ be a compact (boundary-less) $n$-topological manifold. If $M$ is orientable, the map
+\begin{align*}
+D_M:H^p(M)&\to H_{n-p}(M)\\
+\omega&\mapsto\omega\frown\mu_M
+\end{align*}
+where $\mu_M$ is the one of the two sections of generator of the $R$-orientation bundle $$\bigsqcup_{x\in M}H^n(M,M-\{x\})$$ (topologized appropriately, cf. Hatcher p.234), is an isomorphism.
+\end{theorem}
+
+\begin{theorem}[Mayer-Vietoris Sequence]
+$$
+\cdots \rightarrow H_{n+1}(X) \stackrel{\partial}{\rightarrow} H_{n}(A \cap B) \stackrel{(i, j)}{\longrightarrow} H_{n}(A) \oplus H_{n}(B) \stackrel{k_*-l_*}{\longrightarrow} H_{n}(X) \stackrel{\partial_{i}}{\longrightarrow} H_{n-1}(A \cap B) \rightarrow \cdots \rightarrow H_{0}(A) \oplus H_{0}(B) \stackrel{k_*-l_*}{\longrightarrow} H_{0}(X) \rightarrow 0
+$$
+\end{theorem}
+
+\begin{example}[$S^n$]
+First, $H_0(S^0=\{x,x'\},R)=R\oplus R$ and $H_0(S^n)=R$ for $n\geq1$ Proceed by induction on the dimension $n\geq1$. By Mayer-Vietoris sequence applied to the case $A$ being the upper hemisphere, $B$ the lower hemisphere, and $A\cap B$ the equatorial $S^{n-1}$, we have identities $$H_n(S^k)=H_{n-1}(S^{k-1})$$ for all integer $n,k$. Note that $\pi_1(S^1)=\mathbb{Z}$, which results in the abelianization $H_1(S^1)=R$. With Poincar\'e duality, since $S^k$ are boundary-less, compact ($H^p_\mathrm{c}(M;R)\simeq H^p(M;R)$), and orientable, we conclude that $$
+H^n(S^k;R)=H_n(S^k;R)=\begin{cases}R\oplus R & n=k=0\\R&n=0\,\&\,k>0\\R&n=k>0\\0& \mbox{otherwise}.\end{cases}
+$$
+\end{example}
+
+\begin{example}[$\mathbb{R}^n$ and $\mathbb{R}^n-\{0\}$]\leavevmode
+\begin{itemize}
+\item $\mathbb{R}^n$ is nulhomotopic, thus has the same (co)homology as the singleton set;
+\item $\mathbb{R}^n-\{0\}$ is homotopy equivalent to $S^{n-1}$, thus has the same (co)homology with it.
+\end{itemize}
+\end{example}
+
+\begin{fact}[Sphere Bundle over $F\mathbb{P}^n$] In this segment we assume that $F=\mathbb{R},\mathbb{C},\mathbb{H}$. Let $|\cdot|$ denote the the modulus in $F$. For $x=(x_1,\dots,x_n)\in F^n$, define the Euclidean quadratic form $\lVert x\rVert=\sum_{i=1}^n|x_i|^2$ and the sphere $S^n(F)=\{x\in F^{n+1}\,\big|\,\lVert x\rVert=1\}$ with respect to it. Note that a group structure can be given to $S^0(F)$ since it's the kernel of the modulus homomorphism $F\setminus\{0\}\to(\mathbb{R},\cdot)$ Recall the definition of the $n$-dimensional $F$-projective space $$F\mathbb{P}^n=^{(F^{n+1}\setminus\{0\})}\big/_{F\setminus\{0\}}$$ where the quotient is via the diagonal left multiplication action and the quotient map thereof is denoted $\pi$. Now there is a $0$-sphere bundle $\chi:S^n(F)\overset{p}{\to}F\mathbb{P}^n$ with fiber $S^0(F)$ where $$p=\pi\circ i:S^n(F)\xhookrightarrow{}F^{n+1}\setminus\{0\}\to F\mathbb{P}^n$$ where the $i$ is the inclusion map.
+\end{fact}
+
+\begin{fact}[CW structure of $\mathbb{CP}^{n}$]\label{fact:cw_sturecture_of_cpn} Now we describe one of the possible structure of $\mathbb{CP}^{n}$, a $2n$-dimensional real manifold, as a CW complex: First note that $\mathbb{CP}^{n}=S^{2n+1}/S^1$. Given a point in $\mathbb{CP}^{n}$ with homogeneous coordinates $\vec{z}=(z_0,\dots,z_{n})\in\mathbb{C}^{n+1}$, let $\phi=-\arg(z_{n})$, then under the equivalence relation defining $\mathbb{CP}^{n}$, $$\frac{1}{|\vec{z}|}(e^{i\phi}z_0,\dots,e^{i\phi}z_{n-1},r)=\vec{z}$$ where $r=|z_{n+2}|\in[0,1)\subset\mathbb{C}$. Representatives $\vec{z}'$ of this form ($|\vec{z}'|=1$ and $z'_{n+2}\in[0,1]$) parameterize the real disk $D^{2n+3}$ with boundary the $(2n+2)$-sphere with coordinate constraint $r=0$. The resulting function $q:D^{2n+1}\to\mathbb{CP}^{n}$ is continuous since it can be factored as
+\begin{align*}
+q:D^{2n+1}&\hookrightarrow\mathbb{C}^{n+1}\setminus\{0\}&\overset{\pi}{\to}\mathbb{CP}^{n}\\
+(\Re(z_0),\Im(z_0),\dots,\Re(z_{n-1}),\Im(z_{n-1}),r)&\mapsto(z_0,\dots,z_{n-1},r)&\mapsto[z_0,\dots,z_{n-1},r]&
+\end{align*}
+where the first map is the embedding of the disk as a hemisphere in $\mathbb{R}^{2n+1}\hookrightarrow\mathbb{R}^{2n+2}\simeq\mathbb{C}^{n+1}$ and the second the quotient map. The only remaining part of the action by $\mathbb{C}\setminus\{0\}$ which fixes the condition $|z'|=1$ and $z'_{n+2}\in[0,1)$ is the sphere $S^1\subset\mathbb{C}\setminus\{0\}$ acting on the elements with $r=0$ by phase shifts on the coordinates $w=(z_0,\dots,z_{n})$. Regarded as real coordinates, this parameterizes an $S^{2n}$, and thus the result from the previous segment can be applied: voil\`a, une fonction attachant $S^{2n}\to\mathbb{CP}^{n-1}$, which results in the CW structure of $\mathbb{CP}^{n}$ by induction.
+\end{fact}
+
+\begin{example}[$\mathbb{CP}^n$]
+By Fact \ref{fact:cw_sturecture_of_cpn}, the cellular chain complex of $\mathbb{CP}^n$ is nontrivial only at even index, thus its homology must be
+\end{example}
+
+\begin{theorem}[Universal Coefficient Theorem]
+The following two sequence are exact.
+\begin{itemize}
+\item $$0 \rightarrow H_{i}(X ; \mathbb{Z}) \otimes A \stackrel{\mu}{\rightarrow} H_{i}(X ; A) \rightarrow \operatorname{Tor}_{1}\left(H_{i-1}(X ; \mathbb{Z}), A\right) \rightarrow 0;$$
+\item $$0 \rightarrow \operatorname{Ext}_{R}^{1}\left({H}_{i-1}(X ; R), G\right) \rightarrow H^{i}(X ; G) \stackrel{h}{\rightarrow} \operatorname{Hom}_{R}\left(H_{i}(X ; R), G\right) \rightarrow 0.$$
+\end{itemize}
+\end{theorem}
+
+\begin{theorem}[Derived Functor Dimension Shifting]
+For projective resolution $$\cdots\to0\to K=\ker\phi\to P\overset{\phi}{\to}A\to0,$$
+\begin{itemize}
+\item $$D^{(1)}F(A)\simeq\ker(F(K)\to F(P));$$
+\item $$D^{(n)}F(A)\simeq D^{(n-1)}F(K).$$
+\end{itemize}
+\end{theorem}
+
+\begin{theorem}[Topological Quotient Manifold Theorem]
+If $M$ is a connected topological manifold and $G$ is a discrete group acting continuously, freely, and properly on $M$, then the quotient $M/G$ is a topological manifold. Moreover, if the $M$ is orientable and the action of $G$ is orientation preserving, then the quotient $M/G$ is also orientable.
+\end{theorem}
+
+\begin{theorem}[Theorem of Infinite Cyclic Top Homology, Dold1995, VIII Corollary 3.4]
+If $M$ is an $n$-dimensional closed orientable topological manifold without boundary, then $H_n(M;R)=R$.
+\end{theorem}
+
+\begin{example}[$X={S^3}\big/{\xi_q}$]
+The universal cover space of $X$ is $S^3$, to which a path in $X$ can be lifted; it is a $q$-sheeted cover so with a starting point fixed there're $q$ distinct homotopy classes of pathes in the covering space, which in turn gives rise to $q$ homotopy classes in $X$, thus the fundamental group $\pi_1(X)=\mathbb{Z}/q$. The number of path-connected components of $X$ is 1 since the quotient is connected if the quotient\'ee is, and thus $H_0(X;R)=R$. This gives the $H_1(X;R)=\mathbb{Z}/q\otimes R$ by the first formula of the universal coefficient theorem and the Hurewicz theorem, since by taking the projective resolution $$\cdots\to0\to\ker\phi\to\mathbb{Z}\oplus Q\overset{\phi}{\to}\mathbb{Z}\to 0$$ gives $$\mathrm{Tor}_1(H_{i-1}(X,\mathbb{Z})=\mathbb{Z},R)\simeq\ker((\ker\phi=Q)\otimes R\to(\mathbb{Z}\oplus Q)\otimes R)=0$$ where $Q$ is as [Lemma 3.9, Davis \& Kirk, 2nd, p.54] by dimension shifting. By the second formula, also with dimension shifting, $$H^1(X;R)=\mathrm{Hom}((\mathbb{Z}/q)\otimes R,R)$$ since $$\mathrm{Ext}_R^1(H_{0}(X;R)=R,R)\simeq\ker(\mathrm{Hom}(R\oplus Q,R)\to\mathrm{Hom}(Q,R))=0.$$ By the topological quotient manifold theorem, the theorem of infinite cyclic top homology and poincar\'e duality holds also, and thus we may conclude that
+\begin{center}
+\begin{tabular}{|c|c|c|}
+  \hline
+  $n$ & $H_n(X;R)$ & $H^n(X;R)$ \\
+  \hline
+  0 & $R$ & $R$ \\
+  \hline
+  1 & $(\mathbb{Z}/q)\otimes R$ & $\mathrm{Hom}((\mathbb{Z}/q)\otimes R,R)$ \\
+  \hline
+  2 & $\mathrm{Hom}((\mathbb{Z}/q)\otimes R,R)$ & $(\mathbb{Z}/q)\otimes R$ \\
+  \hline
+  3 & $R$ & $R$ \\
+  \hline
+\end{tabular}
+\end{center}
+\end{example}
+
+\begin{example}[$X={S^3}\big/{\xi_q}$]
+The universal cover space of $X$ is $S^3$, to which a path in $X$ can be lifted; it is a $q$-sheeted cover so with a starting point fixed there're $q$ distinct homotopy classes of pathes in the covering space, which in turn gives rise to $q$ homotopy classes in $X$, thus the fundamental group $\pi_1(X)=\mathbb{Z}/q$. The number of path-connected components of $X$ is 1 since the quotient is connected if the quotient\'ee is, and thus $H_0(X)=\mathbb{Z}$. This gives the $H_1(X)=\mathbb{Z}/q$ by the Hurewicz theorem. By the second formula of universal coefficient theorem, also with dimension shifting, $$H^1(X;R)=\mathrm{Hom}(\mathbb{Z}/q)\otimes R,R)$$ since $$\mathrm{Ext}_\mathbb{Z}^1(H_{0}(X;\mathbb{Z})=\mathbb{Z},\mathbb{Z})\simeq\ker(\mathrm{Hom}(\mathbb{Z}\oplus Q,\mathbb{Z})\to\mathrm{Hom}(Q,\mathbb{Z}))=0,$$ where $Q$ is as [Lemma 3.9, Davis \& Kirk, 2nd, p.54] by dimension shifting. By the topological quotient manifold theorem, the theorem of infinite cyclic top homology and poincar\'e duality holds also, and thus we may conclude that
+\begin{center}
+\begin{tabular}{|c|c|c|}
+  \hline
+  $n$ & $H_n(X)$ & $H^n(X)$ \\
+  \hline
+  0 & $\mathbb{Z}$ & $\mathbb{Z}$ \\
+  \hline
+  1 & $\mathbb{Z}/q$ & $\mathrm{Hom}((\mathbb{Z}/q)\otimes\mathbb{Z},\mathbb{Z})=0$ \\
+  \hline
+  2 & $0$ & $\mathbb{Z}/q$ \\
+  \hline
+  3 & $\mathbb{Z}$ & $\mathbb{Z}$ \\
+  \hline
+\end{tabular}
+\end{center}
+\end{example}
+
+\chapter{Pre-Algebraic Geometry}
+
+$$\lim_{\substack{\rightarrow\\U'\ni x}}\lim_{\substack{\rightarrow\\V\supseteq f(U')}}G(V)\dashleftarrow\dashrightarrow\lim_{\substack{\rightarrow\\U'\ni x\\V\supseteq f(U')}}G(V)$$
+
+\chapter{Algebraic Geometry}
+
+$\operatorname{Spec}(-):\mathbf{Ring}\to\mathbf{Top}$ is a \textbf{fully faithful}\footnote{Todd Trimble (https://mathoverflow.net/users/2926/todd-trimble), Reference for Spec as a functor between affine schemes and algebras, URL (version: 2011-07-25): https://mathoverflow.net/q/71228} contravariant functor, and moreover it satisfies the following property.
+$$
+\begin{aligned}
+\phi:&A&&\hookrightarrow B\\
+\operatorname{Spec}\phi:&\operatorname{Spec}A&&\leftarrow\operatorname{Spec}B\\
+V(\operatorname{coim}\phi)\supseteq&D(\operatorname{ker}\phi)&&\hookdoubleheadleftarrow{}B
+\end{aligned}\quad\quad\quad
+\begin{aligned}
+\phi:&A&&\twoheadrightarrow B\\
+\operatorname{Spec}\phi:&\operatorname{Spec}A&&\leftarrow\operatorname{Spec}B\\
+&A&&\hookdoubleheadleftarrow{}D(\operatorname{coker}\phi)\subseteq V(\operatorname{im}\phi)
+\end{aligned}
+$$
+
+{\Large Illusie}
+
+
+
+
+{\Large G\"ortz}
+
+\textbf{Exercise $2.23 .$} A ring $A$ is called Boolean if $a^{2}=a$ for all $a \in A .$ Let $A$ be a Boolean $\operatorname{ring}$ and $X=\operatorname{Spec} A$
+\begin{enumerate}[label=(\alph*)]
+\item
+Show that every prime ideal of $A$ is a maximal ideal and that $\kappa(x)=\mathbb{F}_{2}$ for all $x \in X$ Deduce that $\varphi \mapsto \operatorname{Ker}(\varphi)$ yields a bijection between the set of ring homomorphisms $A \rightarrow \mathbb{F}_{2}$ and $\operatorname{Spec} A$
+\item
+Show that $X$ is a compact totally disconnected space and that $A \mapsto$ Spec $A$ yields an equivalence of the category of Boolean rings (as a full subcategory of all rings) and the category of compact totally disconnected spaces (where the morphisms are continuous maps). A quasi-inverse of $A \mapsto$ Spec $A$ is given by sending $X$ to the $\mathbb{F}_{2}$ -algebra of continuous maps $X \rightarrow \mathbb{F}_{2}$ (where $\mathbb{F}_{2}$ is endowed with the discrete topology
+\end{enumerate}
+Remark: See also Exercise $10.10 .$
+
+\chapter{Miscellany}
+\newpage
+{\Large Project Tournoua Erotos - Settings}
+
+The Tournoua Erotos (Greek for Eros's Game) is to be a fantasy series (collaborative project, in any form---light novel, manga, anime, game). The general background settings, which are inspired by that of \textit{Darwin's Game} and \textit{Puella Magi Madoka Magica}, are
+\begin{enumerate}
+\item
+There's an supernatural app which makes people's wishes come true.
+\item
+To make a wish, you must be matched with another player who also makes a wish and make them fall (in a romantic sense) for you.
+\item
+Your matched player usually has their wish sharing traits with yours, or is somewhat related to you (see below).
+\item
+There are criteria for the app to assess: a scoring system that keeps tracking both parties' thoughts and actions.
+\item
+In the end, only one player gets their wish fulfilled; the other loses their status as a player permanently; the successful player may play again.
+\end{enumerate}
+
+Example criteria for crushing.
+\begin{enumerate}
+\item (nonempirical) Willing to date; share personal thoughts; picturing a future with the player.
+\item (empirical) Willing to (be) kiss(ed)/cuddle(d)/having sex/marry(ied), etc.
+\end{enumerate}
+Note that it's a supernatural game, so it knows people's thoughts, which (hopefully) avoids cheaters.
+
+Advices for writing.
+\begin{enumerate}
+\item
+Make wishes \textbf{personal}: getting good grades, saving one person's life, letting your crush to love you (yes this will be an interesting one), swapping/changing body, being able to eat but not get fat, making people like you, even getting appropriuate amount of money are all examples of good wishes, but please \textbf{avoid}: Eliminating poverty, bigotry, discrimination, nation borders, capitalism or something like those.
+\item
+Make wishes positive; \textbf{don't try} killing someone, breaking common values, spread hatred or anything like those.
+\item
+Write about both the process of the game and stories after the game ends.
+\end{enumerate}
+
+Examples.
+\begin{enumerate}
+\item
+A PhD candidate wishes for an SCI paper (so realistic...), matched with their mentor, who wants one of their relatives who have cancer to be healed. (for those of you who wants to write about student-teacher/employee-employer CP)
+\item
+Two people who wants to understand romance wishes for such understanding, matched together. (this will be a tough one)
+\item
+An MtF and a FtM who made a deal of switching bodies by using the app, but must first make the other fall for them. (a sweet and lovely one)
+\item
+Anything you come up with~
+\end{enumerate}
+
+Good luck creating!
+
+\newpage
+{\Large Project Tournoua Erotos - 设定集}
+
+Tournoua Erotos (希腊语，爱神的游戏) 是一个幻想作品系列（合作写作）。基本设定受到Darwin's Game和魔法少女小圆的启发。设定如下
+\begin{enumerate}
+\item
+存在一个超自然的app，它可以实现人们的愿望。
+\item
+若想要许愿，你需要让app选择的玩家（同样使用app并许愿的人）爱上你。
+\item
+App选择的玩家会和你或/和你的愿望有关。
+\item
+（自由设定）App拥有一些标准：一个评分系统，可以追踪双方的想法和行动。
+\item
+游戏结束时，只有一个玩家的愿望会实现；另一个玩家永久性失去使用app的机会；成功的玩家可以继续许愿。
+\end{enumerate}
+
+关于评分标准
+\begin{enumerate}
+\item (nonempirical) 想要共同生活，约会，拥有未来和其他浪漫的想法；
+\item (empirical) 对身体接触、接吻、爱抚、性爱、婚姻等的想法和行动。
+\end{enumerate}
+注意这是一个超自然的游戏，app了解玩家的想法，（希望）这能避免一些关于设定的漏洞。
+
+写作建议
+\begin{enumerate}
+\item
+描写个人性的愿望，例如：获得好成绩，拯救他人的生命，让你暗恋的人喜欢你（这个会很有趣），交换身体，吃了也不会胖，让大家喜欢你，甚至是获得一定数量的金钱；反例：消灭贫穷、偏执、歧视、国界、资本主义或其他的什么。
+\item
+描写正面的愿望，反例：杀死某人，违反普世价值，传播仇恨/偏见/歧视等。
+\end{enumerate}
+
+例子
+\begin{enumerate}
+\item
+PhD学生希望获得SCI论文并毕业，ta的match是ta的导师，导师希望治愈亲人的癌症。
+\item
+希望理解爱情的两人互相match，在尝试互相让对方爱上自己的过程中领会爱情。
+\item
+MtF和FtM跨性别者希望交换身体，但是首先他们需要让对方爱上自己。
+\end{enumerate}
+
+祝创作顺利~
+
+\chapter*{Reference}
+\printbibliography
+\end{document}

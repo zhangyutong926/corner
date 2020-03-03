@@ -1,0 +1,133 @@
+\begin{thebibliography}{12}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\href}[2]{#2}
+\providecommand{\path}[1]{#1}
+\providecommand{\DOIprefix}{doi:}
+\providecommand{\ArXivprefix}{arXiv:}
+\providecommand{\URLprefix}{URL: }
+\providecommand{\Pubmedprefix}{pmid:}
+\providecommand{\doi}[1]{\href{http://dx.doi.org/#1}{\path{#1}}}
+\providecommand{\Pubmed}[1]{\href{pmid:#1}{\path{#1}}}
+\providecommand{\bibinfo}[2]{#2}
+\ifx\xfnm\relax \def\xfnm[#1]{\unskip,\space#1}\fi
+%Type = Article
+\bibitem[{Baral et~al.(2013)Baral, Poteat, Str{\"o}mdahl, Wirtz, Guadamuz \&
+  Beyrer}]{baral2013}
+\bibinfo{author}{Baral, S.~D.}, \bibinfo{author}{Poteat, T.},
+  \bibinfo{author}{Str{\"o}mdahl, S.}, \bibinfo{author}{Wirtz, A.~L.},
+  \bibinfo{author}{Guadamuz, T.~E.}, \& \bibinfo{author}{Beyrer, C.}
+  (\bibinfo{year}{2013}).
+\newblock \bibinfo{title}{Worldwide burden of hiv in transgender women: a
+  systematic review and meta-analysis}.
+\newblock {\it \bibinfo{journal}{The Lancet infectious diseases}\/},  {\it
+  \bibinfo{volume}{13}\/}, \bibinfo{pages}{214--222}.
+%Type = Article
+\bibitem[{Bockting et~al.(1998)Bockting, Robinson \& Rosser}]{bockting1998}
+\bibinfo{author}{Bockting, W.~O.}, \bibinfo{author}{Robinson, B.}, \&
+  \bibinfo{author}{Rosser, B.} (\bibinfo{year}{1998}).
+\newblock \bibinfo{title}{Transgender hiv prevention: A qualitative needs
+  assessment}.
+\newblock {\it \bibinfo{journal}{AIDS care}\/},  {\it \bibinfo{volume}{10}\/},
+  \bibinfo{pages}{505--525}.
+%Type = Article
+\bibitem[{Cai et~al.(2016)Cai, Wang, Lau, Li, Ma \& Liu}]{cai2016}
+\bibinfo{author}{Cai, Y.}, \bibinfo{author}{Wang, Z.}, \bibinfo{author}{Lau,
+  J.~T.}, \bibinfo{author}{Li, J.}, \bibinfo{author}{Ma, T.}, \&
+  \bibinfo{author}{Liu, Y.} (\bibinfo{year}{2016}).
+\newblock \bibinfo{title}{Prevalence and associated factors of condomless
+  receptive anal intercourse with male clients among transgender women sex
+  workers in shenyang, china}.
+\newblock {\it \bibinfo{journal}{Journal of the International AIDS Society}\/},
+   {\it \bibinfo{volume}{19}\/}, \bibinfo{pages}{20800}.
+%Type = Article
+\bibitem[{Chew et~al.(1997)Chew, Tham \& Ratnam}]{chew1997}
+\bibinfo{author}{Chew, S.}, \bibinfo{author}{Tham, K.}, \&
+  \bibinfo{author}{Ratnam, S.} (\bibinfo{year}{1997}).
+\newblock \bibinfo{title}{Sexual behaviour and prevalence of hiv antibodies in
+  transsexuals}.
+\newblock {\it \bibinfo{journal}{Journal of Obstetrics and Gynaecology
+  Research}\/},  {\it \bibinfo{volume}{23}\/}, \bibinfo{pages}{33--36}.
+%Type = Article
+\bibitem[{Clements et~al.(1999)Clements, Wilkinson, Kitano \&
+  Marx}]{clements1999}
+\bibinfo{author}{Clements, K.}, \bibinfo{author}{Wilkinson, W.},
+  \bibinfo{author}{Kitano, P., K.}, \& \bibinfo{author}{Marx, P., R.}
+  (\bibinfo{year}{1999}).
+\newblock \bibinfo{title}{Hiv prevention and health service needs of the
+  transgender community in san francisco}, .
+%Type = Article
+\bibitem[{De~Santis(2009)}]{desantis2009}
+\bibinfo{author}{De~Santis, J.~P.} (\bibinfo{year}{2009}).
+\newblock \bibinfo{title}{Hiv infection risk factors among male-to-female
+  transgender persons: a review of the literature}.
+\newblock {\it \bibinfo{journal}{Journal of the Association of Nurses in AIDS
+  Care}\/},  {\it \bibinfo{volume}{20}\/}, \bibinfo{pages}{362--372}.
+%Type = Article
+\bibitem[{Handzel et~al.(1990)Handzel, Burstein, Cohen, Pecht, Trainin,
+  Vonsover, Sayer, Gotlieb-Stematsky \& Bentwich}]{handzel1990}
+\bibinfo{author}{Handzel, Z.}, \bibinfo{author}{Burstein, R.},
+  \bibinfo{author}{Cohen, J.}, \bibinfo{author}{Pecht, M.},
+  \bibinfo{author}{Trainin, N.}, \bibinfo{author}{Vonsover, A.},
+  \bibinfo{author}{Sayer, Y.}, \bibinfo{author}{Gotlieb-Stematsky, T.}, \&
+  \bibinfo{author}{Bentwich, Z.} (\bibinfo{year}{1990}).
+\newblock \bibinfo{title}{Absence of t cell impairments in a unique group of
+  anal-receptive transvestite and male prostitutes in israel.}
+\newblock {\it \bibinfo{journal}{Israel journal of medical sciences}\/},  {\it
+  \bibinfo{volume}{26}\/}, \bibinfo{pages}{26--31}.
+%Type = Article
+\bibitem[{Herbst et~al.(2008)Herbst, Jacobs, Finlayson, McKleroy, Neumann,
+  Crepaz, Team et~al.}]{herbst2008}
+\bibinfo{author}{Herbst, J.~H.}, \bibinfo{author}{Jacobs, E.~D.},
+  \bibinfo{author}{Finlayson, T.~J.}, \bibinfo{author}{McKleroy, V.~S.},
+  \bibinfo{author}{Neumann, M.~S.}, \bibinfo{author}{Crepaz, N.},
+  \bibinfo{author}{Team, H. P. R.~S.} et~al. (\bibinfo{year}{2008}).
+\newblock \bibinfo{title}{Estimating hiv prevalence and risk behaviors of
+  transgender persons in the united states: a systematic review}.
+\newblock {\it \bibinfo{journal}{AIDS and Behavior}\/},  {\it
+  \bibinfo{volume}{12}\/}, \bibinfo{pages}{1--17}.
+%Type = Article
+\bibitem[{Melendez \& Pinto(2007)}]{melendez2007}
+\bibinfo{author}{Melendez, R.~M.}, \& \bibinfo{author}{Pinto, R.}
+  (\bibinfo{year}{2007}).
+\newblock \bibinfo{title}{‘it's really a hard life’: Love, gender and hiv
+  risk among male-to-female transgender persons}.
+\newblock {\it \bibinfo{journal}{Culture, health \& sexuality}\/},  {\it
+  \bibinfo{volume}{9}\/}, \bibinfo{pages}{233--245}.
+%Type = Article
+\bibitem[{Modan et~al.(1992)Modan, Goldschmidt, Rubinstein, Vonsover, Zinn,
+  Golan, Chetrit \& Gottlieb-Stematzky}]{modan1992}
+\bibinfo{author}{Modan, B.}, \bibinfo{author}{Goldschmidt, R.},
+  \bibinfo{author}{Rubinstein, E.}, \bibinfo{author}{Vonsover, A.},
+  \bibinfo{author}{Zinn, M.}, \bibinfo{author}{Golan, R.},
+  \bibinfo{author}{Chetrit, A.}, \& \bibinfo{author}{Gottlieb-Stematzky, T.}
+  (\bibinfo{year}{1992}).
+\newblock \bibinfo{title}{Prevalence of hiv antibodies in transsexual and
+  female prostitutes.}
+\newblock {\it \bibinfo{journal}{American Journal of Public Health}\/},  {\it
+  \bibinfo{volume}{82}\/}, \bibinfo{pages}{590--592}.
+%Type = Article
+\bibitem[{Nuttbrock et~al.(2009)Nuttbrock, Hwahng, Bockting, Rosenblum, Mason,
+  Macri \& Becker}]{nuttbrock2009}
+\bibinfo{author}{Nuttbrock, L.}, \bibinfo{author}{Hwahng, S.},
+  \bibinfo{author}{Bockting, W.}, \bibinfo{author}{Rosenblum, A.},
+  \bibinfo{author}{Mason, M.}, \bibinfo{author}{Macri, M.}, \&
+  \bibinfo{author}{Becker, J.} (\bibinfo{year}{2009}).
+\newblock \bibinfo{title}{Lifetime risk factors for hiv/sti infections among
+  male-to-female transgender persons}.
+\newblock {\it \bibinfo{journal}{Journal of acquired immune deficiency
+  syndromes (1999)}\/},  {\it \bibinfo{volume}{52}\/}, \bibinfo{pages}{417}.
+%Type = Article
+\bibitem[{Poteat et~al.(2015)Poteat, Wirtz, Radix, Borquez, Silva-Santisteban,
+  Deutsch, Khan, Winter \& Operario}]{poteat2015}
+\bibinfo{author}{Poteat, T.}, \bibinfo{author}{Wirtz, A.~L.},
+  \bibinfo{author}{Radix, A.}, \bibinfo{author}{Borquez, A.},
+  \bibinfo{author}{Silva-Santisteban, A.}, \bibinfo{author}{Deutsch, M.~B.},
+  \bibinfo{author}{Khan, S.~I.}, \bibinfo{author}{Winter, S.}, \&
+  \bibinfo{author}{Operario, D.} (\bibinfo{year}{2015}).
+\newblock \bibinfo{title}{Hiv risk and preventive interventions in transgender
+  women sex workers}.
+\newblock {\it \bibinfo{journal}{The Lancet}\/},  {\it
+  \bibinfo{volume}{385}\/}, \bibinfo{pages}{274--286}.
+
+\end{thebibliography}

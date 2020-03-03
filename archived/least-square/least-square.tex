@@ -1,0 +1,66 @@
+\documentclass[10pt]{article}
+\usepackage{xeCJK}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{enumitem}
+\usepackage{tikz-cd}
+\usepackage{array}
+\usepackage{makecell}
+\usepackage{tabularx}
+\usepackage[citestyle=authoryear,bibstyle=authortitle,sorting=ynt,backend=bibtex]{biblatex}
+\usepackage{geometry}
+\usepackage{multicol}
+\usepackage{titling}
+\addbibresource{least-square}
+\geometry{a4paper,scale=0.9}
+\newcounter{counter}
+\newcommand{\counter}[1]{\refstepcounter{counter}\label{#1}\thecounter}
+
+\setlength{\parindent}{0cm}
+\setlength{\parskip}{1em}
+\newcommand*{\qedfill}{\hfill\ensuremath{\blacksquare}}
+
+\title{浅谈最小二乘法的及其应用}
+\author{}
+\begin{document}
+\maketitle
+\renewcommand{\abstractname}{摘要}
+\begin{abstract}
+本文讨论了在不同背景问题下的最小二乘法的应用。
+\end{abstract}
+\renewcommand{\setminus}{\mathbin{\backslash}}
+\section{导言——Gauss--Markov定理}
+% \textbf{定义\counter{OLSE}. }对于$y^k,\beta^l,X^k_l\in\mathbb{R}$和随机变量族$\varepsilon^k:(\Omega,\mathcal{F},P_k)\to(\mathbb{R},\mathcal{B})$，若有模型$\displaystyle y^k=\sum_{l=1}^LX^k_l\beta^l+\varepsilon^k$，则称$$\hat{\beta}=(X^\mathrm{T}X)^{-1}X^\mathrm{T}y$$为此模型的OLSE（普通最小二乘估计量）。
+
+% \textbf{例子\counter{acceleration_example}. }设有函数$f:\mathbb{R}\to\mathbb{R}$满足$f(0)=0,f'(0)=0$和$f''(t)=a$，通过对该函数在$t_i\,(i=1,\dots,n)$处的$m$次独立测量可得离散随机过程\begin{align*}y_j:\mathbb{N}\times(\Omega,\mathcal{F},P_i)&\to(\mathbb{R},\mathcal{B})\\(i,\omega)&\mapsto\frac{1}{2}at_i^2+\varepsilon_j(i,\omega)，\end{align*}其中$j=1,\dots,m$，$\varepsilon_j:\mathbb{N}\times(\Omega,\mathcal{F},P_i)\to(\mathbb{R},\mathcal{B})$为独立同分布，且其期望值为$0$，且$y_j$为平稳过程。考虑两个估计量$$\hat{\beta}(i,\omega)=\frac{\displaystyle\sum_{i=1}^n\sum_{j=1}^m\frac{1}{2}t_i^2y_j(i,\omega)}{\displaystyle\sum_{i=1}^n\sum_{j=1}^m(\frac{1}{2}t_i^2)^2}=\frac{\displaystyle2\sum_{i=1}^nt_i^2\sum_{j=1}^my_j(i,\omega)}{\displaystyle m\sum_{i-1}^nt_i^4}\quad\quad\quad\hat{\beta}'(i,\omega)=\frac{\displaystyle\sum_{i=1}^n\sum_{j=1}^my_j(i,\omega)}{\displaystyle\sum_{i=1}^nt_i^2}，$$其中前者为OLSE，后者为一朴素线性估计量。根据假设可得出两者均线性且无偏差，但根据计算前者的方差小于后者的方差，据此可以推断
+
+% \hspace{2em}对于如上描述的模型，我们希望计算
+
+% \textbf{定理}
+
+\textbf{定义 \counter{expectation_up}. }若有概率空间$(H,\mathcal{F},\nu)$和其上的随机变量$X:(H,\mathcal{F},\nu)\to(H',\mathcal{F}')$，其中$H$和$H'$为Hilbert空间、$\mathcal{F}$和$\mathcal{F}'$分别为$H$和$H'$上内积生成的拓扑结构的Borel集。定义如下范畴
+\begin{align*}
+\operatorname{Ob}(\mathcal{C})&=H'\\
+a\longrightarrow b\quad&\mathrm{iff.}\quad\langle b,a\rangle=\int_{H'}\langle X(y),b\rangle\,d\nu(y)，
+\end{align*}
+若在$\mathcal{C}$中存在终对象，则称其为随机变量$X$相对于概率测度$\nu$的期望值，记为$\operatorname{E}_\nu[X]$。另定义$\operatorname{Var}_\nu(X)=\operatorname{E}_\nu[(X-\operatorname{E}_\nu(X))^2]$，若存在，为随机变量$X$相对于概率测度$\nu$的方差。当概率测度可从上下文明确时，我们也会省略下标$\nu$。
+
+\hspace{2em}Hilbert空间$H'$的仿射子空间\footnote{又称线性流形}$M$被称为一个线性模型。我们假设$\operatorname{E}(X)\in M$，并称$M$上的线性泛函为参数函数。注意所有的参数函数都是可估计的，即若$\phi$为一参数函数、$Q$为任意一线性投影$H'\to M$，则有对于所有概率测度$\nu$
+$$\int_{H'}\phi(Q(y))\,d\nu(y)=\phi(Q(\operatorname{E}_\nu[X]))=\phi(\operatorname{E}_\nu[X])。$$
+而这意味着所有线性投影$\phi$都是参数函数的无偏差估计量，并且可以看出，不存在其他的无偏差估计量。计算估计量$\phi(Q)$的方差：$$\operatorname{Var}(\phi(Q))=(m\mapsto\phi(m)\cdot Q^*(m))(\operatorname{Var}(m\mapsto\phi(m)\cdot Q^*(m)))，$$其中$Q^*$是$Q$的Hermitian伴随。
+
+\textbf{定义 \counter{OLSE}. }若线性投影$P:H'\to M$满足$$P(\operatorname{Var}(f)(m))=\operatorname{Var}(P^*)(m)\quad\forall f:M\to H',\,m\in M，$$则称$P$为相对于概率密度$\nu$、随机变量$X$和线性模型$M$的一般最小二乘估计量。
+
+\textbf{定理 \counter{Gauss-Markov}（Gauss-Markov）. }如上定义的$P$是所有无偏差估计量中方差最小的，且仿射子空间$P(H)$和$(\operatorname{Id}-P)(H)$不相关，即$$E[\langle P(X(h)),(\operatorname{Id}-P)(X(h))\rangle]=\langle E[P(X(h))],E[(\operatorname{Id}-P)(X(h))]\rangle\quad\forall h\in H。$$
+
+在进入关于Riemannian流形的讨论前，我们将会描述一定条件下的随机过程中最小二乘法的使用。
+
+\section{随机过程}
+
+
+\section*{参考文献}
+\printbibliography
+\end{document}

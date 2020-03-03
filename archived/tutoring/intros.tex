@@ -1,0 +1,56 @@
+\documentclass[10pt]{article}
+\usepackage{xeCJK}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{enumitem}
+\usepackage{unicode-math}
+\usepackage[a4paper, left=2cm, right=2cm, top=1.25cm, bottom=1.25cm]{geometry}
+\usepackage{multicol}
+\setlength{\columnsep}{0.75cm}
+
+\setCJKmainfont[BoldFont={SimHei}]{SimSun}
+\setCJKsansfont{SimHei}
+\setCJKmonofont{FangSong}
+
+\setlength{\parindent}{0cm}
+\setlength{\parskip}{1em}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\newcommand*{\qedfill}{\hfill\ensuremath{\blacksquare}}
+
+\title{Tutoring}
+\author{Sayako Hoshimiya}
+\begin{document}
+\def \setminus {\mathbin{\backslash}}
+\begin{center}\textbf{\Large Personal Statement Introduction - Topology I}\end{center}
+
+In general, the study of \textbf{topology} (topos "place/location" + logos "word/theory") is the study of \textbf{topological properties} of spaces (geometric objects) which is preserved under continuous changes, or in topological term, \textbf{homeomorphisms} (homoios "same/similar" + morphe "shape/form"). In this document we will discuss the main results from the classical subject branch called \textbf{point-set topology}, and you will possibly choose one as the main topic of your personal statement.
+
+First we introduce \underline{informally} the fundamental terminologies which we will be referring to in our discussion of every major result in point-set topology. Note that these are not their actual definitions and are only mean to provoke your interests. We will cover the actual definitions in our first session.
+\begin{enumerate}
+\item \textbf{topological space} - Topological space is, in our current domain of interest, a set with an additional structure called \textbf{topology}, usually denoted as $(X,\mathcal{T})$.
+\item \textbf{topology} - Topology is the additional structure upon a set $X$ that defines, roughly speaking, the notion of closeness, or nearness. They define a collection of subsets of $X$ called \textbf{open sets} that groups the close, or near \textbf{points} (elements of $X$) together; this collection obeys certain properties that makes it resemble our intuition of nearness; topology is the $\mathcal{T}$ in the notation of topological space.
+\item \textbf{basis \& subbasis} - Basis and subbasis are subsets of the actual topology and tools to help us define topology when it is too large or structurally too complicated to define directly; they are usually denoted as $\mathcal{B}$ and $\mathcal{S}$.
+\item \textbf{continuous function} - The notion of \textbf{continuity} is something we are familiar with back to Calculus I, but at that time we are introduced to it on the real numbers and with the language of $(\varepsilon-\delta)$. Now to extend our view in topology we define, using the language of open sets, it for functions between topological spaces (between $X$'s not $\mathcal{T}$'s).
+\item \textbf{homeomorphism} - Homeomorphism is "double-sided" continuous function, i.e. continuous function with continuous inverse. With examples below you will realize that it is fundamental to our study of topology because it captures the precise notion of continuous change.\footnote{A note for higher learning: homeomorphism isn't the only notion that captures the the notion of continuous change. For example, in algebraic topology (Sayako, the author's main interest), we have homotopy equivalence, homology group isomorphisms, and cohomology isomorphisms that also capture the similar but somewhat weaker idea.}
+\end{enumerate}
+
+It is critical in mathematics to work through examples in order to understand the full glory of a new concept. Thus in the first session we will also be looking at the topology of \textbf{product space}, of \textbf{subspace}, and of \textbf{quotient space}.\footnote{Another note for higher learning: these are canonical constructions appearing in all fields of mathematics, and there is a unifying theory sits upon them called \textbf{category theory}.} And this concludes our first session.
+
+Now we introduce the major concepts and results in point-set topology for you to choose. Note that the knowledge dependencies besides the ones already listed above are listed in the parentheses after the results.
+
+\begin{enumerate}
+\item \textbf{connectedness \& compactness} 
+\begin{enumerate}[label=\alph*.]
+\item \textbf{intermediate value theorem (order topology, connectedness)} - This is a generalize of the calculus version IVT that you are familiar with; It states that continuous map from connected space $X$ to ordered space $(Y,\leq)$ has the property $\forall a,b\in X, r\in Y.\,\exists c\in X.\,f(a)\leq r\leq f(b)\implies f(c)=r$.
+\item \textbf{connectedness of Euclidean space (order topology, connectedness, linear continuum)} - This theorem captures the intuition of certain subsets of finite-dimensional Euclidean space being connected. It states that any finite Cartesian product of intervals and rays of $\mathbb{R}$ is connected.
+\item \textbf{extreme value theorem (order topology, compactness)} - This is again a generalization of the familiar EVT. It states that between compact space $X$ and ordered space $Y$, continuous map achieves its maximum and minimum.
+\item \textbf{uniform continuity theorem (metric space, Lebesgue number, uniform continuity)} - This will be new to you if you haven't studied some pathological examples of continuous but nowhere differentiable functions like \textbf{Weierstrass function}, but it plays an important role in integrability theory. It basically states that any function continuous on a compact space is well-behaved enough to be integrable. Consult first Sayako to check your analysis background\footnote{primarily about the usage of the $(\varepsilon-\delta)-$language} if you're interested in learning this one.
+\item \textbf{uncountability of Euclidean space (order topology, $T_2$ condition\footnote{aka Hausdorrf condition, and this extra condition is due to Bourbaki, et al., so you may now f*** them if you wish.})} - This reflects the intuition that any "box" (product of intervals) in Euclidean space is uncountable. You will need to learn some separation axioms before learning this.
+\end{enumerate}
+\end{enumerate}
+
+\end{document}

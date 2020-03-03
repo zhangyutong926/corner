@@ -1,0 +1,1052 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     37525,       1042]
+NotebookOptionsPosition[     35981,       1001]
+NotebookOutlinePosition[     36337,       1017]
+CellTagsIndexPosition[     36294,       1014]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ NamespaceBox["WolframAlphaQueryParseResults",
+  DynamicModuleBox[{Typeset`q$$ = 
+   "\\frac{x_kx_j+x_{k+1}x_{j+1}}{x_j^2+x_{j+1}^2},\\frac{x_{k+1}x_j-x_kx_{j+\
+1}}{x_j^2+x_{j+1}^2}", Typeset`newq$$ = 
+   "\\frac{x_kx_j+x_{k+1}x_{j+1}}{x_j^2+x_{j+1}^2},\\frac{x_{k+1}x_j-x_kx_{j+\
+1}}{x_j^2+x_{j+1}^2}", Typeset`chosen$$ = 
+   "{(x[k]*x[j] + x[k + 1]*x[j + 1])/(x[j]^2 + x[j + 1]^2), (x[k + 1]*x[j] - \
+x[k]*x[j + 1])/(x[j]^2 + x[j + 1]^2)}", Typeset`open$$ = False}, 
+   PaneSelectorBox[{False->
+    DynamicModuleBox[{WolframAlphaClient`Private`show$$ = False, 
+     WolframAlphaClient`Private`assumptionsQ$$ = False}, 
+     TagBox[
+      FrameBox[
+       TagBox[GridBox[{
+          {
+           InputFieldBox[Dynamic[Typeset`newq$$], String,
+            Appearance->None,
+            BaseStyle->{"CalculateInput"},
+            ContinuousAction->True,
+            Enabled->True,
+            FieldSize->{{1, 40}, {1, 
+               DirectedInfinity[1]}},
+            TrapSelection->False], 
+           ItemBox[
+            ButtonBox[
+             PaneSelectorBox[{True->
+              TagBox[
+               TooltipBox[
+                
+                DynamicBox[FEPrivate`FrontEndResource[
+                 "WABitmaps", "OrangeSquarePlus"],
+                 ImageSizeCache->{10., {3., 8.}}],
+                DynamicBox[
+                 ToBoxes[
+                  FEPrivate`FrontEndResource["WAStrings", "ShowAllResults"], 
+                  StandardForm]]],
+               Annotation[#, 
+                Dynamic[
+                 FEPrivate`FrontEndResource["WAStrings", "ShowAllResults"]], 
+                "Tooltip"]& ], False->
+              TagBox[
+               TooltipBox[
+                
+                DynamicBox[FEPrivate`FrontEndResource[
+                 "WABitmaps", "GraySquarePlus"],
+                 ImageSizeCache->{10., {3., 8.}}],
+                DynamicBox[
+                 ToBoxes[
+                  FEPrivate`FrontEndResource["WAStrings", "ShowAllResults"], 
+                  StandardForm]]],
+               Annotation[#, 
+                Dynamic[
+                 FEPrivate`FrontEndResource["WAStrings", "ShowAllResults"]], 
+                "Tooltip"]& ]}, Dynamic[WolframAlphaClient`Private`show$$],
+              ImageSize->All],
+             Appearance->None,
+             ButtonFunction:>(Quiet[
+                WolframAlpha[]]; If[
+                Or[
+                 CurrentValue["OptionKey"], 
+                 CurrentValue["AltKey"]], SelectionMove[
+                  ButtonNotebook[], All, ButtonCell, AutoScroll -> False]; 
+                NotebookWrite[
+                  ButtonNotebook[], 
+                  Cell[
+                  Typeset`newq$$, "WolframAlphaShort", FormatType -> 
+                   "TextForm"], All], Typeset`open$$ = True; 
+                WolframAlphaClient`Private`extrudeFromFastParse[
+                 "\\frac{x_kx_j+x_{k+1}x_{j+1}}{x_j^2+x_{j+1}^2},\\frac{x_{k+\
+1}x_j-x_kx_{j+1}}{x_j^2+x_{j+1}^2}", 
+                  
+                  Defer[{(Global`x[Global`k] Global`x[Global`j] + 
+                    Global`x[Global`k + 1] Global`x[Global`j + 1])/(
+                    Global`x[Global`j]^2 + 
+                    Global`x[Global`j + 1]^2), (
+                    Global`x[Global`k + 1] Global`x[Global`j] - 
+                    Global`x[Global`k] Global`x[Global`j + 1])/(
+                    Global`x[Global`j]^2 + Global`x[Global`j + 1]^2)}], 
+                  "Fast parse"]; Typeset`open$$ = False]),
+             Evaluator->Automatic,
+             Method->"Queued"],
+            Alignment->{Right, Top},
+            StripOnInput->False]},
+          {
+           PaneBox[
+            TagBox[
+             TooltipBox[
+              ButtonBox[
+               PaneSelectorBox[{False->
+                StyleBox[
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"x", "[", "k", "]"}], "*", 
+                    RowBox[{"x", "[", "j", "]"}]}], " ", "+", " ", 
+                    RowBox[{
+                    RowBox[{"x", "[", 
+                    RowBox[{"k", " ", "+", " ", "1"}], "]"}], "*", 
+                    RowBox[{"x", "[", 
+                    RowBox[{"j", " ", "+", " ", "1"}], "]"}]}]}], ")"}], "/", 
+                    
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"x", "[", "j", "]"}], "^", "2"}], " ", "+", " ", 
+                    RowBox[{
+                    RowBox[{"x", "[", 
+                    RowBox[{"j", " ", "+", " ", "1"}], "]"}], "^", "2"}]}], 
+                    ")"}]}], ",", " ", 
+                   RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"x", "[", 
+                    RowBox[{"k", " ", "+", " ", "1"}], "]"}], "*", 
+                    RowBox[{"x", "[", "j", "]"}]}], " ", "-", " ", 
+                    RowBox[{
+                    RowBox[{"x", "[", "k", "]"}], "*", 
+                    RowBox[{"x", "[", 
+                    RowBox[{"j", " ", "+", " ", "1"}], "]"}]}]}], ")"}], "/", 
+                    
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"x", "[", "j", "]"}], "^", "2"}], " ", "+", " ", 
+                    RowBox[{
+                    RowBox[{"x", "[", 
+                    RowBox[{"j", " ", "+", " ", "1"}], "]"}], "^", "2"}]}], 
+                    ")"}]}]}], "}"}],
+                 StripOnInput->False,
+                 NumberMarks->False], True->
+                StyleBox[
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"x", "[", "k", "]"}], "*", 
+                    RowBox[{"x", "[", "j", "]"}]}], " ", "+", " ", 
+                    RowBox[{
+                    RowBox[{"x", "[", 
+                    RowBox[{"k", " ", "+", " ", "1"}], "]"}], "*", 
+                    RowBox[{"x", "[", 
+                    RowBox[{"j", " ", "+", " ", "1"}], "]"}]}]}], ")"}], "/", 
+                    
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"x", "[", "j", "]"}], "^", "2"}], " ", "+", " ", 
+                    RowBox[{
+                    RowBox[{"x", "[", 
+                    RowBox[{"j", " ", "+", " ", "1"}], "]"}], "^", "2"}]}], 
+                    ")"}]}], ",", " ", 
+                   RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"x", "[", 
+                    RowBox[{"k", " ", "+", " ", "1"}], "]"}], "*", 
+                    RowBox[{"x", "[", "j", "]"}]}], " ", "-", " ", 
+                    RowBox[{
+                    RowBox[{"x", "[", "k", "]"}], "*", 
+                    RowBox[{"x", "[", 
+                    RowBox[{"j", " ", "+", " ", "1"}], "]"}]}]}], ")"}], "/", 
+                    
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"x", "[", "j", "]"}], "^", "2"}], " ", "+", " ", 
+                    RowBox[{
+                    RowBox[{"x", "[", 
+                    RowBox[{"j", " ", "+", " ", "1"}], "]"}], "^", "2"}]}], 
+                    ")"}]}]}], "}"}],
+                 StripOnInput->False,
+                 ShowSyntaxStyles->False,
+                 NumberMarks->False,
+                 FontColor->RGBColor[1, 0.5, 0]]}, Dynamic[
+                 CurrentValue["MouseOver"]],
+                BaseStyle->{ShowStringCharacters -> True},
+                FrameMargins->0,
+                ImageSize->Automatic],
+               Alignment->Left,
+               Appearance->None,
+               BaseStyle->{},
+               ButtonFunction:>(SelectionMove[
+                  ButtonNotebook[], All, ButtonCell]; NotebookWrite[
+                  ButtonNotebook[], 
+                  Cell[
+                   BoxData[
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"x", "[", "k", "]"}], "*", 
+                    RowBox[{"x", "[", "j", "]"}]}], " ", "+", " ", 
+                    RowBox[{
+                    RowBox[{"x", "[", 
+                    RowBox[{"k", " ", "+", " ", "1"}], "]"}], "*", 
+                    RowBox[{"x", "[", 
+                    RowBox[{"j", " ", "+", " ", "1"}], "]"}]}]}], ")"}], "/", 
+                    
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"x", "[", "j", "]"}], "^", "2"}], " ", "+", " ", 
+                    RowBox[{
+                    RowBox[{"x", "[", 
+                    RowBox[{"j", " ", "+", " ", "1"}], "]"}], "^", "2"}]}], 
+                    ")"}]}], ",", " ", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"x", "[", 
+                    RowBox[{"k", " ", "+", " ", "1"}], "]"}], "*", 
+                    RowBox[{"x", "[", "j", "]"}]}], " ", "-", " ", 
+                    RowBox[{
+                    RowBox[{"x", "[", "k", "]"}], "*", 
+                    RowBox[{"x", "[", 
+                    RowBox[{"j", " ", "+", " ", "1"}], "]"}]}]}], ")"}], "/", 
+                    
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"x", "[", "j", "]"}], "^", "2"}], " ", "+", " ", 
+                    RowBox[{
+                    RowBox[{"x", "[", 
+                    RowBox[{"j", " ", "+", " ", "1"}], "]"}], "^", "2"}]}], 
+                    ")"}]}]}], "}"}]], "Input"], All]; SelectionMove[
+                  ButtonNotebook[], After, CellContents]),
+               Evaluator->Automatic,
+               ImageSize->Automatic,
+               Method->"Preemptive"],
+              DynamicBox[
+               ToBoxes[
+                FEPrivate`FrontEndResource["WAStrings", "RemoveResults"], 
+                StandardForm]]],
+             Annotation[#, 
+              Dynamic[
+               FEPrivate`FrontEndResource["WAStrings", "RemoveResults"]], 
+              "Tooltip"]& ],
+            AppearanceElements->{},
+            BaseStyle->{ShowStringCharacters -> True, ScriptLevel -> 0},
+            ImageSize->{Automatic, {1, 100}},
+            Scrollbars->{False, Automatic}], "\[SpanFromLeft]"}
+         },
+         AutoDelete->False,
+         BaselinePosition->{1, 1},
+         FrameStyle->GrayLevel[0.85],
+         GridBoxAlignment->{"Columns" -> {{Left}}},
+         GridBoxDividers->{
+          "Columns" -> {{False}}, "Rows" -> {False, {True}, False}},
+         GridBoxItemSize->{
+          "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+        "Grid"],
+       Alignment->Top,
+       Background->Dynamic[
+         FEPrivate`If[
+          FEPrivate`And[
+           FEPrivate`SameQ[
+            FEPrivate`Head[Typeset`newq$$], String], 
+           FEPrivate`UnsameQ[Typeset`q$$, Typeset`newq$$]], 
+          RGBColor[1., 0.975, 0.95], 
+          GrayLevel[1]]],
+       BaselinePosition->Baseline,
+       FrameStyle->GrayLevel[0.85],
+       ImageSize->Automatic,
+       RoundingRadius->5,
+       StripOnInput->False],
+      EventHandlerTag[{
+       "MouseEntered" :> 
+        FEPrivate`Set[WolframAlphaClient`Private`show$$, True], "MouseExited" :> 
+        FEPrivate`Set[WolframAlphaClient`Private`show$$, False], Method -> 
+        "Preemptive", PassEventsDown -> Automatic, PassEventsUp -> True}]],
+     DynamicModuleValues:>{}], True->
+    TagBox[GridBox[{
+       {
+        DynamicModuleBox[{WolframAlphaClient`Private`show$$ = False, 
+         WolframAlphaClient`Private`assumptionsQ$$ = False}, 
+         TagBox[
+          FrameBox[
+           TagBox[GridBox[{
+              {
+               InputFieldBox[Dynamic[Typeset`newq$$], String,
+                Appearance->None,
+                BaseStyle->{"CalculateInput"},
+                ContinuousAction->True,
+                Enabled->True,
+                FieldSize->{{1, 40}, {1, 
+                   DirectedInfinity[1]}},
+                TrapSelection->False], 
+               ItemBox[
+                ButtonBox[
+                 PaneSelectorBox[{True->
+                  TagBox[
+                   TooltipBox[
+                    
+                    DynamicBox[FEPrivate`FrontEndResource[
+                    "WABitmaps", "OrangeSquarePlus"]],
+                    DynamicBox[
+                    ToBoxes[
+                    FEPrivate`FrontEndResource["WAStrings", "ShowAllResults"],
+                     StandardForm]]],
+                   Annotation[#, 
+                    Dynamic[
+                    FEPrivate`FrontEndResource[
+                    "WAStrings", "ShowAllResults"]], "Tooltip"]& ], False->
+                  TagBox[
+                   TooltipBox[
+                    
+                    DynamicBox[FEPrivate`FrontEndResource[
+                    "WABitmaps", "GraySquarePlus"]],
+                    DynamicBox[
+                    ToBoxes[
+                    FEPrivate`FrontEndResource["WAStrings", "ShowAllResults"],
+                     StandardForm]]],
+                   Annotation[#, 
+                    Dynamic[
+                    FEPrivate`FrontEndResource[
+                    "WAStrings", "ShowAllResults"]], "Tooltip"]& ]}, Dynamic[
+                  WolframAlphaClient`Private`show$$],
+                  ImageSize->All],
+                 Appearance->None,
+                 ButtonFunction:>(Quiet[
+                    WolframAlpha[]]; If[
+                    Or[
+                    CurrentValue["OptionKey"], 
+                    CurrentValue["AltKey"]], SelectionMove[
+                    ButtonNotebook[], All, ButtonCell, AutoScroll -> False]; 
+                    NotebookWrite[
+                    ButtonNotebook[], 
+                    Cell[
+                    Typeset`newq$$, "WolframAlphaShort", FormatType -> 
+                    "TextForm"], All], Typeset`open$$ = True; 
+                    WolframAlphaClient`Private`extrudeFromFastParse[
+                    "\\frac{x_kx_j+x_{k+1}x_{j+1}}{x_j^2+x_{j+1}^2},\\frac{x_{\
+k+1}x_j-x_kx_{j+1}}{x_j^2+x_{j+1}^2}", 
+                    
+                    Defer[{(Global`x[Global`k] Global`x[Global`j] + 
+                    Global`x[Global`k + 1] Global`x[Global`j + 1])/(
+                    Global`x[Global`j]^2 + 
+                    Global`x[Global`j + 1]^2), (
+                    Global`x[Global`k + 1] Global`x[Global`j] - 
+                    Global`x[Global`k] Global`x[Global`j + 1])/(
+                    Global`x[Global`j]^2 + Global`x[Global`j + 1]^2)}], 
+                    "Fast parse"]; Typeset`open$$ = False]),
+                 Evaluator->Automatic,
+                 Method->"Queued"],
+                Alignment->{Right, Top},
+                StripOnInput->False]},
+              {
+               PaneBox[
+                TagBox[
+                 TooltipBox[
+                  ButtonBox[
+                   PaneSelectorBox[{False->
+                    StyleBox[
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"x", "[", "k", "]"}], "*", 
+                    RowBox[{"x", "[", "j", "]"}]}], " ", "+", " ", 
+                    RowBox[{
+                    RowBox[{"x", "[", 
+                    RowBox[{"k", " ", "+", " ", "1"}], "]"}], "*", 
+                    RowBox[{"x", "[", 
+                    RowBox[{"j", " ", "+", " ", "1"}], "]"}]}]}], ")"}], "/", 
+                    
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"x", "[", "j", "]"}], "^", "2"}], " ", "+", " ", 
+                    RowBox[{
+                    RowBox[{"x", "[", 
+                    RowBox[{"j", " ", "+", " ", "1"}], "]"}], "^", "2"}]}], 
+                    ")"}]}], ",", " ", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"x", "[", 
+                    RowBox[{"k", " ", "+", " ", "1"}], "]"}], "*", 
+                    RowBox[{"x", "[", "j", "]"}]}], " ", "-", " ", 
+                    RowBox[{
+                    RowBox[{"x", "[", "k", "]"}], "*", 
+                    RowBox[{"x", "[", 
+                    RowBox[{"j", " ", "+", " ", "1"}], "]"}]}]}], ")"}], "/", 
+                    
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"x", "[", "j", "]"}], "^", "2"}], " ", "+", " ", 
+                    RowBox[{
+                    RowBox[{"x", "[", 
+                    RowBox[{"j", " ", "+", " ", "1"}], "]"}], "^", "2"}]}], 
+                    ")"}]}]}], "}"}],
+                    StripOnInput->False,
+                    NumberMarks->False], True->
+                    StyleBox[
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"x", "[", "k", "]"}], "*", 
+                    RowBox[{"x", "[", "j", "]"}]}], " ", "+", " ", 
+                    RowBox[{
+                    RowBox[{"x", "[", 
+                    RowBox[{"k", " ", "+", " ", "1"}], "]"}], "*", 
+                    RowBox[{"x", "[", 
+                    RowBox[{"j", " ", "+", " ", "1"}], "]"}]}]}], ")"}], "/", 
+                    
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"x", "[", "j", "]"}], "^", "2"}], " ", "+", " ", 
+                    RowBox[{
+                    RowBox[{"x", "[", 
+                    RowBox[{"j", " ", "+", " ", "1"}], "]"}], "^", "2"}]}], 
+                    ")"}]}], ",", " ", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"x", "[", 
+                    RowBox[{"k", " ", "+", " ", "1"}], "]"}], "*", 
+                    RowBox[{"x", "[", "j", "]"}]}], " ", "-", " ", 
+                    RowBox[{
+                    RowBox[{"x", "[", "k", "]"}], "*", 
+                    RowBox[{"x", "[", 
+                    RowBox[{"j", " ", "+", " ", "1"}], "]"}]}]}], ")"}], "/", 
+                    
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"x", "[", "j", "]"}], "^", "2"}], " ", "+", " ", 
+                    RowBox[{
+                    RowBox[{"x", "[", 
+                    RowBox[{"j", " ", "+", " ", "1"}], "]"}], "^", "2"}]}], 
+                    ")"}]}]}], "}"}],
+                    StripOnInput->False,
+                    ShowSyntaxStyles->False,
+                    NumberMarks->False,
+                    FontColor->RGBColor[1, 0.5, 0]]}, Dynamic[
+                    CurrentValue["MouseOver"]],
+                    BaseStyle->{ShowStringCharacters -> True},
+                    FrameMargins->0,
+                    ImageSize->Automatic],
+                   Alignment->Left,
+                   Appearance->None,
+                   BaseStyle->{},
+                   ButtonFunction:>(SelectionMove[
+                    ButtonNotebook[], All, ButtonCell]; NotebookWrite[
+                    ButtonNotebook[], 
+                    Cell[
+                    BoxData[
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"x", "[", "k", "]"}], "*", 
+                    RowBox[{"x", "[", "j", "]"}]}], " ", "+", " ", 
+                    RowBox[{
+                    RowBox[{"x", "[", 
+                    RowBox[{"k", " ", "+", " ", "1"}], "]"}], "*", 
+                    RowBox[{"x", "[", 
+                    RowBox[{"j", " ", "+", " ", "1"}], "]"}]}]}], ")"}], "/", 
+                    
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"x", "[", "j", "]"}], "^", "2"}], " ", "+", " ", 
+                    RowBox[{
+                    RowBox[{"x", "[", 
+                    RowBox[{"j", " ", "+", " ", "1"}], "]"}], "^", "2"}]}], 
+                    ")"}]}], ",", " ", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"x", "[", 
+                    RowBox[{"k", " ", "+", " ", "1"}], "]"}], "*", 
+                    RowBox[{"x", "[", "j", "]"}]}], " ", "-", " ", 
+                    RowBox[{
+                    RowBox[{"x", "[", "k", "]"}], "*", 
+                    RowBox[{"x", "[", 
+                    RowBox[{"j", " ", "+", " ", "1"}], "]"}]}]}], ")"}], "/", 
+                    
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"x", "[", "j", "]"}], "^", "2"}], " ", "+", " ", 
+                    RowBox[{
+                    RowBox[{"x", "[", 
+                    RowBox[{"j", " ", "+", " ", "1"}], "]"}], "^", "2"}]}], 
+                    ")"}]}]}], "}"}]], "Input"], All]; SelectionMove[
+                    ButtonNotebook[], After, CellContents]),
+                   Evaluator->Automatic,
+                   ImageSize->Automatic,
+                   Method->"Preemptive"],
+                  DynamicBox[
+                   ToBoxes[
+                    FEPrivate`FrontEndResource["WAStrings", "RemoveResults"], 
+                    StandardForm]]],
+                 Annotation[#, 
+                  Dynamic[
+                   FEPrivate`FrontEndResource["WAStrings", "RemoveResults"]], 
+                  "Tooltip"]& ],
+                AppearanceElements->{},
+                BaseStyle->{ShowStringCharacters -> True, ScriptLevel -> 0},
+                ImageSize->{Automatic, {1, 100}},
+                Scrollbars->{False, Automatic}], "\[SpanFromLeft]"}
+             },
+             AutoDelete->False,
+             BaselinePosition->{1, 1},
+             FrameStyle->GrayLevel[0.85],
+             GridBoxAlignment->{"Columns" -> {{Left}}},
+             
+             GridBoxDividers->{
+              "Columns" -> {{False}}, "Rows" -> {False, {True}, False}},
+             
+             GridBoxItemSize->{
+              "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+            "Grid"],
+           Alignment->Top,
+           Background->Dynamic[
+             FEPrivate`If[
+              FEPrivate`And[
+               FEPrivate`SameQ[
+                FEPrivate`Head[Typeset`newq$$], String], 
+               FEPrivate`UnsameQ[Typeset`q$$, Typeset`newq$$]], 
+              RGBColor[1., 0.975, 0.95], 
+              GrayLevel[1]]],
+           BaselinePosition->Baseline,
+           FrameStyle->GrayLevel[0.85],
+           ImageSize->Automatic,
+           RoundingRadius->5,
+           StripOnInput->False],
+          
+          EventHandlerTag[{
+           "MouseEntered" :> 
+            FEPrivate`Set[WolframAlphaClient`Private`show$$, True], 
+            "MouseExited" :> 
+            FEPrivate`Set[WolframAlphaClient`Private`show$$, False], Method -> 
+            "Preemptive", PassEventsDown -> Automatic, PassEventsUp -> True}]],
+         DynamicModuleValues:>{}]},
+       {
+        InterpretationBox[
+         StyleBox[
+          
+          DynamicBox[FEPrivate`FrontEndResource[
+           "FEExpressions", "NecklaceAnimator"][20]],
+          AnimatorBoxOptions->{ImageSize->20}],
+         Animator[Appearance -> "Necklace", ImageSize -> 20],
+         BaseStyle->{"Deploy"}]}
+      },
+      BaselinePosition->{1, 1},
+      DefaultBaseStyle->"Column",
+      GridBoxAlignment->{"Columns" -> {{Left}}},
+      GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+     
+     "Column"]}, Dynamic[
+     TrueQ[Typeset`open$$]],
+    BaseStyle->{Deployed -> True},
+    ImageSize->Automatic],
+   DynamicModuleValues:>{}],
+  BaseStyle->{Deployed -> True},
+  DeleteWithContents->True,
+  Editable->False,
+  SelectWithContents->True]], "WolframAlphaShortInput",ExpressionUUID->\
+"60d8b168-afca-4501-a576-676d7b9ce10f"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   FractionBox[
+    RowBox[{
+     RowBox[{
+      SubscriptBox["x", "j"], " ", 
+      SubscriptBox["x", "k"]}], "+", 
+     RowBox[{
+      SubscriptBox["x", 
+       RowBox[{"j", "+", "1"}]], " ", 
+      SubscriptBox["x", 
+       RowBox[{"k", "+", "1"}]]}]}], 
+    RowBox[{
+     SuperscriptBox[
+      SubscriptBox["x", "j"], "2"], "+", 
+     SuperscriptBox[
+      SubscriptBox["x", 
+       RowBox[{"j", "+", "1"}]], "2"]}]], ",", 
+   FractionBox[
+    RowBox[{
+     RowBox[{
+      RowBox[{"-", 
+       SubscriptBox["x", 
+        RowBox[{"j", "+", "1"}]]}], " ", 
+      SubscriptBox["x", "k"]}], "+", 
+     RowBox[{
+      SubscriptBox["x", "j"], " ", 
+      SubscriptBox["x", 
+       RowBox[{"k", "+", "1"}]]}]}], 
+    RowBox[{
+     SuperscriptBox[
+      SubscriptBox["x", "j"], "2"], "+", 
+     SuperscriptBox[
+      SubscriptBox["x", 
+       RowBox[{"j", "+", "1"}]], "2"]}]]}], "}"}]], "Input",
+ CellChangeTimes->{{3.7652924876107883`*^9, 3.765292539244055*^9}, {
+  3.765292656722693*^9, 
+  3.765292682962076*^9}},ExpressionUUID->"2c6aaa14-952f-4c9c-bb95-\
+47e04a6433d3"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"D", "[", 
+  RowBox[{
+   FractionBox[
+    RowBox[{
+     RowBox[{
+      SubscriptBox["x", "j"], " ", 
+      SubscriptBox["x", "k"]}], "+", 
+     RowBox[{
+      SubscriptBox["x", 
+       RowBox[{"j", "+", "1"}]], " ", 
+      SubscriptBox["x", 
+       RowBox[{"k", "+", "1"}]]}]}], 
+    RowBox[{
+     SuperscriptBox[
+      SubscriptBox["x", "j"], "2"], "+", 
+     SuperscriptBox[
+      SubscriptBox["x", 
+       RowBox[{"j", "+", "1"}]], "2"]}]], ",", 
+   SubscriptBox["x", "k"]}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"D", "[", 
+  RowBox[{
+   FractionBox[
+    RowBox[{
+     RowBox[{
+      SubscriptBox["x", "j"], " ", 
+      SubscriptBox["x", "k"]}], "+", 
+     RowBox[{
+      SubscriptBox["x", 
+       RowBox[{"j", "+", "1"}]], " ", 
+      SubscriptBox["x", 
+       RowBox[{"k", "+", "1"}]]}]}], 
+    RowBox[{
+     SuperscriptBox[
+      SubscriptBox["x", "j"], "2"], "+", 
+     SuperscriptBox[
+      SubscriptBox["x", 
+       RowBox[{"j", "+", "1"}]], "2"]}]], ",", 
+   SubscriptBox["x", 
+    RowBox[{"k", "+", "1"}]]}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"D", "[", 
+  RowBox[{
+   FractionBox[
+    RowBox[{
+     RowBox[{
+      SubscriptBox["x", "j"], " ", 
+      SubscriptBox["x", "k"]}], "+", 
+     RowBox[{
+      SubscriptBox["x", 
+       RowBox[{"j", "+", "1"}]], " ", 
+      SubscriptBox["x", 
+       RowBox[{"k", "+", "1"}]]}]}], 
+    RowBox[{
+     SuperscriptBox[
+      SubscriptBox["x", "j"], "2"], "+", 
+     SuperscriptBox[
+      SubscriptBox["x", 
+       RowBox[{"j", "+", "1"}]], "2"]}]], ",", 
+   SubscriptBox["x", "j"]}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"D", "[", 
+  RowBox[{
+   FractionBox[
+    RowBox[{
+     RowBox[{
+      SubscriptBox["x", "j"], " ", 
+      SubscriptBox["x", "k"]}], "+", 
+     RowBox[{
+      SubscriptBox["x", 
+       RowBox[{"j", "+", "1"}]], " ", 
+      SubscriptBox["x", 
+       RowBox[{"k", "+", "1"}]]}]}], 
+    RowBox[{
+     SuperscriptBox[
+      SubscriptBox["x", "j"], "2"], "+", 
+     SuperscriptBox[
+      SubscriptBox["x", 
+       RowBox[{"j", "+", "1"}]], "2"]}]], ",", 
+   SubscriptBox["x", 
+    RowBox[{"j", "+", "1"}]]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.765292396349661*^9, 3.76529242521383*^9}, {
+  3.765292544786778*^9, 
+  3.765292569832165*^9}},ExpressionUUID->"821be2b3-c731-44a8-ada9-\
+3c733c1c027a"],
+
+Cell[BoxData[
+ FractionBox[
+  SubscriptBox["x", "j"], 
+  RowBox[{
+   SubsuperscriptBox["x", "j", "2"], "+", 
+   SubsuperscriptBox["x", 
+    RowBox[{"1", "+", "j"}], "2"]}]]], "Output",
+ CellChangeTimes->{{3.7652924055073833`*^9, 3.7652924257213087`*^9}, 
+   3.7652925706294537`*^9},ExpressionUUID->"dd182ca3-7149-45c2-821d-\
+cb0e257dc136"],
+
+Cell[BoxData[
+ FractionBox[
+  SubscriptBox["x", 
+   RowBox[{"1", "+", "j"}]], 
+  RowBox[{
+   SubsuperscriptBox["x", "j", "2"], "+", 
+   SubsuperscriptBox["x", 
+    RowBox[{"1", "+", "j"}], "2"]}]]], "Output",
+ CellChangeTimes->{{3.7652924055073833`*^9, 3.7652924257213087`*^9}, 
+   3.765292570636414*^9},ExpressionUUID->"efe053e3-c770-499d-a2be-\
+7beab5cc6ae2"],
+
+Cell[BoxData[
+ RowBox[{
+  FractionBox[
+   SubscriptBox["x", "k"], 
+   RowBox[{
+    SubsuperscriptBox["x", "j", "2"], "+", 
+    SubsuperscriptBox["x", 
+     RowBox[{"1", "+", "j"}], "2"]}]], "-", 
+  FractionBox[
+   RowBox[{"2", " ", 
+    SubscriptBox["x", "j"], " ", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{
+       SubscriptBox["x", "j"], " ", 
+       SubscriptBox["x", "k"]}], "+", 
+      RowBox[{
+       SubscriptBox["x", 
+        RowBox[{"1", "+", "j"}]], " ", 
+       SubscriptBox["x", 
+        RowBox[{"1", "+", "k"}]]}]}], ")"}]}], 
+   SuperscriptBox[
+    RowBox[{"(", 
+     RowBox[{
+      SubsuperscriptBox["x", "j", "2"], "+", 
+      SubsuperscriptBox["x", 
+       RowBox[{"1", "+", "j"}], "2"]}], ")"}], "2"]]}]], "Output",
+ CellChangeTimes->{{3.7652924055073833`*^9, 3.7652924257213087`*^9}, 
+   3.765292570639647*^9},ExpressionUUID->"0f1b02f7-2e4b-4119-9abe-\
+d6d5340a8dfc"],
+
+Cell[BoxData[
+ RowBox[{
+  FractionBox[
+   SubscriptBox["x", 
+    RowBox[{"1", "+", "k"}]], 
+   RowBox[{
+    SubsuperscriptBox["x", "j", "2"], "+", 
+    SubsuperscriptBox["x", 
+     RowBox[{"1", "+", "j"}], "2"]}]], "-", 
+  FractionBox[
+   RowBox[{"2", " ", 
+    SubscriptBox["x", 
+     RowBox[{"1", "+", "j"}]], " ", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{
+       SubscriptBox["x", "j"], " ", 
+       SubscriptBox["x", "k"]}], "+", 
+      RowBox[{
+       SubscriptBox["x", 
+        RowBox[{"1", "+", "j"}]], " ", 
+       SubscriptBox["x", 
+        RowBox[{"1", "+", "k"}]]}]}], ")"}]}], 
+   SuperscriptBox[
+    RowBox[{"(", 
+     RowBox[{
+      SubsuperscriptBox["x", "j", "2"], "+", 
+      SubsuperscriptBox["x", 
+       RowBox[{"1", "+", "j"}], "2"]}], ")"}], "2"]]}]], "Output",
+ CellChangeTimes->{{3.7652924055073833`*^9, 3.7652924257213087`*^9}, 
+   3.7652925706428633`*^9},ExpressionUUID->"961a0fbe-40ed-49f3-aae9-\
+9750a976b675"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"D", "[", 
+  RowBox[{
+   FractionBox[
+    RowBox[{
+     RowBox[{
+      RowBox[{"-", 
+       SubscriptBox["x", 
+        RowBox[{"j", "+", "1"}]]}], " ", 
+      SubscriptBox["x", "k"]}], "+", 
+     RowBox[{
+      SubscriptBox["x", "j"], " ", 
+      SubscriptBox["x", 
+       RowBox[{"k", "+", "1"}]]}]}], 
+    RowBox[{
+     SuperscriptBox[
+      SubscriptBox["x", "j"], "2"], "+", 
+     SuperscriptBox[
+      SubscriptBox["x", 
+       RowBox[{"j", "+", "1"}]], "2"]}]], ",", 
+   SubscriptBox["x", "k"]}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"D", "[", 
+  RowBox[{
+   FractionBox[
+    RowBox[{
+     RowBox[{
+      RowBox[{"-", 
+       SubscriptBox["x", 
+        RowBox[{"j", "+", "1"}]]}], " ", 
+      SubscriptBox["x", "k"]}], "+", 
+     RowBox[{
+      SubscriptBox["x", "j"], " ", 
+      SubscriptBox["x", 
+       RowBox[{"k", "+", "1"}]]}]}], 
+    RowBox[{
+     SuperscriptBox[
+      SubscriptBox["x", "j"], "2"], "+", 
+     SuperscriptBox[
+      SubscriptBox["x", 
+       RowBox[{"j", "+", "1"}]], "2"]}]], ",", 
+   SubscriptBox["x", 
+    RowBox[{"k", "+", "1"}]]}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"D", "[", 
+  RowBox[{
+   FractionBox[
+    RowBox[{
+     RowBox[{
+      RowBox[{"-", 
+       SubscriptBox["x", 
+        RowBox[{"j", "+", "1"}]]}], " ", 
+      SubscriptBox["x", "k"]}], "+", 
+     RowBox[{
+      SubscriptBox["x", "j"], " ", 
+      SubscriptBox["x", 
+       RowBox[{"k", "+", "1"}]]}]}], 
+    RowBox[{
+     SuperscriptBox[
+      SubscriptBox["x", "j"], "2"], "+", 
+     SuperscriptBox[
+      SubscriptBox["x", 
+       RowBox[{"j", "+", "1"}]], "2"]}]], ",", 
+   SubscriptBox["x", "j"]}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"D", "[", 
+  RowBox[{
+   FractionBox[
+    RowBox[{
+     RowBox[{
+      RowBox[{"-", 
+       SubscriptBox["x", 
+        RowBox[{"j", "+", "1"}]]}], " ", 
+      SubscriptBox["x", "k"]}], "+", 
+     RowBox[{
+      SubscriptBox["x", "j"], " ", 
+      SubscriptBox["x", 
+       RowBox[{"k", "+", "1"}]]}]}], 
+    RowBox[{
+     SuperscriptBox[
+      SubscriptBox["x", "j"], "2"], "+", 
+     SuperscriptBox[
+      SubscriptBox["x", 
+       RowBox[{"j", "+", "1"}]], "2"]}]], ",", 
+   SubscriptBox["x", 
+    RowBox[{"j", "+", "1"}]]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.765292691854854*^9, 
+  3.765292715397294*^9}},ExpressionUUID->"4ad4f03d-45d1-4e0c-9cab-\
+0f73d01ab99d"],
+
+Cell[BoxData[
+ RowBox[{"-", 
+  FractionBox[
+   SubscriptBox["x", 
+    RowBox[{"1", "+", "j"}]], 
+   RowBox[{
+    SubsuperscriptBox["x", "j", "2"], "+", 
+    SubsuperscriptBox["x", 
+     RowBox[{"1", "+", "j"}], "2"]}]]}]], "Output",
+ CellChangeTimes->{
+  3.765292715999073*^9},ExpressionUUID->"4fc23fd0-dca3-49c5-8c5d-\
+cf20bab2c6fe"],
+
+Cell[BoxData[
+ FractionBox[
+  SubscriptBox["x", "j"], 
+  RowBox[{
+   SubsuperscriptBox["x", "j", "2"], "+", 
+   SubsuperscriptBox["x", 
+    RowBox[{"1", "+", "j"}], "2"]}]]], "Output",
+ CellChangeTimes->{
+  3.765292716002112*^9},ExpressionUUID->"9e5fde1c-e09d-4373-8e82-\
+91317a657cb9"],
+
+Cell[BoxData[
+ RowBox[{
+  FractionBox[
+   SubscriptBox["x", 
+    RowBox[{"1", "+", "k"}]], 
+   RowBox[{
+    SubsuperscriptBox["x", "j", "2"], "+", 
+    SubsuperscriptBox["x", 
+     RowBox[{"1", "+", "j"}], "2"]}]], "-", 
+  FractionBox[
+   RowBox[{"2", " ", 
+    SubscriptBox["x", "j"], " ", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"-", 
+        SubscriptBox["x", 
+         RowBox[{"1", "+", "j"}]]}], " ", 
+       SubscriptBox["x", "k"]}], "+", 
+      RowBox[{
+       SubscriptBox["x", "j"], " ", 
+       SubscriptBox["x", 
+        RowBox[{"1", "+", "k"}]]}]}], ")"}]}], 
+   SuperscriptBox[
+    RowBox[{"(", 
+     RowBox[{
+      SubsuperscriptBox["x", "j", "2"], "+", 
+      SubsuperscriptBox["x", 
+       RowBox[{"1", "+", "j"}], "2"]}], ")"}], "2"]]}]], "Output",
+ CellChangeTimes->{
+  3.765292716004974*^9},ExpressionUUID->"3d4eed85-199c-4d57-9a64-\
+48e40d4cbc47"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"-", 
+   FractionBox[
+    SubscriptBox["x", "k"], 
+    RowBox[{
+     SubsuperscriptBox["x", "j", "2"], "+", 
+     SubsuperscriptBox["x", 
+      RowBox[{"1", "+", "j"}], "2"]}]]}], "-", 
+  FractionBox[
+   RowBox[{"2", " ", 
+    SubscriptBox["x", 
+     RowBox[{"1", "+", "j"}]], " ", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"-", 
+        SubscriptBox["x", 
+         RowBox[{"1", "+", "j"}]]}], " ", 
+       SubscriptBox["x", "k"]}], "+", 
+      RowBox[{
+       SubscriptBox["x", "j"], " ", 
+       SubscriptBox["x", 
+        RowBox[{"1", "+", "k"}]]}]}], ")"}]}], 
+   SuperscriptBox[
+    RowBox[{"(", 
+     RowBox[{
+      SubsuperscriptBox["x", "j", "2"], "+", 
+      SubsuperscriptBox["x", 
+       RowBox[{"1", "+", "j"}], "2"]}], ")"}], "2"]]}]], "Output",
+ CellChangeTimes->{
+  3.765292716010991*^9},ExpressionUUID->"636299fc-c4ba-4ba4-8378-\
+a18375234bba"]
+}, Open  ]]
+},
+WindowSize->{808, 905},
+WindowMargins->{{398, Automatic}, {45, Automatic}},
+FrontEndVersion->"11.1 for Mac OS X x86 (32-bit, 64-bit Kernel) (April 18, \
+2017)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 24599, 583, 100, "WolframAlphaShortInput", "ExpressionUUID" -> \
+"60d8b168-afca-4501-a576-676d7b9ce10f"],
+Cell[25160, 605, 1109, 39, 54, InheritFromParent, "ExpressionUUID" -> \
+"2c6aaa14-952f-4c9c-bb95-47e04a6433d3"],
+Cell[CellGroupData[{
+Cell[26294, 648, 2301, 82, 195, "Input", "ExpressionUUID" -> \
+"821be2b3-c731-44a8-ada9-3c733c1c027a"],
+Cell[28598, 732, 339, 9, 55, "Output", "ExpressionUUID" -> \
+"dd182ca3-7149-45c2-821d-cb0e257dc136"],
+Cell[28940, 743, 361, 10, 55, "Output", "ExpressionUUID" -> \
+"efe053e3-c770-499d-a2be-7beab5cc6ae2"],
+Cell[29304, 755, 891, 29, 59, "Output", "ExpressionUUID" -> \
+"0f1b02f7-2e4b-4119-9abe-d6d5340a8dfc"],
+Cell[30198, 786, 944, 31, 59, "Output", "ExpressionUUID" -> \
+"961a0fbe-40ed-49f3-aae9-9750a976b675"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[31179, 822, 2349, 85, 195, "Input", "ExpressionUUID" -> \
+"4ad4f03d-45d1-4e0c-9cab-0f73d01ab99d"],
+Cell[33531, 909, 334, 11, 55, "Output", "ExpressionUUID" -> \
+"4fc23fd0-dca3-49c5-8c5d-cf20bab2c6fe"],
+Cell[33868, 922, 286, 9, 55, "Output", "ExpressionUUID" -> \
+"9e5fde1c-e09d-4373-8e82-91317a657cb9"],
+Cell[34157, 933, 890, 31, 59, "Output", "ExpressionUUID" -> \
+"3d4eed85-199c-4d57-9a64-48e40d4cbc47"],
+Cell[35050, 966, 915, 32, 59, "Output", "ExpressionUUID" -> \
+"636299fc-c4ba-4ba4-8378-a18375234bba"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+

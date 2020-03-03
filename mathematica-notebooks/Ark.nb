@@ -1,0 +1,256 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      9637,        248]
+NotebookOptionsPosition[      9339,        235]
+NotebookOutlinePosition[      9683,        250]
+CellTagsIndexPosition[      9640,        247]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"Module", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"alpha", "=", 
+      FractionBox["1", "50"]}], ",", 
+     RowBox[{"n", "=", "2"}], ",", 
+     RowBox[{"m", "=", "3"}], ",", 
+     RowBox[{"incre", "=", 
+      FractionBox["1", "50"]}], ",", 
+     RowBox[{"mu", "=", 
+      RowBox[{"{", "}"}]}], ",", 
+     RowBox[{"nu", "=", 
+      RowBox[{"{", "}"}]}], ",", 
+     RowBox[{"xi", "=", 
+      RowBox[{"{", "}"}]}], ",", "i"}], "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"AppendTo", "[", 
+     RowBox[{"mu", ",", 
+      RowBox[{"TransformedDistribution", "[", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"a", ",", 
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{"a", "\[Equal]", "1"}], ",", "alpha", ",", 
+            RowBox[{"alpha", "+", "incre"}]}], "]"}], ",", "n"}], "}"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{"Distributed", "[", 
+          RowBox[{"a", ",", 
+           RowBox[{"ProbabilityDistribution", "[", 
+            RowBox[{
+             RowBox[{"Piecewise", "[", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"alpha", ",", 
+                  RowBox[{"x", "\[Equal]", "1"}]}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"1", "-", "alpha"}], ",", 
+                  RowBox[{"x", "\[Equal]", "0"}]}], "}"}]}], "}"}], "]"}], 
+             ",", 
+             RowBox[{"{", 
+              RowBox[{"x", ",", "0", ",", "1"}], "}"}]}], "]"}]}], "]"}], 
+         "}"}]}], "\[IndentingNewLine]", "]"}]}], "]"}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"AppendTo", "[", 
+     RowBox[{"nu", ",", 
+      RowBox[{"TransformedDistribution", "[", 
+       RowBox[{
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"a", "\[Equal]", "1"}], ",", "alpha", ",", 
+          RowBox[{"alpha", "+", "incre"}]}], "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"Distributed", "[", 
+          RowBox[{"a", ",", 
+           RowBox[{"mu", "[", 
+            RowBox[{"[", "1", "]"}], "]"}]}], "]"}], "}"}]}], "]"}]}], "]"}], 
+    ";", "\[IndentingNewLine]", 
+    RowBox[{"AppendTo", "[", 
+     RowBox[{"xi", ",", 
+      RowBox[{"TransformedDistribution", "[", 
+       RowBox[{"n", ",", 
+        RowBox[{"{", 
+         RowBox[{"Distributed", "[", 
+          RowBox[{"a", ",", 
+           RowBox[{"mu", "[", 
+            RowBox[{"[", "1", "]"}], "]"}]}], "]"}], "}"}]}], "]"}]}], "]"}], 
+    ";", "\[IndentingNewLine]", 
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"i", "=", "1"}], ",", 
+      RowBox[{"i", "\[LessEqual]", "m"}], ",", 
+      RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"AppendTo", "[", 
+        RowBox[{"mu", ",", 
+         RowBox[{"TransformedDistribution", "[", "\[IndentingNewLine]", 
+          RowBox[{"r", ",", "\[IndentingNewLine]", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"Distributed", "[", 
+              RowBox[{"a", ",", 
+               RowBox[{"mu", "[", 
+                RowBox[{"[", "i", "]"}], "]"}]}], "]"}], ",", 
+             "\[IndentingNewLine]", 
+             RowBox[{"Distributed", "[", 
+              RowBox[{"b", ",", 
+               RowBox[{"nu", "[", 
+                RowBox[{"[", "i", "]"}], "]"}]}], "]"}], ",", 
+             "\[IndentingNewLine]", 
+             RowBox[{"Distributed", "[", 
+              RowBox[{"c", ",", 
+               RowBox[{"xi", "[", 
+                RowBox[{"[", "i", "]"}], "]"}]}], "]"}], ",", 
+             "\[IndentingNewLine]", 
+             RowBox[{"Distributed", "[", 
+              RowBox[{"r", ",", 
+               RowBox[{"Expectation", "[", 
+                RowBox[{"z", ",", 
+                 RowBox[{"Distributed", "[", 
+                  RowBox[{"z", ",", 
+                   RowBox[{"nu", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}]}], "]"}]}], "]"}]}], 
+              "]"}]}], "}"}]}], "\[IndentingNewLine]", "]"}]}], 
+        "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"AppendTo", "[", 
+        RowBox[{"nu", ",", 
+         RowBox[{"TransformedDistribution", "[", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{"r", "\[Equal]", "0"}], ",", "\[IndentingNewLine]", 
+             RowBox[{"If", "[", 
+              RowBox[{
+               RowBox[{"b", "\[Equal]", "0"}], ",", "\[IndentingNewLine]", 
+               RowBox[{"b", "+", "incre"}], ",", "\[IndentingNewLine]", "b"}],
+               "\[IndentingNewLine]", "]"}], ",", "\[IndentingNewLine]", 
+             "alpha"}], "\[IndentingNewLine]", "]"}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"Distributed", "[", 
+              RowBox[{"a", ",", 
+               RowBox[{"mu", "[", 
+                RowBox[{"[", "i", "]"}], "]"}]}], "]"}], ",", 
+             "\[IndentingNewLine]", 
+             RowBox[{"Distributed", "[", 
+              RowBox[{"b", ",", 
+               RowBox[{"nu", "[", 
+                RowBox[{"[", "i", "]"}], "]"}]}], "]"}], ",", 
+             "\[IndentingNewLine]", 
+             RowBox[{"Distributed", "[", 
+              RowBox[{"c", ",", 
+               RowBox[{"xi", "[", 
+                RowBox[{"[", "i", "]"}], "]"}]}], "]"}], ",", 
+             "\[IndentingNewLine]", 
+             RowBox[{"Distributed", "[", 
+              RowBox[{"r", ",", 
+               RowBox[{"Expectation", "[", 
+                RowBox[{"z", ",", 
+                 RowBox[{"Distributed", "[", 
+                  RowBox[{"z", ",", 
+                   RowBox[{"nu", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}]}], "]"}]}], "]"}]}], 
+              "]"}]}], "}"}]}], "\[IndentingNewLine]", "]"}]}], 
+        "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"AppendTo", "[", 
+        RowBox[{"xi", ",", 
+         RowBox[{"TransformedDistribution", "[", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{"r", "\[Equal]", "0"}], ",", "\[IndentingNewLine]", 
+             RowBox[{"If", "[", 
+              RowBox[{
+               RowBox[{"b", "\[Equal]", "0"}], ",", "\[IndentingNewLine]", 
+               "0", ",", "\[IndentingNewLine]", 
+               RowBox[{"c", "-", "1"}]}], "\[IndentingNewLine]", "]"}], ",", 
+             "\[IndentingNewLine]", "n"}], "\[IndentingNewLine]", "]"}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"Distributed", "[", 
+              RowBox[{"a", ",", 
+               RowBox[{"mu", "[", 
+                RowBox[{"[", "i", "]"}], "]"}]}], "]"}], ",", 
+             "\[IndentingNewLine]", 
+             RowBox[{"Distributed", "[", 
+              RowBox[{"b", ",", 
+               RowBox[{"nu", "[", 
+                RowBox[{"[", "i", "]"}], "]"}]}], "]"}], ",", 
+             "\[IndentingNewLine]", 
+             RowBox[{"Distributed", "[", 
+              RowBox[{"c", ",", 
+               RowBox[{"xi", "[", 
+                RowBox[{"[", "i", "]"}], "]"}]}], "]"}], ",", 
+             "\[IndentingNewLine]", 
+             RowBox[{"Distributed", "[", 
+              RowBox[{"r", ",", 
+               RowBox[{"Expectation", "[", 
+                RowBox[{"z", ",", 
+                 RowBox[{"Distributed", "[", 
+                  RowBox[{"z", ",", 
+                   RowBox[{"nu", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}]}], "]"}]}], "]"}]}], 
+              "]"}]}], "}"}]}], "\[IndentingNewLine]", "]"}]}], 
+        "\[IndentingNewLine]", "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], 
+    ";", "\[IndentingNewLine]", 
+    RowBox[{"Probability", "[", 
+     RowBox[{
+      RowBox[{"a", "\[Equal]", "1"}], ",", 
+      RowBox[{"Distributed", "[", 
+       RowBox[{"a", ",", 
+        RowBox[{"mu", "[", 
+         RowBox[{"[", "m", "]"}], "]"}]}], "]"}]}], "]"}]}]}], 
+  "\[IndentingNewLine]", "]"}]], "Input",
+ CellChangeTimes->CompressedData["
+1:eJwdz2kow3EAxvF/rhdIZi+w7MWIXCGbxStzRUyyLFeY1XLUEjJteDF3G6Wc
+OXO8QMk5zQqZUIwSOcM/yVLIMVJy7Pm9ePq8e+rLkZaJZDYURflaB01iWZQb
+9zEm46ErGVK69Sw4LEwohgaNWy9010nnoFlNLcPPmEpikzrfAJmq4ws4yJ2i
+4Zj9JnH0Neme/LDkxK+ubws8ud3+hqx2A8W0upoY4gAtT6EucFtbGwAfTUwe
+5HMVxFtbXhwUP9mmwIDnaG+O1b0cM/G35M8PMoKbA6FKeh4CIyPZAhghuImH
+PZr5RKiv16fCAndJNqQySvNgRfyLBOaU/yjg4nBaN2wxLo1Ai3RhGsZ6hM1C
+7bXvHDQOpa5BZW7UDkwf1x7C/sLzS6hR8+280V+05QwblUsMyBaqPOFuq4oN
+T/lj/nDj9DMcOrIaouFXynoCZIj3k2Dw5IAQur7NEIOq3rOgU8cH8cGHVwrX
+OAo5nGxTKiDtZSL2sR0aYadORKQDZzTwrOZIC+9ENhNQYF41wHtutRHqVzLP
+4MiB5Apy6Doa/gOS7ALE
+  "],
+ CellLabel->"In[12]:=",ExpressionUUID->"56409090-e0c1-4f92-8398-1c63d95c1fcd"]
+},
+WindowSize->{1620, 1007},
+WindowMargins->{{-8, Automatic}, {Automatic, -8}},
+FrontEndVersion->"12.0 for Microsoft Windows (64-bit) (April 8, 2019)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 8777, 213, 930, "Input",ExpressionUUID->"56409090-e0c1-4f92-8398-1c63d95c1fcd"]
+}
+]
+*)
+

@@ -1,0 +1,67 @@
+[**Definition S2 (Orientation Bundle of a Vector
+Bundle).**]{style="background-color: red!30"} Assume we have a vector
+bundle $\eta:E\overset{p}{\to}B$ and a choice of trivialization
+$\{(U_a,\phi_a)\}_{a\in A}$. We define the **orientation bundle** (a
+fiber bundle, not a vector bundle) of $\eta$,
+$\hat{\eta}=\langle\hat{E},B,q,\pm1\rangle$ as follows. First, the
+underlying set of the total space is defined to be
+$$\hat{E}=\bigsqcup_{b\in B}\left(^{F_{\mathrm{GL}}(E_b)}\big/_{\mathrm{GL}^+}\right);$$
+and the base space $\hat{B}=B$. Given an open set $B'\subseteq U_a$ for
+some $a$, define
+$$\mu_{B'}={\displaystyle\left(\bigsqcup_{b'\in B'}F_{\mathrm{GL}}(E_{b'})\right)}\Big/{\sim}$$
+where $e\sim e'$ if and only if there exists $g^+\in\mathrm{GL}^+$ such
+that $(\varphi_a(e))_2\cdot g^+=(\varphi_a(e'))_2$; for $b'\in B'$,
+define a pseudo-inclusion map $$\begin{align}
+\psi^{B'}_{b'}:\mu_B&\to(b',-)\in\hat{\eta}\\\nu&\mapsto[(\beta,\cdots)\in\mu_{B'}\,\big|\,\beta=b']\end{align}$$
+and define $U(\mu_{B'})$ to be the set of all $\mu_{b'}\in\hat{\eta}$
+such that $b'\in B'$ and $\mu_{b'}=\psi^{B'}_{b'}(\mu_{B'})$.
+Topologizing $\hat{E}$ with the basis of the topology being the sets
+$U(\mu_{B'})$, indexed over all possible $B'$, a projection
+$q:\hat{\eta}\to B$ is just a projection into the first factor.
+
+[**Lemma S3.**]{style="background-color: red!30"} The orientation bundle
+of any vector bundle is a two-sheeted covering space thereof.
+
+Trivial since
+$$\left|^{F_{\mathrm{GL}}(E_b)}\big/_{\mathrm{GL}^+}\right|=|\mathrm{GL}:\mathrm{GL}^+|=2.$$
+
+[**Lemma S4 (Orientability of Orientation
+Bundle).**]{style="background-color: red!30"} The orientation bundle of
+any vector bundle with connected and compact base space is orientable.
+
+Choose a finite open cover $U_i$ and its corresponding family of
+trivialization maps $\varphi_i:p^{-1}(U_i)\to B\times F^n$. Consider the
+intersection graph of $U_i$, which is clearly connected since the base
+space itself is connected, thus if we have a procedure to glue
+$\mu_{B'_k}$ and $\mu_{B'_l}$ together, we will have a method to create
+two global sections of the orientation bundle, which results in an
+assignment of the $\pm1$ thereto that is continuous, as required by the
+orientability condition for fiber bundle, i.e. fiberwise
+orientation-preserving trivialization maps. And indeed we have: On the
+intersection of two sets $U_i,U_j$ in the open cover, two equivalence
+classes $[e]\in\mu_{U_i},[e']\in\mu_{U_j}$ are equivalent and to be
+merged if and only if $(\phi_i(e))_2\cdot g^+=(\phi_j(e'))_2$ for some
+$g^+\in\mathrm{GL}^+$, and we are done.
+
+[**Proposition S5 (Criterion for Orientability of Vector
+Bundle).**]{style="background-color: red!30"} Let
+$\eta:E\overset{p}{\to}B$ a vector bundle with $B$ connected, then
+$\eta$ is orientable if and only if the orientation bundle $\hat{\eta}$
+has two connected components.
+
+If $B$ is connected, $\hat{\eta}$ has either one or two component(s)
+since it's a two-sheeted covering space of $B$, If it has two, then they
+are each mapped homeomorphically to $B$ by the covering projection
+defined above, splitting the fibers into 2 classes: voilà, une section
+d'orientation par l'axiome du choix! Conversely, if $\eta$ is
+orientable, it has two orientations since it is connected, and each of
+these orientations corresponds to one of the global section of the
+orientation bundle, de facto et de jure!
+
+[**Problem 2.**]{style="background-color: blue!30"} Disprove that
+$\xi\simeq\eta$.
+
+Referring to Proposition S5, the former is orientable; the latter's
+orientation bundle is path-connected, thus it's unorientable. Since
+orientability of vector bundle is a vector bundle isomorphism invariant,
+they are not isomorphic.

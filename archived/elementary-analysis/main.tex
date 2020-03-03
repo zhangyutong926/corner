@@ -1,0 +1,47 @@
+\providecommand{\main}{.}
+\documentclass[cite=authoryear,cyan,en,11pt,base=hide,twoside]{\main/elegantbook}
+\usepackage{graphicx}
+\graphicspath{{./}{../}{images/}{../images/}}
+\usepackage{subfiles}
+\usepackage{multicol}
+\usepackage{tikz-cd}
+\usepackage{imakeidx}
+\usepackage{CJKutf8}
+\usepackage{prftree}
+\usepackage{rotating}
+\usepackage{vwcol}
+\setlength{\parskip}{0pt}
+\setlength{\parindent}{4ex}
+\raggedbottom
+\makeatletter
+\newcommand{\@minipagerestore}{\setlength{\parskip}{3pt}\setlength{\parindent}{4ex}}
+\geometry{a4paper,top=18mm,bottom=10mm,headheight=2.17cm,headsep=4mm,footskip=12mm,left=20mm,right=20mm}
+\makeatletter
+\ifcsname f@nch@setoffs\endcsname\else%
+\let\f@nch@setoffs\fancy@setoffs
+\fi
+\f@nch@setoffs
+\input{\main/predefs/predefs}
+\def\biblio{\nocite{*}\bibliography{\main/bibliography/bibliography}}
+\makeindex[columns=3, title=Alphabetical Index, intoc]
+\title{Elementary Analysis}
+\subtitle{A Guide for Higher Learning}
+\author{Sayako Hoshimiya}
+\institute{\begin{CJK*}{UTF8}{gbsn}Sayako的文学和数学社\end{CJK*}}
+\date{\today}
+\extrainfo{Des résidus apparaissent ... naturellement dans plusieurs branches de l'analyse. -- Augustin-Louis Cauchy}
+\logo{logo.png}
+\cover{cover.jpg}
+\begin{document}
+\def\biblio{}
+\maketitle
+\tableofcontents
+\mainmatter
+\hypersetup{pageanchor=true}
+\subfile{./chapter1-introduction/chapter1-introduction.tex}
+\subfile{./chapter2-set-theory-and-logic/chapter2-set-theory-and-logic.tex}
+\subfile{./chapter3-ordinals-cardinals-and-numerals/chapter3-ordinals-cardinals-and-numerals.tex}
+\nocite{*}
+\bibliography{\main/bibliography/bibliography}
+\printindex
+\end{document}

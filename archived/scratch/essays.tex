@@ -1,0 +1,160 @@
+\documentclass[10pt]{article}
+\usepackage{CJKutf8}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{enumitem}
+\usepackage[a4paper, left=2.5cm, right=2.5cm, top=1.25cm, bottom=1.25cm]{geometry}
+\usepackage{multicol}
+\usepackage{tikz-cd}
+\usepackage{array}
+\usepackage{makecell}
+\usepackage{tabularx}
+\setlength{\columnsep}{0.75cm}
+
+\newtheorem{exercise}{Exercise}
+
+\setlength{\parindent}{0cm}
+\setlength{\parskip}{1em}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\newcommand*{\qedfill}{\hfill\ensuremath{\blacksquare}}
+
+\title{Sayako's Scratchpad}
+\author{Sayako Hoshimiya}
+\begin{document}
+\begin{CJK*}{UTF8}{gbsn}
+\maketitle
+\renewcommand{\setminus}{\mathbin{\backslash}}
+\def \setminus {\mathbin{\backslash}}
+AP Calc $\to$ Baby Rudin - (Compactness and Connectedness, EVT, IVT, UCT, \textbf{Topological properties of the space is the most general intrinsic properties thereof}), Inverse Function Theorem (Hadamard, \textbf{topological properties of the map extends local property to global property}), Implicit Function Theorem (Differential Equation)
+
+Baby Rudin (Munkres) $\to$ Tu Manifold - de Rham Cohomology (cohomologouity of form, counterexample of closed form being exact, \textbf{de Rham cohomology group reveals the topological nature of manifold as a space, e.g.} $H_{\mathrm{dR}}^{0}(M) \cong \mathbb{R}^{m}$), Regular Level Set Theorem (Brouwer's Fixed Point Theorem)
+
+Brouwer (Fundamental Group and Homotopy Group) \& de Rham Cohomology (try to find similar construct) $\to$ Hatcher algebraic topology: triangularization of space/CW-complex (simplicial homology, cellular homology), once again \textbf{topological nature of space captured by algebraic structure}: $\mathbb{Z} \pi_{0}(X) \simeq H_{0}(X, \mathbb{Z})$, $\pi_1(X,x_0)\simeq H_1(X,\mathbb{Z})$, project: cellular approximation theorem (current), project: computational homology (current)
+
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
+
+Let me tell you a story of a math girl, a cyclic story of interest, exploration, frustration, satisfaction, and most importantly knowledge acquisition and contribution, a story of her following her intellectual antecedents experiencing the methodologies by which we human explored the world and its disciplines, a story of her and her first love, a story of her and mathematics, a story of me.
+
+``For any epsilon greater than zero, there exists a delta greater than zero, such that...," then my journey begins with Rudin's \textit{Principles of Mathematical Analysis}. Even today, highlights of mathematical analysis still triggers my memory (and some of them also apply to me current study). I remember when I was introduced to topology induced by metric; compactness and connectedness, EVT and IVT and and UCT; what I learned in AP Calculus is brought to me again but with rigorous language. I remember the inverse function theorem from Rudin and the theorem of Hadamard, the global version; "certain topological properties of spaces and maps extends local property to global property," like they say. There are three things I feel unsatisfactory about Rudin: topology, differential geometry, and measure theory, each occupying a chapter\footnote{2, 10, and 11; though it's an analysis book so it's extenuating}. For those, I turned to Munkres \textit{Topology}, Tu \textit{Introduction to Manifolds} and Lee \textit{Introduction to Smooth Manifolds}, and Stein \textit{Real Analysis}. 
+
+If there's a most important take away from Tu, I would say it's de Rham cohomology (which makes me unusual since most people love Stokes' theorem more than de Rham theory, probably because I'm the more theoretical type), which paves a road for me to what I'm currently studying, homological algebra and algebraic topology. de Rham cohomology is the first construct with $\frac{\ker}{\operatorname{im}}$ liked form I ever encountered which captures the element in the kernel that is not in the image. This construct for chain/cochain complex is useful when it is used to reflect the nature of a topological space: such as $n$-simplex with boundary map in singular homology and that $\mathbb{Z}\pi_0(X,x_0)\simeq H_0(X,\emptyset;\mathbb{Z})$\footnote{and more general, Hurewicz theorem} or $n$-form in exterior derivative in de Rham cohomology and that $H^0_{\mathrm{dR}}(M)\simeq\mathbb{R}^m$. At the time, I was so intrigued by the multilinear algebra of differential forms and cohomology, but tired of tedious coordinate related calculations (in which I always make mistakes), then I found a lecture note on algebraic topology, which brings me the similar idea, but without coordinate-related calculations.
+
+I proved the zig-zag lemma for homology defined for chain complex. It generates a long exact sequence for any short exact sequence of chain map. A technique called diagram chasing is used: I wish to find a $a\in A_{n-1}$ for a specific $c\in C_n$ given, like shown in the following diagram. I observe that since $0$ the trivial module is the starting and ending point of the short exact sequence, so that from the exactness of map $\ker=\operatorname{im}$ the first map in the sequence is injective, and the second is surjective. So we can ``chase" the element one step up to an element $b'\in B_n\setminus\ker\partial_n^B$. By assumption $c\in\ker\partial_n^C$, we have $(g_{n-1}\circ\partial_n^B)(b)=0=(\partial_n^C\circ g_n)(b)$ and this allowed me to chase on step up to an element $a\in A_{n-1}$. Recall that I used a choice of preimage of a surjective (but possibly not injective) map. The next step requires me to prove that the value of this correspondence $\partial$ does not depend on that choice but only the parameter $c$. Another useful note in this argument is that there is functor $H_*(-):(\mathbf{Top}^2)\to(\mathbf{Gr}_{\mathbb{Z}}^+)$ such allows me to apply this result of homological algebra to algebraic topology.
+
+Besides things mathematical, I'm very well acquainted, too, with matters about computer science.
+
+\newpage
+Let me tell you a story of a math girl, a cyclic story of interest, exploration, frustration, satisfaction, and most importantly knowledge acquisition and contribution, a story of her following her intellectual antecedents experiencing the methodologies by which we human explored the world and its disciplines, a story of her and her first love, a story of her and mathematics, a story of me.
+
+The first insight worth sharing to me is the distinct 
+
+I believe what makes homology theory and algebraic topology intriguing to me is that the central notions of the subject, homology and cohomology of various chain complexes characterizing topological spaces (e.g. singular chain complex, CW complex, etc.) is, philosophically speaking, one of the most fundamental topological invariant of those spaces; though they might be difficult to be understood intuitively, for example in torsion-free spaces, singular homology captures the higher-dimensional analogy of ``holes" of topological space, when considered in an ambient Euclidean space (this intuition actually works for an unexpectedly wide range of spaces since every compact metrizable space of Lebesgue covering dimension $m$ can be imbedded in a Euclidean ambient space of dimension $2m+1$), or even lack intuitive meaning in some spaces (e.g. torsionful spaces).
+
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
+
+``You have a solid foundation in mathematical analysis," so exclaimed Prof. Yitang Zhang. That was the first time I am accredited by a professional in the field of mathematics. ``You are like a second year undergraduate, though you're only 15," he said, when he watched me doing an rather not-so-trivial exercise in Rudin's \textit{Principles of Mathematical Analysis} (the integral of the Thomae function) and read my note collection on mathematical analysis.
+
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
+
+One day, an Olympiad problem was brought to me by a fellow student; it requires me to find the shortest path between two points in a plane with an circular area obstructed. The solution comes immediately from the problem settings: two tangent lines segments and an arc of the circle would suffice. But then I started wondering how a proof can be constructed and what if the problem is given in a more general setting, say 
+
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
+
+\begin{enumerate}
+\item Yitang Zhang accredited me;
+\item Read AP Calculus in grade 7;
+\item Able to use {\LaTeX} since grade 8;
+\item Grade 9 - Haskell; TAPL@PKU
+\item French - 2018;
+\item analysis, algebra - 2016-2017
+\item DG - 2018;
+\item AT - 2019;
+\item Tutoring
+\end{enumerate}
+
+\newpage
+My journey of mathematics started in 2014. Like any young and curious little girl, I received a present, an AP Calculus textbook, from a dear teacher. Its obscure content on the notion of limit made my learning unsatisfactory. I'm unable to accept the notion of ``arbitrary closeness". Then I tried to use my language to fill the emptiness of it. First I was convinced that I have to find a way to achieve ``infinitesimal". For that I defined a special kind of ``list" of numbers, progressing becoming less than any number ``nominable". And any function whose values form a difference between a number $l$ and elements of such a list with another such list plus an $x_0$ as parameters would be considered to have a ``limit" $l$ at point $x_0$. This was found out later by a math teacher to be ``surprisingly similar to the definition of limit given by Cauchy in his \textit{Cours d'Analyse}."
+
+Recently I'm also into the theories of pre-tertiary mathematical education. I believe that the idea of general education of modern mathematical notions is crucial in current and future secondary mathematical education. To verify that, I conducted a social experiment. I gathered a group of A-Level students who are applying for math-related majors, then, several other teachers and I started to teach an alternative curriculum, in which modern notions are incorporated with the classical content. For example, when we were teaching the properties of the real line, the notion of topological space and ordered field were introduced; when we were teaching the exponential and logarithm functions, the properties of general sequence and series of functions were given. Theorems that requires higher knowledge to deduce or are too technical to be presented at the pre-tertiary phase, such as the equivalent definitions of the real number, was admitted without proof. This experiment is still on-going and the assessment of the result will be drawn from the comparison of our students against others trained in the traditional way, in the aspect like acceptance, MAT score, interview feedback, and GPA performance. After careful reading of related researches and historic literature, I found out that my approach is surprisingly similar to that of Bourbaki, and I did learn from the failure thereof and refined my current approach. I would say this experiment enhanced my understanding of the relation between education and society, provoked my interests in mathematics and teaching further, and gave me new insights of the subject I love, and I would say that this experiment and research will continue.
+
+Besides studying and researching on my own, I also love sharing knowledge. In 2017, I organized a mathematical history seminar on the general use of analytic methods in the history of mathematics. My lecture topic is calculus of variation, with application to the brachistochrone problem and the isoperimetric problem, among others, which includes topics like the fundamental theorem of algebra, the Jordan curve theorem, the Sard's theorem, the Brouwer's fixed point theorem, etc. As an organizer, I talked to my high school's coordinator for booking the classroom for the seminar, designed and opened up webpage for paper submission and audience registration, prepared the projector and computer, set up the posters and made address to the students about the seminar on our school's assembly; also as a lecturer, I prepared the lecture note and the slides, all exquisitely typeset with {\LaTeX}, overcame my social anxiety and voice dysphoria, and on the seminar day answered every question with detailed argument and patience.
+
+As for my recent study, I am currently working on homological algebra and commutative algebra, and, consequently their application in algebraic topology and algebraic geometry. I'm following Davis \& Kirk's \textit{Lectures in Algebraic Topology} and the open-sourced textbook \textit{The Stacks Project}. With the help of a Ph.D. student from PKU (Peking University), I will have a chance to audit courses on homology theory and commutative algebra in PKU in the first semester of 2019-2020 academic year. Preparing myself with sufficient background in algebra and topology, I see this great opportunity more valuable than ever. Though it's probably too early to say, I look forward to a mathematical career in topology and geometry, which is the main reason I've started so early in self-studying mathematics especially modern notions such as commutative algebra and category theory. I see my tertiary and higher education as a new opportunity of closer integration of resources and opportunities of application of my knowledge, as well as a platform to develop it further. For that, as a mathematical student, I request you to consider me for the admission into the undergraduate department of mathematics in the 2020-2021 academic year.
+
+\newpage
+``I'm a girl, a girl who is born inside a boy's body, and it's not my fault," I finished my speech in the TA (transgender anonymous) session in Beijing LGBT Center. It is something I would never imagine two years ago: confidence and extraordinariness, in a way that allows me to give a speech, as a female, about my identity, for the community.
+
+Like most of transgenders, I discovered my identity so early in life that I even can't remember when exactly it is. And it isn't me until puberty, when I started to feel the damage of gender dysphoria, a person who is self-enclosed, socially anxious, underconfident, and depressed, like me 2 years ago. Since then, I became less proactive in socializing scenarios, lost friends, got unsatisfactory grades. I found myself less and less confident in daily life, avoiding going to restrooms and change rooms, trying to be the same as other cisgender boys and hide my identity, for example.
+
+But this all changed in 2018, when I finally nerved myself to come out with my parents. With help from my gender therapist, they understood my identity and decided to give support. Then I started my transition: trying clothes that are female oriented, experimenting with cosmetics, etc. But I would say now the most important part is my voice training. In China, not so many people know and really understand transgenderism, and they tend to apply implicit violence upon us like verbal harassment and humiliation, and this hurt my confidence multiple times. Once I was in a cosmetics store with a cisfemale friend. I was talking to her and the staff clearly heard my voice and said to me: ``that boy, please move to this side, you're blocking the light," as if my friend is the only customer he cares about, and as if I'm my appearance isn't passing enough to let him use the proper pronoun. I ran away and decided I would work so hard on my voice so that no one can deny my identity anymore. Indeed, it was difficult, possible due to my unorthodox training method. My vocal cord hurt on an hourly basis. But eventually I overcame the obstructions and achieved a relatively satisfactory result.
+
+Since then, my appearance and voice became consistent. I would finally be able to speak to the crowd. I went back to that cosmetics store and found the same staff. This time he genuinely introduced me to their products and referred to me a beautiful lady. That did strengthen my confidence: in the past, when I organized my mathematical seminar, I was nervous about my voice, but now I stand up confidently, ask, answer questions and interact with the lecturer when auditing courses in PKU (Peking University). I also studied more theories on transgenderism and gender, which brings the speech aforementioned possible. I now live full-time as a female, enjoying socializing both in the real world and online, with voice and video, proudly showing my image to the world, and having made new friends. My transition shaped me, letting me become the woman I am now, and my identity as a female gave me insights about myself, gender, love, and the world, like a second puberty, except for this time it's a happy one, and is an important part of me and my journey of life.
+
+\begin{tabularx}{\linewidth}{c|X}
+\thead{Activity}&\thead{Description}\\\hline
+Types and Programming Languages&Audited a course TaPL in PKU about theoretical computer science; got 85/100 on the exam\\\hline
+Calculus Book&Attempted to write a rigorous calculus note series for my classmates\\\hline
+Voluntary Service Translation&Translated for Beijing LGBT Center transgender related sessions\\\hline
+Literature Review&Wrote a literature review on the interdiscipline research of transgender and HIV prevention for Beijing LGBT Center\\\hline
+IMMC 2018&Participated in the International Mathematical Modeling Challenge 2018; got finalist award\\\hline
+Contribution to Wuli.wiki&Contribution to a Chinese online physics wiki project; the topic contributed is differential geometry and general relativity.\\\hline
+Book Project - algebra-for-cute-girls&Authored a self-contained book, using categorical language to formulate algebra.\\\hline
+Book Project - elementary-analysis&Authored a self-contained book to help high schoolers get familiar with prerequisite of analysis and modern mathematics; Main content: first-order logic, natural deduction, ZFC axiomatic set theory, number systems
+\end{tabularx}
+
+\newpage
+I love community work and collaboration in my academic work. Moreover, I'm actually an open source projects leader. I have 2 open source textbook project, algebra-for-cute-girls, which is a graduate text aiming to formula relatively self-contained contents on algebra using categorical and higher categorical language, and elementary-analysis which is an attempt to help mathematical students transition from high school to university by providing them the mathematical foundations to modern analysis and other branches, such as first-order logic, natural deduction, ZFC axiomatic set theory, construction of number systems, etc. I also contribute to another open source wiki project, wuli.wiki, which provides self-contained physics content for high school and undergraduate students, much like the stacks project by Columbia University.
+
+In the process of creating and contributing to these projects, I applied academic skills as well as interpersonal collaboration skills. I helped my co-authors with technical problems like using {\LaTeX} and GitHub. We used peer-reviewing process to ensure the validity and quality of our drafts. I, specifically, as a leader, must know when to brainstorm and come up with ideas with my co-authors, but also when to make the tough decisions like which parts of the book stay and which part go. From past events I acquire the faith habitually that I am not suitable to be a leader or decision maker. But in these practices I developed these skills and become a relatively successful leader.
+
+\newpage
+Few days ago, I read a message: graduate school of science of Hiroshima University posted a tenure-track oriented offer for a position of associate professor that is specifically exclusive for female applicants. To me, this ringed a bell. The intention of such offers, should it exist, is undoubtedly of goodwill, the consideration of promoting females’ participation and engagement in the field of science, but it is crucial for us to understand, in the context of society and academia, if this is a well-considered action.
+
+There are a few pending questions to be discussed. First, will this work?  In Japan, the numerical distinction of the male versus female doctoral application and graduation rate is significant, not to mention the low chance of female academicians entering research positions. The impact of similar policy may not be as effective as we originally predict, since it doesn’t solve the fundamental issue that Japanese culture and society implicitly discourage females in participating those disciplines that are considered male dominant. Second, is this gender discrimination? I suppose so; the definition of gender discrimination is the distinctive treatment toward genders, and surely providing a special offer for females falls in to that category. It triggers my thoughts on the question: if we’re unable to change the societal situations at once, is it acceptable to incline toward the weak group in the selection process temporarily? This has been done worldwide; and I believe the university I’m applying is also enforcing the policies, out of good intention, inclined toward minorities. Maybe in the future I would have grounds for a definitive answer, but for now I can only pose this question; I do not know how to judge a moral situation like this.
+
+Another question I would pose, in my position, is that, how do I prove that I am competitive enough for my offer? The policies inclines toward me and similar minorities. What can we do as females, transgenders, Asians, etc. to prove that we are not accepted for our minority status but for our endurance and accomplishments? Remember the Republican candidate Ben Carson; he is black, and thus being inclined toward by the law, but at his position, this not only does not support him, but gives him another burden: he has to prove that he is worth of choice because of his talent and dedication, not because of he being black. In the future, I would face the similar situations when competing with my fellows. What should I do to change this situation? I wish in the future I would have the answer for that.
+
+\newpage
+Thursday, February 28, 2019 is a special day, the day when the 10 campus system of University of California discontinued the renewal of its subscription with the world's largest academic publisher, Elsevier. This day marks a hard-fought victory of the academic community with the idea of openness I believe in.
+
+When I was young, there was this girl who knows, to me at that time, everything and who I yearn for in my primary years. I yearn for her knowledge of advanced mathematics such as exponentials and logarithms, for her ability to communicate in English and Cantonese with the foreigners fluently, for her unique interpretation of ancient Chinese corpuses. I wondered how she can be so excellent and wanted to be like her. It turns out that her parents are both Ph.D. and value her education so much that even pay for her to exchange abroad. This notified me, in the early days of my life, the significant role in acquiring them one's background and resources play: If you have highly educated parents, a lot of money, and a good geographic community then you can have knowledge which will make you again be highly educated, rich, and in a good community, and most importantly, make you powerful. But if you're without them, at least in China, there will be an opposite circle waiting for you.
+
+And this is why I support the most radical ideas in the open academic community: I have dream that one day no one should ever pay for education and acquiring knowledge. I support the community with my ideas with action since when I started publishing, outputting, and creating. For example, I am publishing every snippet of \LaTeX code I wrote (typically about mathematics) online with license allowing anyone to read, modify, and republish. I petitioned for GitHub to which I publish my Julia and Mathematica codes not being acquired by Microsoft, although it turns out that it doesn't work. I donated to and spreaded Wikipedia, SciHub, LibGen and other sites that supports my idea. I sincerely hope that one day my dream of free and open knowledge access will come true.
+
+\newpage
+Everyone, such as myself, loves romance. Internet give us the opportunity to pursue romance and intimate relationships online, but this journey is relatively undesirable to some of us: to be specific, I am talking about the sexual minorities in China.
+
+There are social network apps for dating in China, of course; in fact, plenty of them with a diversity of functions like voice/"soul" matching, random chatting, public surveying, etc. But they at most times gives me and other minority people in China negative experiences. For example, I matched a person on an app called Douli. For a bit of background this app allows its user to set their SOGIE (sexual orientation - gender identity, expression), which is pretty great at the first glance to me and I set my real SOGIE. But when this person heard my voice and saw my SOGIE, he constantly negate my identity and claims that I am a male pervert. This really hurt me and made me uninstall this app at once.
+
+This bad experience also inspired me in a way that motivates my friends at Beijing LGBT Center and me to come up the idea of writing an real minority-friendly dating app of our own. We did this from scratch: planned for SOGIE education functions like videos and in-app tests, contacted friendly organizations for spreading the app, etc. (TODO write a closure)
+
+\newpage
+\begin{enumerate}[label=\arabic*.]
+\item $5\pi\,m^2/m$, i.e. $5\pi\,m$;
+\item $f(x)=-\cos x+3$;
+\item $2\text{ in}\times 2\text{ in}$;
+\item $3$;
+\item $-\ln\circ\cos$, whose domain is $\mathbb{C}\setminus\{n\pi\,|\,n\in\mathbb{Z}\}$;
+\item $\displaystyle\frac{125}{6}$;
+\item $9\pi$;
+\item $\displaystyle\frac{\pi}{32}$;
+\item $\displaystyle\frac{\sqrt{5}}{3}$, $\displaystyle\frac{2}{\sqrt{5}}$, $\displaystyle\frac{3\sqrt{5}}{5}$, $\displaystyle\frac{3}{2}$;
+\item $\displaystyle\frac{\sqrt{9+x^2}}{3}$;
+\item $7$;
+\item $\displaystyle y(x)=C_1x^{-2}+C_2 x$;
+\item $\displaystyle y(x)=\frac{1}{2}e^{3x}x^2+C_1e^{3x}+C_2e^{3x}x$;
+\item $\displaystyle-\frac{h(1+r)}{r-1}$;
+\item This Question is missing;
+\item $10\sqrt{2}$;
+\item $-7$;
+\item $xy\cos xy+\sin xy$;
+\item $\displaystyle\frac{7}{12}$;
+\item $\displaystyle\frac{1}{8}$.
+\end{enumerate}
+
+\end{CJK*}
+\end{document}

@@ -1,0 +1,331 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{enumitem}
+\usepackage[a4paper, left=2.5cm, right=2.5cm, top=1cm, bottom=1cm, includefoot]{geometry}
+\usepackage{etoolbox}
+
+\setlength{\parindent}{0cm}
+\setlength{\parskip}{1em}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\newcommand{\theorem}[1][]{%
+  \ifstrequal{#1}{}%
+    {\textbf{Theorem.} }%
+    {\textbf{Theorem (#1).}}%
+}
+\newcommand{\lemma}[1][]{%
+  \ifstrequal{#1}{}%
+    {\textbf{Lemma.} }%
+    {\textbf{Lemma (#1).}}%
+}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+\usepackage{mmacells}
+
+\mmaDefineMathReplacement[≤]{<=}{\leq}
+\mmaDefineMathReplacement[≥]{>=}{\geq}
+\mmaDefineMathReplacement[≠]{!=}{\neq}
+\mmaDefineMathReplacement[→]{->}{\to}[2]
+\mmaDefineMathReplacement[⧴]{:>}{:\hspace{-.2em}\to}[2]
+\mmaDefineMathReplacement{∉}{\notin}
+\mmaDefineMathReplacement{∞}{\infty}
+\mmaDefineMathReplacement{��}{\mathbbm{d}}
+
+\mmaSet{
+  morefv={gobble=2},
+  linklocaluri=mma/symbol/definition:#1,
+  morecellgraphics={yoffset=1.9ex}
+}
+
+\title{Advancement in Mathematical Analysis}
+\author{Yutong Zhang}
+\date{}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+\section{Limit and Continuity}
+\subsection{Intermediate Value Theorem}
+\theorem For function $f:[a,b]\subset D\to\mathbb{R}$, if $f$ is continuous on $[a,b]$, then for any $y_0\in[f(a),f(b)]$, there exists an $x_0$ such that $y=f(x_0)$.
+\begin{proof}
+Define the set
+$$
+S=\{x\in[a,b]\,\big|\,f(v)\leq y\,\forall v\in[a,x]\},
+$$
+then it is not empty because $a\in S$, and it is bounded above because $b$ is an upper bound, then by the least upper bound property of real number, the set $S$ has a least upper bound, denoted as $c$. It is claimed that $f(c)=y$.
+
+Suppose $f(c)>y$, let $\epsilon=f(c)-y>0$. Then by the continuity of $f$, there exists $\delta>0$ such that $\abs{x-c}<\delta$ implies $\abs{f(x)-f(c)}<\epsilon$, which suggests that $f(x)>y$. But these means that if $\abs{x-c}<\delta$, $x\notin S$, then there would be other upper bound of $S$ that is less than $c$, say $c-\frac{\delta}{2}$. This contradicts the fact that $c$ is the \textbf{least} upper bound of $S$.
+
+Suppose $f(c)<y$, let $\epsilon=y-f(c)>0$. Then by the continuity of $f$, there exists $\delta>0$ such that $\abs{x-c}<\delta$ implies $\abs{f(x)-f(c)}<\epsilon$, which suggests that $f(x)<y$. Then there exists an $x\in S$ that is greater than $c$, say $c+\frac{\delta}{2}$. This contradicts the fact that $c$ is an upper bound of $S$.
+\end{proof}
+
+\subsection{Extreme Value Theorem}
+\lemma[Boundedness Lemma] For a function $f:[m,n]\to\mathbb{R}$, if $f$ is continuous, then it is bounded.
+\begin{proof}
+Suppose $f$ is unbounded, then it is possible to define a sequence $\{a_n\}$ such that $f(a_n)>n$. Since $\{a_n\}\in[m,n]$ which is bounded, by \textbf{Bolzano-Weierstra{\ss} Theorem}, there exists a convergent subsequence $\{a_{n_k}\}$, denoting its limit $a$, which is a limit point of $[m,n]$. $[m,n]$ being closed, $a\in[m,n]$. By the continuity of $f$, $\lim_{k\to\infty}f(a_{n_k})=f(a)$, but $f(a_{n_k})>n_k>k$ for $k\in\mathbb{N}$ thus $\lim_{k\to\infty}f(a_{n_k})=\infty$, which contradicts the fact that it converges, as desired.
+\end{proof}
+
+\lemma[Subsequence Limit Lemma] For sequence $\{a_n\}$ and any one of its subsequence $a_{n_k}$, if $\displaystyle\lim_{n\to\infty}a_n=L$, then $\displaystyle\lim_{k\to\infty}a_{n_k}=L$.
+\begin{proof}
+For any given $\epsilon>0$, there exists an $N\in\mathbb{N}$ such that for $n>N$, $\abs{a_n-L}<\epsilon$. For $k>N$, it is obvious that $n_k>k>N$, thus $\abs{a_{n_k}-L}<\epsilon$, as desired.
+\end{proof}
+
+\lemma If a function $f$ is continuous at $a$, then for any sequence $\{a_n\}$ that converges to $a$, $\displaystyle\lim_{n\to\infty}f(a_n)=f(a)$.
+\begin{proof}
+Trivial.
+\end{proof}
+
+\theorem[Extreme Value Theorem] For a function $f:[m,n]\to\mathbb{R}$ that is continuous over the domain, $f$ attains its maximum and minimum in $[m,n]$.
+\begin{proof}
+By the boundedness lemma, function $f$ is bounded from above, thus by the least upper bound property of real number, there exists $M=\sup f(x)$. Since $M$ is the least upper bound, it is possible to define a sequence $\{a_n\}$ such that $M-\frac{1}{n}<a_n$ for $n\in\mathbb{N}$. By definition, $\displaystyle M-\frac{1}{n}<f(a_n)\leq M$, apply the squeeze theorem, $\displaystyle M=\lim_{n\to\infty}a_n$.
+
+By \textbf{Bolzano-Weierstra{\ss} Theorem}, there exists a subsequence $\{a_{n_k}\}$ of $\{a_n\}$ that converges, say to $a$. The interval $[m,n]$ is closed, thus the limit point $a\in[m,n]$. Since $\{f(a_{n_k})\}$ is a subsequence of $\{f(a_n)\}$, and $\{f(a_n)\}$ converges to M, by the subsequence limit lemma, $\displaystyle M=\lim_{k\to\infty}f(a_{n_k})$. And by the continuity of $f$ and the previous lemma\footnote{$f$ conti. at $a$ $\iff$ $\displaystyle\forall\{a_n\}\in\text{Dom}(f).\,\lim_{n\to\infty}a_n=a\implies\lim_{n\to\infty}f(a_n)=f(a)$}\footnote{$f$ lim exists at $a$ $\iff$ $\displaystyle\forall\{a_n\}\in\text{Dom}(f).\,\lim_{n\to\infty}a_n=a\implies\lim_{n\to\infty}f(a_n)=\lim_{x\to a}f(x)$}, $\displaystyle M=\lim_{k\to\infty}f(a_{n_k})=f(a)$, which is the point at which $f$ attains its maximum.
+
+The case of minimum is similar.
+\end{proof}
+
+\section{Sequence and Series}
+\subsection{Cauchy Sequence}
+\theorem[Cauchy Convergence Criterion] A sequence $\{a_n\}$ is convergent if and only if for all $\epsilon>0$, there exists $N\in\mathbb{N}$ such that for all $p,q>N$,
+$$
+\abs{a_p-a_q}<\epsilon.
+$$
+\begin{proof}
+The $(\implies)$ direction is trivial, we only prove the $(\impliedby)$ direction. The sequence $\{a_n\}$ is clearly bounded, thus by the \textbf{Bolzano-Weierstra{\ss} Theorem}, there exists a subsequence $\{a_{n_k}\}$ convergent to, say $L$. Choose $N$ such that for all $p,q>N$, $\displaystyle\abs{a_p-a_q}<\frac{\epsilon}{2}$, and choose $K$ such that for $k>K$, $\displaystyle\abs{a_{n_k}-L}<\frac{\epsilon}{2}$. For any $n>N$, pick $k$ such that $k>K$ and $n_k>N$, then
+$$
+\abs{a_n-L}\leq\abs{a_n-a_{n_k}}+\abs{a_{n_k}-L}<\frac{\epsilon}{2}+\frac{\epsilon}{2}=\epsilon,
+$$
+as desired.
+\end{proof}
+
+\subsection{Series Convergence Tests}
+
+
+\section{Differentiation}
+\subsection{Leibniz's Rules of Differentiation}
+\theorem[Leibniz's Product Rule] For two functions $f$ and $g$ differentiable at $a$,
+$$
+(f\cdot g)'(a)=f'(a)g(a)+f(a)g'(a).
+$$
+\begin{proof}
+\begin{align*}
+(f\cdot g)'(a)&=\lim_{x\to a}\frac{f(x)g(x)-f(a)g(a)}{x-a}\\
+&=\lim_{x\to a}\frac{f(x)g(x)-f(x)g(a)-f(a)g(a)+f(x)g(a)}{x-a}\\
+&=\lim_{x\to a}\left(f(x)\frac{g(x)-g(a)}{x-a}-g(a)\frac{f(a)-f(x)}{x-a}\right)\\
+&=f(a)g'(a)-g(a)(-f'(a))=f'(a)g(a)+f(a)g'(a).
+\end{align*}
+\end{proof}
+
+\theorem[Leibniz's Quotient Rule] For two functions $f$ and $g$ differentiable at $a$, if $g(a)\neq0$,
+$$
+\left(\frac{f}{g}\right)'(a)=\frac{f'(a)g(a)-f(a)g'(a)}{g^2(a)}.
+$$
+\begin{proof}
+\begin{align*}
+\left(\frac{f}{g}\right)'(a)&=\lim_{x\to a}\frac{\displaystyle\frac{f(x)}{g(x)}-\frac{f(a)}{g(a)}}{x-a}\\
+&=\lim_{x\to a}\frac{f(x)g(a)-g(x)f(a)}{(x-a)g(x)g(a)}\\
+&=\lim_{x\to a}\frac{f(x)g(a)-f(a)g(a)-g(x)f(a)+f(a)g(a)}{(x-a)g(x)g(a)}\\
+&=\lim_{x\to a}\frac{1}{g(x)g(a)}\left(g(a)\frac{f(x)-f(a)}{x-a}-f(a)\frac{g(x)-g(a)}{x-a}\right)\\
+&=\frac{1}{g^2(a)}(g(a)f'(a)-f(a)g'(a))=\frac{f'(a)g(a)-f(a)g'(a)}{g^2(a)}.
+\end{align*}
+\end{proof}
+
+\subsection{Derivative of Inverse Function}
+\theorem For a bijection $f$ differentiable at $a$, the derivative of its inverse function $\displaystyle g'(b)=\frac{1}{f'(g(b))}$ if $g(b)=a$.
+\begin{proof}
+By the definition of derivative and the property of inverse function,
+$$
+g'(b)=\lim_{y\to b}\frac{g(y)-g(b)}{y-b}=\lim_{y\to f(a)}\frac{g(y)-g(f(a))}{y-f(a)}=\lim_{f(x)\to f(a)}\frac{g(f(x))-g(f(a))}{f(x)-f(a)}.
+$$
+Since $g$ is the inverse function of a continuous function $f$, it is continuous, i.e. $f(x)\to f(a)$ as $x\to a$, we substitute the variable of the limit to $x$,
+$$
+g'(b)=\lim_{x\to a}\frac{x-a}{f(x)-f(a)}=\frac{1}{f'(a)}=\frac{1}{f'(g(b))}.
+$$
+\end{proof}
+
+\subsection{Derivative of Composite Function}
+\lemma[Linear Decomposition Lemma] A function $f$ is differentiable at a point $a$ if and only if it can be decomposed near $a$ to
+$$
+f(x)=f(a)+A(x-a)+\eta(x-a)(x-a),
+$$
+where $A$ is a linear map (in this case, a real number) and $\displaystyle\lim_{h\to0}\eta(h)=0=\eta(0)$.
+\begin{proof}
+Trivial.
+\end{proof}
+
+\theorem[The Chain Rule] If $f:I\to J$ is differentiable at $a$, $g:J\to\mathbb{R}$ differentiable at $f(a)$, then $g\circ f$ is differentiable at $a$, and the derivative $(g\circ f)'(a)=g'(f(a))f'(a)$.
+\begin{proof}
+By the \textbf{Linear Decomposition Lemma}, $f$ being differentiable at $a$ implies that $f$ can be decomposed by linear principal part near $a$ as
+$$
+f(x)=f(a)+f'(a)\cdot(x-a)+\eta(x-a)\cdot(x-a)
+$$
+where $\displaystyle\lim_{x\to a}\eta(x-a)=0=\eta(0)$. Similarly, $g$ can be decomposed near $f(a)$ as
+$$
+g(y)=g(f(a))+g'(f(a))\cdot(y-f(a))+\xi(y-f(a))\cdot(y-b)
+$$
+where $\displaystyle\lim_{y\to f(a)}\xi(y-f(a))=0=\xi(0)$.
+Now we attempt to decompose the composition $g\circ f$ near $x$,
+\begin{align*}
+g(f(x))=&g(f(a))+g'(f(a))\cdot\left(f(a)+f'(a)\cdot(x-a)+\eta(x-a)\cdot(x-a)-f(a)\right)+\\
+&\xi(f(a)+f'(a)\cdot(x-a)+\eta(x-a)\cdot(x-a)-f(a))\cdot\\
+&(f(a)+f'(a)\cdot(x-a)+\eta(x-a)\cdot(x-a)-f(a)).
+\end{align*}
+Simplify, we get
+\begin{equation}
+\label{eqn:gfx}
+\begin{aligned}
+g(f(x))=&g(f(a))+g'(f(x))f'(a)\cdot(x-a)+\big(g'(f(x))\eta(x-a)\cdot(x-a)+\\
+&\xi(f'(a)\cdot(x-a)+\eta(x-a)\cdot(x-a))\cdot(f'(a)\cdot(x-a)+\eta(x-a)\cdot(x-a))\big).
+\end{aligned}
+\end{equation}
+Define
+$$
+\chi(h)=g'(f(x))\eta(h)+\xi(f'(a)\cdot(h)+\eta(h)\cdot(h))\cdot(f'(a)+\eta(h)),
+$$
+then since $\eta(h),\xi(h)\to0$ when $h\to0$ and $\eta(0)=\xi(0)=0$, when $h\to 0$, $\chi\to0$ and $\chi(0)=0$, which satisfies the condition for error term in the decomposition, thus (\ref{eqn:gfx}) can be rewritten as
+$$
+g(f(x))=g(f(a))+g'(f(x))f'(a)\cdot(x-a)+\chi(x-a)\cdot(x-a),
+$$
+thus by the \textbf{Linear Decomposition Lemma}, $g\circ f$ is differentiable at $a$ and the derivative is $g'(f(a))f'(a)$.
+\end{proof}
+
+\subsection{Mean Value Theorems}
+\subsubsection{Rolle's Theorem}
+\theorem[Rolle's Theorem] For a function $f$ that is continuous on $[m,n]$, differentiable on $(m,n)$, if $f(m)=f(n)$, then there exists a $c\in(m,n)$ such that $f'(c)=0$.
+\begin{proof}
+By the \textbf{Extreme Value Theorem}, there exists a maximum and a minimum in $[m,n]$. If they are both on the border of the interval, namely $m$ and $n$, then the function is a constant function, the derivative of which is constantly $0$. If not, say the maximum $x_0$ is in $(m,n)$ (if it's the minimum or both, the case is similar), then it is true that for all $x\in[m,n]$, $f(x)<f(x_0)$. We claim that $c=x_0$. The right derivative of $f$ at point $c$
+$$
+f_+'(c)=\lim_{x\to c^+}\frac{f(x)-f(c)}{x-c}
+$$
+is obvious smaller than $0$. Similarly, $f_-'(c)\geq0$. Since $f$ is differentiable at $c$, $f_+'(c)=f_-'(c)$, then $f'(c)=0$, as desired.
+\end{proof}
+
+\subsubsection{Lagrange's Mean Value Theorem}
+\theorem[Lagrange's Mean Value Theorem] For a function $f$ that is continuous on $[m,n]$, differentiable on $(m,n)$, there exists a $c\in(m,n)$ such that $\displaystyle f'(c)=\frac{f(n)-f(m)}{n-m}$.
+\begin{proof}
+Construct function
+$$
+F(x)=f(x)-\left(f(m)+\frac{f(n)-f(m)}{n-m}(x-m)\right).
+$$
+It is true that $F(m)=F(n)=0$, which brings $f$ to satisfy the premises of the \textbf{Rolle's Theorem}. Applying it, the conclusion is that there exists a $c\in(m,n)$ such that $F'(c)=0$. Then
+$$
+F'(c)=f'(c)-\frac{f(n)-f(m)}{n-m}=0,
+$$
+as desired.
+\end{proof}
+
+\subsubsection{Cauchy's Mean Value Theorem}
+\theorem[Cauchy's Mean Value Theorem] For two functions $f$ and $g$ that is continuous on $[m,n]$, differentiable on $(m,n)$, there exists a $c\in(m,n)$ such that
+$$
+f'(c)(g(n)-g(m))=g'(c)(f(n)-f(m)).
+$$
+\begin{proof}
+Construct function
+$$
+F(x)=f(x)(g(n)-g(m))-g(x)(f(n)-f(m)).
+$$
+$F$ satisfies the premises of the \textbf{Rolle's Theorem}: $F(m)=F(n)=f(m)g(n)-g(m)f(n)$. Applying it, it concludes that there exists a $c\in(m,n)$ such that $F'(c)=0$, which suggests
+$$
+F'(c)=f'(x)(g(n)-g(m))-g'(x)(f(n)-f(m))=0,
+$$
+as desired.
+\end{proof}
+
+\subsection{L'H\^opital's Rule}
+\theorem[L'H\^opital's Rule] For functions $f$ and $g$ that is differentiable on $(a,b)$ with $g(x)\neq0$ for all $x\in(a,b)$, if $\displaystyle\lim_{x\to a}\frac{f'(x)}{g'(x)}=A$, and $f(x),g(x)\to0$ as $x\to a$, then $\displaystyle\lim_{x\to a}\frac{f(x)}{g(x)}=A$.
+\begin{proof}
+Since $\displaystyle\frac{f'(x)}{g'(x)}\to A$ as $x\to a$, for any $\epsilon>0$, there exists $c=\min\{\delta,b\}\in(a,b)$ such that 
+$$
+A-\epsilon<\frac{f'(x)}{g'(x)}<A+\epsilon
+$$
+when $a<x<c$. For $a<x<y<c$, by the \textbf{Cauchy's Mean Value Theorem}, there exists a point $t\in(x,y)$ such that
+$$
+A-\epsilon<\frac{f(x)-f(y)}{g(x)-g(y)}=\frac{f'(t)}{g'(t)}<A+\epsilon.
+$$
+Since $f(x),g(x)\to0$ as $x\to a$, take the limit $x\to a$ and $y\to a$ and apply the property that limit preserves non-strict order relation, we have
+$$
+A-\epsilon\leq\lim_{y\to a}\frac{f(y)}{g(y)}\leq A+\epsilon.
+$$
+Since $\epsilon$ is arbitrary, the theorem is proven.
+\end{proof}
+
+\section{Riemann-Darboux Integral}
+\subsection{Fundamental Theorem of Calculus}
+\lemma For a Riemann-Darboux integrable function $f:[a,b]\to\mathbb{R}$ and partition $P=\{x_0,x_1,\dots,x_n\}$ of interval $[a,b]$ such that $U(P,f)-L(P,f)<\epsilon$ for some $\epsilon$, if $t_i$ are arbitrary points in $[x_{i-1},x_i]$, then
+$$
+\Big\lvert\sum_{i=1}^nf(t_i)\cdot(x_i-x_{i-1})-\int_a^bf(x)\operatorname{d}x
+\Big\rvert<\epsilon.$$
+\begin{proof}
+Since $t_i$ are arbitrary points in $[x_{i-1},x_i]$,
+$$
+L(P,f)=\sum_{i=1}^n\inf_{x_{i-1}\leq x\leq x_i}f(x)\cdot(x_i-x_{i-1})\leq\sum_{i=1}^nf(t_i)\cdot(x_i-x_{i-1})\leq\sum_{i=1}^n\sup_{x_{i-1}\leq x\leq x_i}f(x)\cdot(x_i-x_{i-1})=U(P,f).
+$$
+And since $f$ is Riemann-Darboux integrable,
+$$
+L(P,f)\leq\int_a^bf(x)\operatorname{d}x\leq U(P,f).
+$$
+Finally, since $U(P,f)-L(P,f)<\epsilon$, the result is proven.
+\end{proof}
+
+\theorem[Fundamental Theorem of Calculus] If $f$ is Riemann-Darboux integrable and if there exists a function $F$ differentiable on $[a,b]$ such that $F'(x)=f(x)$, then
+$$
+\int_a^bf(x)\operatorname{d}x=F(b)-F(a).
+$$
+\begin{proof}
+For given $\epsilon>0$, it is possible to choose a partition $P=\{x_0,x_1,\dots,x_n\}$ of interval $[a,b]$ such that $U(P,f)-L(P,f)<\epsilon$, because $f$ is Riemann-Darboux integrable. By the \textbf{Lagrange's Mean Value Theorem}, there exists $t_i\in[x_{i-1},x_i]$ such that
+$$
+F(x_i)-F(x_{i-1})=f(t_i)\cdot(x_i-x_{i-1}).
+$$
+Sum these up, we have
+$$
+F(b)-(a)=\sum_{i=1}^nf(t_i)\cdot(x_i-x_{i-1}),
+$$
+which satisfies the premises of previous lemma. Applying it, we have
+$$
+\Big\lvert F(b)-(a)-\int_a^bf(x)\operatorname{d}x\Big\rvert=\Big\lvert\sum_{i=1}^nf(t_i)\cdot(x_i-x_{i-1})-\int_a^bf(x)\operatorname{d}x\Big\rvert<\epsilon,
+$$
+as desired.
+\end{proof}
+
+\section{Exponential and Logarithmic Function}
+\subsection{Equivalency of Usual Definition of $\exp x$ and that by Series}
+\textbf{Lemma.} For any function $f$, $f$ is continuous at $a$ $\iff$ for all sequence $\{a_n\}\in\text{Dom}(f)$ with $\lim_{n\infty}a_n=a$, $\lim_{n\to\infty}f(a_n)=f(a)$.
+
+From previous arguments, the following statements are assumed.
+\begin{itemize}
+\item $E(p)=e^p$ for $p\in\mathbb{Q}$;
+\item $E(x)$ is continuous on $\mathbb{R}$;
+\item $E(x)$ is strictly monotonically increasing on $\mathbb{R}$; and
+\item $e^p$ is strictly monotonically increasing on $\mathbb{Q}$.
+\end{itemize}
+
+\textbf{Theorem.} $$E(x)=e^x$$ where $$e^x=\displaystyle\sup_{\substack{p\in\mathbb{Q}\\p<x}}e^p.$$
+\begin{proof}
+Since $e^x=\displaystyle\sup_{\substack{p\in\mathbb{Q}\\p<x}}e^p$, there exists a sequence $\{p_n\}\in\mathbb{Q}$ such that
+\begin{enumerate}
+\item $\lim_{n\to\infty}e^{p_n}=\displaystyle\sup_{\substack{p\in\mathbb{Q}\\p<x}}e^{p_n}$;
+\item $e^{p_n}<e^{p_{n+1}}\implies p_n<p_{n+1}$ (by monotonicity of $e^p$ for $p\in\mathbb{Q}$); and
+\item $p_n<x$.
+\end{enumerate}
+This existence holds since there exists a rational number between any two real numbers. We claim that $\lim_{n\to\infty}p_n=x$, and this can be proven by contradiction. Suppose $L=\lim_{n\to\infty}p_n\neq x$, then either
+\begin{itemize}
+\item $L>x$, in which case there exists a $p_n>x$, which contradicts the hypotheses made on $\{p_n\}$, or
+\item $L<x$, in which case we can pick $k,r\in\mathbb{Q}$ such that $L<k<r<x$. Since $e^p$ is monotonic, $e^{p_n}<e^k$ for all $n$; take limit on both sides, we have
+$$
+\lim_{n\to\infty}p_n\leq e^k<e^r\leq\sup_{\substack{p\in\mathbb{Q}\\p<x}}e^p\implies\lim_{n\to\infty}p_n<\sup_{\substack{p\in\mathbb{Q}\\p<x}}e^p,
+$$
+which contradicts the hypotheses made on $\{p_n\}$.
+\end{itemize}
+
+By the statements assumed, $e^{p_n}=E(P_n)$. Take limit on both sides, $\lim_{n\to\infty}e^{p_n}=\lim_{n\to\infty}E(p_n)$. By continuity of $E(x)$, swap $E$ and the limit sign, $\lim_{n\to\infty}E(p_n)=E(\lim_{n\to\infty}p_n)=E(x)$.
+\end{proof}
+
+\end{document}

@@ -1,0 +1,378 @@
+\providecommand{\main}{..}
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+\setcounter{chapter}{1}
+\chapter{Set Theory and Logic}\label{cha:set_theory_and_logic}
+Mathematics is a subject of axiomatic nature. In contrast to natural sciences where you use induction to draw conclusions from natural phenomena, in mathematics and other formal sciences we use deduction to formulate conclusions from axioms. In order to do that, we must first familiarize ourselves with the language in which these deductions are carried out, namely the language (syntax and semantics) of first-order logic.
+
+\section{First-Order Logic I}
+We are going to define a language, a language that is formal and unambiguous which makes it suitable to be used in the discussion of mathematics. There are numerous ways we can define such a language, and the results are often different. But in our study of mathematical analysis, we choose to use a specific kind of language, which is called the \textbf{first-order logic}\index{first-order logic} (FOL)\index{FOL}.
+
+\subsection{Syntax}
+\begin{definition}{Syntax of FOL}{syntax_of_fol}
+\begin{align*}
+\text{Formula}\quad\to\quad&\text{PrimitiveFormula}\\
+|\,\,\quad&(\text{Formula Connective Formula})\\
+|\,\,\quad&\neg\text{Formula}\\
+|\,\,\quad&\text{Quantifier Variable Formula}\\
+\text{PrimitiveFormula}\quad\to\quad&\text{Predicate}(\text{Term},\dots,\text{Term})\\
+\text{Term}\quad\to\quad&\text{Function}(\text{Term},\dots,\text{Term})\\
+|\,\,\quad&\text{Variable}\\
+\text{Connective}\quad\to\quad&\implies\quad\land\quad\lor\quad\iff\\
+\text{Quantifier}\quad\to\quad&\forall\quad\exists\\
+\text{Variable (Name)}\quad\to\quad&\text{a string valid in the \textbf{signature} that is not taken as Name}\\
+\text{Predicate (Name)}\quad\to\quad&\text{a string valid in the \textbf{signature} that is not taken as Name}\\
+\text{Function (Name)}\quad\to\quad&\text{a string valid in the \textbf{signature} that is not taken as Name}\\
+\end{align*}
+\index{signature}
+\index{connective}
+\index{quantifier}
+\index{variable}
+\index{predicate}
+\index{function!logical}
+\index{formula!of FOL}
+\index{term!of FOL}
+\end{definition}
+
+The above definition is called \textbf{BNF syntax}\index{BNF syntax}. If you are pursuing a career in computer science or theoretical computer science, you should probably search for it. If not, then just understanding FOL with it will suffice. We now describe each type of symbol used to construct a FOL formula.
+
+Here's how to read the BNF syntax of FOL: Any term on the left is a \textbf{metavariable}\index{metavariable}, and on the right is the form it can take. On the right, when a metavariable is referred to, it can be replaced by that metavariable. The metavariables denoted with \textit{Name} is related to the signature, which will be discussed in the next subsection. The following are examples of FOL formulae, in which we temporarily ignore the existence of signature.
+
+\begin{example}
+$\forall G\,(\text{IsAbelian}(G)\implies\text{IsGroup}(G))$
+\end{example}
+\begin{example}
+$\exists X\,((\text{IsTopologicalSpace}(X)\land\text{IsMetrizable}(X))\implies\text{IsMetricSpace}(X))$
+\end{example}
+
+These are what we call \textbf{tautology}\index{tautology}, which are the FOL formulae that are also true. It is okay if you do not understand the meaning of these formulae, as in latter chapters we will elaborate them in details.
+
+\begin{definition}{Free Variable}{free_variable}
+When we denote a formula with mathematical notation, it is customary to write a uppercase Latin or Greek letter, and when there are unbounded variables, i.e. the variables that appear as terms in the formula, but not after any quantifier, we use parenthesis notation. These unbounded variables are called \textbf{free variable}\index{free variable}. A formula without free variables is called a sentence.
+\end{definition}
+\begin{example}
+$\Psi(\omega_1,\dots,\omega_n)\forall x\,P(x,\omega_1,\dots,\omega_n)$
+\end{example}
+
+\subsection{Interpretation}
+There's a subject called \textbf{model theory}\index{model theory} that specifically defines and studies the interpretation (meaning) of FOL formulae. But these researches are related to the cognition process we human perceive logic. For the sake of simplicity and tangibility to the most of readers, we here will only introduce an intuitive methods of interpretation of the FOL formulae, namely the interpretation with truth values.
+
+\begin{definition}{Variable Substitution}{variable_substitution}
+We may substitute the occurrences of a \textit{Variable} with a \textit{Term} in a formula; the result of this process is denoted as \textit{Formula}$/$\textit{Variable}$\to$\textit{Term}.
+\end{definition}
+
+In \textbf{classical logic}\index{classical logic}, we always assume the existence of \textbf{truth value}\index{truth value} of any FOL formulae, either a \textbf{true}\index{true} (T) or a \textbf{false}\index{false} (F). 
+\begin{itemize}
+    \item The truth value of a \textit{PrimitiveFormula} depends on the signature in use.
+    \item The truth value of a $\neg$\textit{Formula} is the opposite to the truth value of the \textit{Formula}.
+    \item The truth value of a formula-connective-formula formula is presented in Table \ref{tab:connective_truth_value}.
+\begin{center}
+\begin{table}[!htbp]
+\caption{Truth Value of the Connectives}
+\label{tab:connective_truth_value}
+\begin{tabular}{cc|c}
+A&B&$A\implies B$\\\hline
+T&T&T\\
+T&F&F\\
+F&T&T\\
+F&F&T
+\end{tabular}\hfill
+\begin{tabular}{cc|c}
+A&B&$A\land B$\\\hline
+T&T&T\\
+T&F&F\\
+F&T&F\\
+F&F&F
+\end{tabular}\hfill
+\begin{tabular}{cc|c}
+A&B&$A\lor B$\\\hline
+T&T&T\\
+T&F&T\\
+F&T&T\\
+F&F&F
+\end{tabular}\hfill
+\begin{tabular}{cc|c}
+A&B&$A\iff B$\\\hline
+T&T&T\\
+T&F&F\\
+F&T&F\\
+F&F&T
+\end{tabular}
+\end{table}
+\end{center}
+\vspace{-1cm}
+    \item The truth value of a $\forall$-variable-formula formula is true only if \textit{Formula}$/$\textit{Variable}$\to$\textit{Function} is true for all functions in the signature.
+    \item The truth value of a $\exists$-variable-formula formula is true if there is at least one \textit{Function} in the signature such that \textit{Formula}$/$\textit{Variable}$\to$\textit{Function} is true.
+    \item Only formula has truth value; term doesn't.
+\end{itemize}
+
+\subsection{Signatures}
+\textbf{Signatures} are contexts in which a mathematical discussion is carried out. A signature consists of two parts, a collection of functions, and a collection of predicates, and naturally, in the FOL language, these will be functions and predicates respectively.
+
+Every element in the signature has a \textbf{arity}\index{arity!logical}, that is the number of terms it takes; if the number mismatches, then the formula is invalid. For any predicate, it must have a truth value for all combinations of functions as its parameter.
+
+Now assume we have a signature defined as follow. The function elements of this signature includes:
+\begin{itemize}
+    \item Add, which is of arity $2$;
+    \item Mul, which is of arity $2$;
+    \item AddInv, which is of arity $1$;
+    \item MulInv, which is of arity $1$;
+    \item All the rational numbers\footnote{If you are unfamiliar with rational numbers, we have an appendix on the construction of it from set theory.}, which are all of arity $0$.
+\end{itemize}
+The predicate elements of this signature includes:
+\begin{itemize}
+    \item Equ, which is of arity $2$, which is true if and only if the two parameters are equal;
+    \item LesEq, which is of arity $2$, which is true if and only if the first parameter is less or equal than the second.
+\end{itemize}
+
+Now we can already write some true and false FOL formulae:
+\begin{example}
+LesEq$(1,2)$, which is true
+\end{example}
+\begin{example}
+$\forall x\,$Equ$(x,x)$, which is true
+\end{example}
+\begin{exercise}
+Write more true and false FOL formulae with the above signature (this signature is called the \textbf{rational ordered field signature})\index{signature!rational ordered field}.
+\end{exercise}
+
+\begin{exercise}
+Now we want to expand our discussion. Specifically, we want to convey the idea that "$x\mapsto x^2$ is a non-negative function on the rational ordered field" with an FOL formula. How would you proceed? Hint:
+\begin{enumerate}
+    \item Introduce this quadratic function as a function to the signature;
+    \item Redefine the predicate LesEq to make it work with the newly introduced function (there are multiple ways to do this, some undesirable, some desirable);
+    \item Write the desired FOL formula.
+\end{enumerate}
+\end{exercise}
+
+Now we would like to take a little detour to set theory, so that we may use sets in the following discussions, then we will return with the language of sets to the methods of writing proofs, namely \textbf{natural deduction}\index{natural deduction}.
+
+\section{Set Theory I}
+\subsection{ZFC Axiomatic Set Theory}
+In the discussion of mathematical analysis, we use the \textbf{axiomatic set theory} called \textbf{Zermelo-Fraenkel set theory with the axiom of choice} (ZFC)\index{ZFC}. The ZFC is a enormous system with countless major results and constructions; for now, we don't need those. So this is only a very brief introduction to ZFC.
+
+The signature of ZFC\index{signature!of ZFC} contains \textbf{sets}\index{set} as nullary ($0$-arity) function elements, and two predicate elements In and Equ. Commonly, we denote $x\in y$ for In$(x,y)$, and $x=y$ for Equ$(x,y)$; and for $\neg(x\in y)$ and $\neg(x=y)$, we also use the notation $x\notin y$ and $x\neq y$, respectively.
+
+Here are one version of the axioms of ZFC that is most suitable to our need. We will first describe the axiom in English, then with FOL formula.
+\begin{axiom}{ZFC Axioms}{zfc_axioms}
+\begin{enumerate}
+    \item \textbf{Axiom of Extensionality.}\index{axiom!of extensionality} If $X$ and $Y$ have the same elements, then $X=Y$;\\$\forall X\,\forall Y\,(\forall x\,x\in X\iff x\in Y)\implies X=Y$;
+    \item \textbf{Axiom of Pairing.} \index{axiom!of pairing} For any $a$ and $b$ there exists a set ${a,b}$ that contains exactly $a$ and $b$;\\$\forall a\,\forall b\,\exists c\,(a\in c\land b\in c)$;
+    \item \textbf{Axiom Schema of Separation.} \index{axiom!schema of separation} If $P$ is a property (with variable $u$ and parameters $\omega_1,\dots,\omega_n$), then for any $X$ and $p$ there exists a set $Y=\{u\in X\,|\,P(u,\omega_1,\dots,\omega_n)\}$ that contains all those $u\in X$ that makes property $P$ hold;\\$\forall X\,\forall \omega_1\,\dots\,\forall \omega_n\,\exists Y\,\forall u\,[u\in Y\iff(u\in X\land P(u,\omega_1,\dots,\omega_n))]$;
+    \item \textbf{Axiom of Union.} \index{axiom!of union} For any $X$ there exists a set $Y=\bigcup X$, the union of all elements of $X$;\\$\forall X\,\exists Y\,\forall x\,\forall x'\,[(x'\in x\land x\in X)\implies x'\in Y]$;
+    \item \textbf{Axiom of Power Set.} \index{axiom!of power set} For any $x$ there exists a set $Y=\mathcal{P}(X)$, the set of all subsets of $X$;\\$\forall X\,\exists Y\,\forall x\,\forall x'\,[(x'\in x)\implies(x'\in X)]\implies x\in Y$;
+    \item \textbf{Axiom of Infinity.} \index{axiom!of infinity} We postpone our elaboration of this axiom to \S\ref{subsec:structure_of_zfc_signature};
+    \item \textbf{Axiom Schema of Replacement.} \index{axiom!schema of replacement} We also postpone our elaboration of this axiom to \S\ref{subsec:structure_of_zfc_signature};
+    \item \textbf{Axiom of Regularity.} \index{axiom!of regularity} Every nonempty set has an $\in$-minimal element;\\$\forall X\,\exists x\,\forall y\,(x\in X\land y\notin x)$;
+    \item \textbf{Axiom of Choice.} \index{axiom!of choice} We also postpone our elaboration of this axiom to \S\ref{subsec:structure_of_zfc_signature}.
+\end{enumerate}
+\end{axiom}
+
+\subsection{Structure of ZFC Signature}\label{subsec:structure_of_zfc_signature}
+\subsubsection{Set Theory Formulae}
+It is sometimes tedious and time-wasting to write complex ZFC signature FOL formulae. So first, besides the $\in$ and $=$ above, we introduce some more common patterns that occur in usual formulae, and we will be using them interchangeably with their natural language terms.
+\begin{definition}{Convetions of Formula}{conventions_of_formula}
+\begin{center}
+\begin{tabular}{c|c}
+\textbf{Formula}&\textbf{Meaning}\\\hline
+\makecell{Restricted Universal Quantification\\$\forall x\in X.\,P(x,\omega_1,\dots,\omega_n)$}&\makecell{$\forall x\,x\in X\implies P(x,\omega_1,\dots,\omega_n)$\\``for all $x$ in $X$, $P(x,\omega_1,\dots,\omega_n)$ holds''}\\\hline
+\makecell{Restricted Existential Quantification}\\$\exists x\in X.\,P(x,\omega_1,\dots,\omega_n)$&\makecell{$\exists x\,x\in X\implies P(x,\omega_1,\dots,\omega_n)$\\``there exists an $x$ in $X$ such that $P(x,\omega_1,\dots,\omega_n)$ holds''}\\\hline
+\makecell{Restricted Uniqueness Quantification\\$\exists!x\in X.\,P(x,\omega_1,\dots,\omega_n)$}&\makecell{$\exists x\in X.\,[P(x,\omega_1,\dots,\omega_n)\land\neg\exists y\in X.\,(P(y,\omega_1,\dots,\omega_n)\land y\neq x)]$\\``there exists a unique $x$ in $X$ such that $P(x,\omega_1,\dots,\omega_n)$''}\\\hline
+\makecell{Set Inclusion\\$X\subseteq Y$}&\makecell{$\forall x\in X.\,x\in Y$\\"$X$ is a subset of $Y$"}\\\hline
+\makecell{Set Equality\\$X=Y$}&\makecell{$X\subseteq Y\land Y\subseteq X$\\"$X$ is equal to $Y$"}\\
+\end{tabular}
+\end{center}
+\end{definition}
+
+\subsection{FOL Equality}
+\begin{axiom}{FOL Equality Axioms}{fol_equality_axioms}
+\begin{enumerate}
+    \item \textbf{Reflexivity.} \index{reflexivity!in FOL equality} For each function $x$ in the signature, $x=x$;
+    \item \textbf{Substitution for Function.} \index{substitution!for function in FOL} If $f$ is a function in the signature with arity greater or equal to $1$, then for all functions $x,y$, $x=y\implies f(\dots,x,\dots)=f(d\dots,y,\dots)$;
+    \item \textbf{Substitution for Formula.} \index{substitution!for formula in FOL} If $\Psi$ is an FOL formula, then $x=y\implies\Psi\implies\Psi/x\to y$.
+\end{enumerate}
+\end{axiom}
+When a signature is equipped with a function symbol $=$ that satisfies the above axioms, we say that it is a signature with FOL-compatible equality. It is easily verified that the axiom of extensionality defines a FOL-compatible equality, namely \textbf{ZFC-FOL equality}\index{equality!of ZFC-FOL}.
+
+\begin{exercise}
+Prove that the equality defined in the axiom of extensionality is an FOL equality.
+\end{exercise}
+
+\subsubsection{Details of Construction}
+Extensionality follows directly from the axiom of extensionality. The converse of this axiom can be deduced from the axiom of commutativity and axiom of substitution for formula of the FOL equality axioms. This reveals a important idea of a set: \textbf{A set is determined completely by its elements}\footnote{In the future, you will be seeing this kind of construction a lot, like in category theory a morphism in a category is completely determined by its behaviour when composed with other morphisms.}.
+
+Pairing is unique, by extensionality. Also, we define the \textbf{singleton set}\index{singleton set} of $a$ to be $\{a,a\}$. Further, we can define the ordered pair of $a,b$ as $(a,b)=\{\{a\},\{a,b\}\}$ and ordered tuple of $a_1,\dots,a_n$ as $(a_1,\dots,a_n)=((\cdots(a_1,a_2),a_3)\cdots,),a_n)$.
+\begin{exercise}
+The reader will verify at once that $(a_1,\dots,a_n)=(b_1,\dots,b_n)$ if and only if $a_i=b_i$ for all $i$.
+\end{exercise}
+
+The schema of separation gives rise to the \textbf{set-builder notation}\index{set-build notation}, that is for any set $X$ and predicate $P$ with arity $n+1$, a set $\{x\in X\,|\,P(x,\omega_1,\dots,\omega_n)\}$ can be built, and satisfies the property that axiom schema of separation provides. The schema also furnishes the existence of empty set: $\emptyset=\{u:X\,|\,u\neq u\}$; here $X$ can be any set and the result is identical.
+\begin{exercise}
+Verify: $\forall x\,x\notin\emptyset$.\footnote{From now on we will be using primarily the restricted versions of quantifications, only using the unrestricted one on absolute necessity.}
+\end{exercise}
+The schema gives us the ability to talk about \textbf{set intersection}\index{set intersection} and \textbf{set difference}\index{set difference}.
+\begin{exercise}
+Define the intersection $X\cap Y$ with set-builder notation such that the only elements in them are the common elements of the two sets.
+\end{exercise}
+\begin{exercise}
+Define the difference $X\setminus Y$ with set-builder notation such that the only elements in them are those in the first one but not the second one.
+\end{exercise}
+
+The most important contribution to our language by the axiom of union the union operator, namely $X\cup Y=\bigcup\{x,Y\}$, and that a set can be constructed by listing finite elements that are in the set: $\{a_1,\dots,a_n\}=\{a_1\}\cup\cdots\cup\{a_n\}$.
+\begin{exercise}
+Establish that
+\begin{itemize}
+    \item $\{x\in X\,|\,P(x,\omega_1,\dots,\omega_n)\land Q(x,\omega'_1,\dots,\omega'_m)\}=\{x\in X\,|\,P(x,\omega_1,\dots,\omega_n)\}\cap\{x\in X\,|\,Q(x,\omega'_1,\dots,\omega'_m)\}$;
+    \item $\{x\in X\,|\,P(x,\omega_1,\dots,\omega_n)\lor Q(x,\omega'_1,\dots,\omega'_m)\}=\{x\in X\,|\,P(x,\omega_1,\dots,\omega_n)\}\cup\{x\in X\,|\,Q(x,\omega'_1,\dots,\omega'_m)\}$
+    \item $\{x\in X\,|\,\neg P(x,\omega_1,\dots,\omega_n)\}=X\setminus\{x\in X\,|\,P(x,\omega_1,\dots,\omega_n)\}$
+    \item $(P(x,\omega_1,\dots,\omega_n)\implies Q(x,\omega'_1,\dots,\omega'_m))\iff\{x\in X\,|\,P(x,\omega_1,\dots,\omega_n)\}\subseteq\{x\in X\,|\,Q(x,\omega'_1,\dots,\omega'_m)\}$
+    \item $(P(x,\omega_1,\dots,\omega_n)\iff Q(x,\omega'_1,\dots,\omega'_m))\iff\{x\in X\,|\,P(x,\omega_1,\dots,\omega_n)\}=\{x\in X\,|\,Q(x,\omega'_1,\dots,\omega'_m)\}$
+\end{itemize}
+\end{exercise}
+Note that the above exercise is important as you will need it when writing proofs.
+
+Now it's time for the axiom of power set, which gives us the ability to talk about \textbf{Cartesian products}\index{Cartesian product}, \textbf{functions}\index{function!set-theoretic}, and \textbf{equivalence relations}\index{equivalence relation}. We first use the axiom schema of separation and axiom of power set to define the Cartesian product of two sets $X, Y$: $X\times Y=\{(x,y)\in \mathcal{P}(\mathcal{P}(X\cup Y))\,|\,x\in X\land y\in Y\}$. Here the double power set is to be understood as the power set of power set, i.e. it consists of the sets of the form $\{a,\dots\}$ where $a\in\mathcal{P}(X\cup Y)$, and thus the pairs of the form $\{\{x\},\{x,y\}\}$ where $x\in X$ and $y\in Y$ are certainly elements of it. Remember to use the schema of separation, we have to find a superset to start with. We will see why this is required when we talk about the invalidity of axiom schema of comprehension and the Russell's paradox. As we've already defined the Cartesian product of two sets, the Cartesian product of finite sets. Now we consider functions. A set-theoretic function is a set which is made into a logical function in the signature with the equality (ZFC-FOL equality) augmented in a particular way. The set-theoretic function from $X$ to $Y$ is a subset $F$ of $X\times Y$ such that $[(x,y)\in F\land(x,z)\in F]\implies y=z$ and that $\forall x\in X.\,\exists y\in Y.\,(x,y)\in F$. The domain of the a function $f$ is $\domain(f)=X$. Unsurprisingly, we henceforth denote such a subset $f(-)$, and the ZFC-FOL equality is augmented such that a particular equation $f(x)=y$ where $(x,y)\in F$ holds for every function and every $x\in X$; this is called the \textbf{ZFC function FOL equality}\index{FOL equality!of ZFC function}.
+\begin{exercise}
+Verify that (1) there is only one equality $f(x)=y$ in the ZFC function FOL equality that holds up to ZFC-FOL equality; and (2) augmented with ZFC function FOL equality, ZFC-FOL equality is still a FOL-compatible equality.
+\end{exercise}
+Recall the three axioms of equivalence relation we introduced earlier.
+\begin{axiom}{Equivalence Relation Axioms}{Equivalence Relation Axioms}
+\begin{enumerate}
+    \item \textbf{Reflexivity.} \index{reflexivity!in FOL equality} For each function $x$ in the signature, $x\sim x$;
+    \item \textbf{Commutativity.} \index{commutativity!in FOL equality} For all functions $x,y$ in the signature, $x\sim y\implies y\sim x$;
+    \item \textbf{Transitivity} \index{transitivity!in FOL equality} For all functions $x,y,z$ in the signature, $(x\sim y\land y\sim z)\implies x\sim z$;
+\end{enumerate}
+\end{axiom}
+Here, $a\sim b$ if and only if $(a,b)\in R$, and $R$ is called a equivalence relation if it satisfies the above axioms. A family of sets is disjoint if the intersection of any two of its members is empty. A \textbf{partition}\index{partition!of set} of a set $X$ is a disjoint family $P$ of nonempty sets such that $X=\bigcup P$. If we have a equivalence relation $\sim$, then we define the equivalence class of $x\in X$ to be $[x]=\{y\in X\,|\,y\sim x\}$, and we define the \textbf{quotient set}\index{quotient set} to be $X/{\sim}=\{[x]\in\mathcal{P}(X)\,|\,x\in X\}$.
+
+We take a little detour to discussion further the property of functions, namely \textbf{injectivity}\index{injectivity!of function}, \textbf{surjectivity}\index{surjectivity!of function}, and \textbf{bijectivity}\index{bijectivity!of function}. A function $f:X\to Y$ is called injective if and only if $\forall x,y\in X.\,f(x)=f(y)\implies x=y$; it's surjectivity if and only if $\forall y\in Y.\,\exists x\in X.\,y=f(x)$; it's bijective if and only iff it's both injective and surjective.
+
+Here comes the axiom of infinity. To understand infinity, we first have to define finiteness, and this often involves the natural number system.
+\begin{exercise}
+Define the notion of finiteness without mentioning any number system. (This is actually not-so-obvious to first-timers. Hint: consider what property of infinite sets regarding autobijections\footnote{bijection with domain and codomain the same} doesn't hold for finite sets)
+\end{exercise}
+To the very least, we axiomize here class of infinite sets for you as a further hint to the above exercise; the property these infinite sets (they are equal up to bijection) have is called \textbf{inductivity}\index{inductivity!of set}. The \textbf{standard inductive set} is a set $S$ such that $\emptyset\in S$ and $\forall s\in S.\,s\cup\{s\}\in S$; the axiom of infinity actually asserts the existence of such a set, and the existence of such a set implies the axiom of infinity (see, for example \cite{jeshsettheory}, chapter 2). A inductive set is a set that is equal to the standard inductive set up to bijection.
+
+The schema of replacement asserts the existence of set $f(X)$ for any ZFC function $f$; it reads $\forall f:X\to Y.\,\forall X'\,\exists Y=f(X).\,\forall y\,[y\in Y\iff\exists x\in X.\,f(x)=y]$. This asserts the existence of the image of a set $X$ under ZFC function $f$. Note that now the following form of the set-builder notation starts to make sense: $X=\{f(x)\,|\,x\in X\}$. One important consequence is that the union and intersection can now iterate over any index set $I$, i.e. $\exists X=\bigcup_{i\in I}X_i.\,\forall x\,[x\in X\iff(\exists i\in I.\,x\in X_i)]$ and $\exists X=\bigcap_{i\in I}X_i.\,\forall x\,[x\in X\iff(\forall i\in I.\,x\in X_i)]$.
+\begin{exercise}
+Use the new set-builder notation to express the set $\bigcup_{i\in I}X_i$ and $\bigcap_{i\in I}X_i$. Hint: indices are functions.
+\end{exercise}
+
+If $S$ is a family of sets and $\emptyset\notin S$, then a \textbf{choice function}\index{choice function} for $S$ is a function $f$ on $S$ such that $f(X)\in X$. The axiom of choice (commonly abbreviated as AC) postulates that for every $S$ without empty set being an element it admits a choice function. The AC is the first non-constructive axiom you will encounter in your study of mathematical analysis (The next one is probably the law of excluded middle from natural deduction). Here by non-constructive we mean that we are asserting the existence of a set (a ZFC function---the choice function) without actually constructing it, unlike what we did in the previous axioms. Though the use of AC in modern mathematics is extensive, but surprisingly in basic analysis we don't use that often. Here are some cases in the elementary stage where you might need to be careful because of AC's presence:
+\begin{itemize}
+    \item The well ordering theorem;
+    \item The trichotomy of cardinality;
+    \item The existence of right inverse of surjective function;
+    \item Zorn's lemma;
+    \item That every vector space has a basis;
+    \item Tychonoff's theorem;
+    \item That any union of countably many countable sets is countable;
+    \item That if $X$ is infinite, there exists an injection $\mathbb{N}\to A$;
+    \item The equivalence between sequential continuity and continuity;
+    \item etc.
+\end{itemize}
+You will encounter more of AC in the last chapter of \cite{babyrudin}.
+
+\subsection{Axiom Schema of Comprehension and Russell's Paradox}
+\begin{definition}{(False) Axiom Schema of Comprehension}{false_axiom_schema_of_comprehension}
+If $P$ is a predicate with arity $n+1$, then there exists a set $Y=\{x\,|\,P(x,\omega_1,\dots,\omega_n)\}$.
+\end{definition}
+This axiom was the dream of Cantor, G., yet, it's contradictive thus cannot be a real axiom. The contradiction is called \textbf{Russell's paradox}\index{Russell's paradox}, and it contradicts the inference rules of natural deduction, which will be all be introduced in \S\ref{sub:natural_deduction}.
+
+\section{First-Order Logic II}
+Now we turn to writing proofs (finally!). The way of writing proofs we will introduce in this series is called \textbf{Gentzen-style proof tree}\index{proof tree!Gentzen-style}.
+
+% \subsection{Rule of Inference}
+% \begin{definition}{Rule of Inference}{rule_of_inference}
+% A \textbf{rule of inference}\index{rule of inference} of a deduction system is a step of valid proof which can be selected to construct specific proofs. It has multiple premises and one conclusion, and it's denoted as \begin{displaymath}\prftree[r]{Rule Name}{\text{Assumption }1}{\cdots}{\text{Assumption }n}{\text{Conclusion}}\end{displaymath} If a rule of inference is without any premise, we say it's a axiom rule.
+% \end{definition}
+
+\subsection{Natural Deduction}\label{sub:natural_deduction}
+At the beginning of an argument, we designate two environments: the term environment $\Sigma$, and the hypothesis environment $\Gamma$. We here present an excerpt from Wikipedia:
+\begin{center}
+\includegraphics*[width=.9\textwidth,keepaspectratio,trim={.2cm 0cm .2cm .2cm},clip]{\main/chapter2-set-theory-and-logic/images/natural_deduction}
+\end{center}
+
+\subsection{Axioms}
+According to our previous discussion, the axioms for ZFC in FOL language are:
+$$\prfbyaxiom{ZFC-Ext}{\forall X\,\forall Y\,(\forall x\,x\in X\iff x\in Y)\implies X=Y}$$
+$$\prfbyaxiom{ZFC-Prg}{\forall a\,\forall b\,\exists c\,(a\in c\land b\in c)}$$
+$$\prfbyaxiom{ZFC-Sep}{\forall X\,\forall \omega_1\,\dots\,\forall \omega_n\,\exists Y\,\forall u\,[u\in Y\iff(u\in X\land P(u,\omega_1,\dots,\omega_n))]}$$
+$$\prfbyaxiom{ZFC-Uni}{\forall X\,\exists Y\,\forall x\,\forall x'\,[(x'\in x\land x\in X)\implies x'\in Y]}$$
+$$\prfbyaxiom{ZFC-Pwr}{\forall X\,\exists Y\,\forall x\,\forall x'\,[(x'\in x)\implies(x'\in X)]\implies x\in Y}$$
+$$\prfbyaxiom{ZFC-Inf}{\exists S\,\emptyset\in S\land\forall s\in S.\,s\cup\{s\}\in S}$$
+$$\prfbyaxiom{ZFC-Rep}{\forall f\,\forall X'\,\exists Y.\,\forall y\,[y\in Y\iff\exists x\in X.\,f(x)=y]}$$
+$$\prfbyaxiom{ZFC-Reg}{\forall X\,\exists x\,\forall y\,(x\in X\land y\notin x)}$$
+$$\prfbyaxiom{ZFC-Chc}{\forall S\,\exists f\,\forall X\,\exists x\,(X\in S\land f\text{ is a ZFC function})\implies f(X)\in X}$$\footnote{We use English to describe part of this because it's too long and tedious to write them out completely in FOL.}
+
+The axioms for ZFC FOL equality in FOL Language are the following. Here $F_n$ denotes the set of logical functions with arity $n$; $P_n$ of predicate with arity $n$. Also note that ZFC functions are logical functions.
+$$\prfbyaxiom{ZFCEq-Refl}{\forall x\, x=x}$$
+$$\prftree[r]{ZFCEq-SubFunc}{x,y\text{ term}}{\omega_1,\dots,\omega_n\text{ term}}{f\in F_{n+1}}{x=y}{f(x,\omega_1,\dots,\omega_n)=f(y,\omega_1,\dots,\omega_n)}$$
+$$\prftree[r]{ZFCEq-SubPred}{x,y\text{ term}}{\Psi\text{ prop}}{\Psi}{\Psi/x\to y}$$
+We used the metalanguage---rule of inference---to avoid using higher-order logic language in the formula\footnote{If you don't understand what this means, just ignore it.}.
+
+We've been always talking about "ZFC functions are logical functions". Here it is:
+$$\prftree[r]{ZFCFunc-InSig}{X_1,\dots,X_n\text{ term}}{Y\text{ term}}{f\subseteq\left(\textstyle\prod_{i=1}^nX_i\right)\times Y}{\forall x_1\in X_1,\dots,x_n\in X_n.\,\exists!y\,(x_1,\dots,x_n,y)\in f}{f\in F_{n}}$$
+And in order for a formula to be a predicate, we have
+$$
+\prftree[r]{ZFCPred-InSig}{|\operatorname{FreeVar(P)}|=n}{P\in P_n}
+$$
+
+Last but not least, there is one axiom for classical logic, the law of excluded middle:
+$$\prftree[r]{Excl-Mid}{P\text{ prop}}{P\lor\neg P}.$$ Note that in this law, we do not assume the truth of $P$, only that it's a valid proposition.
+
+\subsection{Examples of Proof}
+\begin{minipage}[b]{0.3\linewidth}
+\hspace{-1.5cm}
+\begin{sideways}
+\resizebox{.9\textheight}{!}{
+$$
+\prftree[r]{DefUnfold-$\subseteq$}{
+\prftree[r]{Intro-$\forall$}{
+\prftree[r]{DefUnfold-$\cap$}{
+\prftree[r]{Intro-${\Rightarrow}$}{
+\prftree[r]{Elim-$\land_1$}{
+\prftree[r]{Elim-${\Rightarrow}$}{
+\prftree[r]{Elim-$\forall$}{
+\prftree[r]{Elim-$\land_1$}{
+\prftree[r]{DefFold-${\Leftrightarrow}$}{
+\prfbyaxiom{Hyp}{A,B,x,S;\forall s\,(s\in A\land s\in B)\iff s\in S,x\in S\vdash\forall s\,s\in S\iff s\in A\land s\in B}
+}{A,B,x,S;\forall s\,(s\in A\land s\in B)\iff s\in S,x\in S\vdash\forall s\,(s\in S\implies s\in A\land s\in B)\land(s\in S\impliedby s\in A\land s\in B)}
+}{A,B,x,S;\forall s\,(s\in A\land s\in B)\iff s\in S,x\in S\vdash\forall s\,s\in S\implies s\in A\land s\in B}
+}{\prfbyaxiom{Var-$\Sigma$}{A,B,x,S\vdash x\text{ term}}}{A,B,x,S;\forall s\,(s\in A\land s\in B)\iff s\in S,x\in S\vdash x\in S\implies x\in A\land x\in B}
+}{\prfbyaxiom{Hyp}{A,B,x,S;\forall s\,(s\in A\land s\in B)\iff s\in S,x\in S\vdash x\in S}}{A,B,x,S;\forall s\,(s\in A\land s\in B)\iff s\in S,x\in S\vdash x\in A\land x\in B}
+}{A,B,x,S;\forall s\,(s\in A\land s\in B)\iff s\in S,x\in S\vdash x\in A}
+}{A,B,x,S;\forall s\,(s\in A\land s\in B)\iff s\in S\vdash x\in S\implies x\in A}
+}{A,B,x;\emptyset\vdash x\in A\cap B\implies x\in A}
+}{A,B;\emptyset\vdash\forall x\,x\in A\cap B\implies x\in A}
+}{A,B;\emptyset\vdash A\cap B\subseteq A}
+$$
+}
+\end{sideways}
+\end{minipage}
+\begin{minipage}[b]{0.6\linewidth}
+On the left is a typical Gentzen-style proof tree. We've made the proof tree rotated counterclockwise by $90\deg$ for the sake of typesetting. Read the bottom line of the tree, you can see what we are trying to prove is that for any given $A$ and $B$ (that's why they're in $\Sigma$, the set of all terms), $A\cap B\subseteq A$.
+
+Now it's your turn. Since proving ZFC related is usually long and tedious, we only require you to imitate us and do one:
+\begin{exercise}
+Use natural language with FOL with ZFC signature defined above indicating the key aspects of the proof, can you find an optimal way of writing proofs without diving into details of logic? Try your method with the proposition $\forall A,B\,A\subseteq A\cup B$.
+\end{exercise}
+But, there are still plenty to try since you need to familiarize yourself with the language. We here provide you a list of classical propositional logic maxims that can be proven using FOL and proof tree. Some of these coincides with the natural deduction, and others are different.
+\begin{itemize}
+    \item \textbf{Modus Ponens.} \begin{center}$\prftree[r]{ClassProp-MP}{P\implies Q}{P}{\vdash Q}$\end{center}
+    \vspace{-.5cm}\item \textbf{Hypothetical Syllogism.} \begin{center}$\prftree[r]{ClassProp-HS}{P\implies Q}{Q\implies R}{\vdash P\implies R}$\end{center}
+    \vspace{-.5cm}\item \textbf{Constructive Dilemma} \begin{center}$\prftree[r]{ClassProp-CD}{(P\implies Q)\land(R\implies S))}{P\lor R}{\vdash Q\lor S}$\end{center}
+    \vspace{-.5cm}\item \textbf{Simplification.} \begin{center}$\prftree[r]{ClassProp-Simpl}{P\land Q}{P}{\vdash P}$\end{center}
+    \vspace{-.5cm}\item \textbf{Addition.} \begin{center}$\prftree[r]{ClassProp-Add}{P}{\vdash P\lor Q}$\end{center}
+    \vspace{-.5cm}\item \textbf{Modus Tollens.} \begin{center}$\prftree[r]{ClassProp-MT}{P\implies Q}{\neg Q}{\vdash \neg P}$\end{center}
+    \vspace{-.5cm}\item \textbf{Disjunctive Syllogigm.} \begin{center}$\prftree[r]{ClassProp-DS}{P\land Q}{\neg P}{\vdash Q}$\end{center}
+    \vspace{-.5cm}\item \textbf{Destructive Dilemma.} \begin{center}$\prftree[r]{ClassProp-DD}{(P\implies Q)\land(R\implies S)}{\neg Q\lor\neg S}{\vdash \neg P\lor\neg R}$\end{center}
+    \vspace{-.5cm}\item \textbf{Conjunction.} \begin{center}$\prftree[r]{ClassProp-Conj}{P}{Q}{\vdash P\land Q}$\end{center}
+\end{itemize}
+\vfill
+\end{minipage}
+
+\section{Conclusion}
+At this point, we conclude our discussion of axiomatic set theory and the FOL language, we say that in mathematical analysis (as well as in many other branches of mathematics), the language we use is \textbf{FOL with ZFC signature with ZFC-FOL equality with ZFC function FOL equality with complex number system under natural deduction with ZFC axiom rules and ZFC-FOL equality axiom rules}. It is crucial for you to understand and get used to this language. We will be introducing the number systems in the next chapter.
+\biblio
+\end{document}

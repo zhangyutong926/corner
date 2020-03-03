@@ -1,0 +1,80 @@
+\documentclass[10pt]{article}
+\usepackage{CJKutf8}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{enumitem}
+\usepackage[a4paper, left=2.5cm, right=2.5cm, top=1.25cm, bottom=1.25cm]{geometry}
+\usepackage{multicol}
+\usepackage{tikz-cd}
+\usepackage{array}
+\usepackage{makecell}
+\usepackage{tabularx}
+\usepackage{enumitem}
+\setlength{\columnsep}{0.75cm}
+
+\newtheorem{exercise}{Exercise}
+
+\setlength{\parindent}{0cm}
+\setlength{\parskip}{1em}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\newcommand*{\qedfill}{\hfill\ensuremath{\blacksquare}}
+
+\title{STEP Lectures}
+\author{Sayako Hoshimiya}
+\begin{document}
+\begin{CJK*}{UTF8}{gbsn}
+\maketitle
+\renewcommand{\setminus}{\mathbin{\backslash}}
+\def \setminus {\mathbin{\backslash}}
+
+\begin{enumerate}
+\item \textbf{[Rudin 6.13 (6.14 is similar)]} Define $$f(x)=\int_{x}^{x+1} \sin \left(t^{2}\right) d t$$ and prove that
+\begin{enumerate}[label=\alph*]
+\item $|f(x)|<\frac{1}{x}$ if $x>0$.
+\item $$2 x f(x)=\cos \left(x^{2}\right)-\cos \left[(x+1)^{2}\right]+r(x)$$ where $|r(x)|<\frac{c}{x}$ and $c$ is constant.
+\item Find $$\limsup_{x\to\infty}xf(x)\quad\text{and}\quad\liminf_{x\to\infty}xf(x).$$
+\item Does the improper integral $$\int_0^\infty\sin(t^2)\,dt$$ converge?
+\end{enumerate}
+\item \textbf{[Rudin 8.19]} A trigonometric polynomial is a finite formal sum $$f(x)=a_{0}+\sum_{n=1}^{N}\left(a_{n} \cos n x+b_{n} \sin n x\right)$$ in a real formal variable $x$ with all coefficients $a_i$ and $b_i$ in $\mathbb{C}$; it can be viewed as a complex-valued function. If $\frac{\alpha}{\pi}$ is irrational, prove that $$\lim _{N \rightarrow \infty} \frac{1}{N} \sum_{n=1}^{N} f(x+n \alpha)=\frac{1}{2 \pi} \int_{-\pi}^{\pi} f(t) d t.$$
+\item Define $$F(a)=\int_{0}^{1}|\sin x-a \cos x| d x.$$ Find the $a$ that minimizes $F(a)$.
+\item Let $f(x)$ be differentiable on $\mathbb{R}$ and $f(x)>0$, $f'(0)=0$. If $f$ satisfies the functional equation $f(x+y)=f(x)f(y)e^{2xy}$, find $f(x)$.
+\item Assume that $f(x)\geq 0$ and that $f$ decreases monotonically on $[1,\infty)$. Prove that the improper integral $$\int_{1}^{\infty} f(x) d x$$ converges if and only if $$\sum_{n=1}^{\infty} f(n)$$ converges.
+\item Prove that $$\sum_{n=0}^{\infty} \frac{1}{n !}=\lim _{n \rightarrow \infty}\left(1+\frac{1}{n}\right)^{n}.$$
+\item Fill an $n\times n$ table $A^i_j$ with $0$ and $1$, prove that $n\geq 5$ is a sufficient condition for that there exists $i_1,i_2,j_1,j_2$ such that $A^{i_1}_{j_1}=A^{i_1}_{j_2}=A^{i_2}_{j_2}=A^{i_2}_{j_1}$.
+\item For a function $f$ such that $f(x)>0$ on $\mathbb{R}$, define $$I_a=\frac{1}{a}\int_0^af(x)\,dx.$$ If $\lim_{a\to\infty}I_a=A$, then there exists a strictly monotonically increasing $\{x_n\}$ such that $\lim_{n\to\infty}x_n=\infty$ and $\lim_{n\to\infty}f(x_n)=A$.
+\item Let $f$ be continuous on $[1,2]$, and $1\leq x\leq 2$. Find $A$ and $B$ in $$\int_{\frac{1}{x}}^{\frac{2}{x}}|\log y| f(x y) d y=3 x(\log x-1)+A+\frac{B}{x}.$$
+\item Let $a=\frac{2^{8}}{3^{4}}$. Consider the sequence $$b_{k}=\frac{(k+1)^{k+1}}{a^{k} k !}\quad(k=1,2,3, \cdots).$$
+\begin{enumerate}[label=\alph*.]
+\item Show that $f(x)=(x+1) \log \left(1+\frac{1}{x}\right)$ is monotonically increasing on $x>1$.
+\item Find the maximum $M$ of the sequence $\{b_k\}$, and nominate all $k$ such that $M=b_k$.
+\end{enumerate}
+\item Consider the Cauchy's functional equation $$f(x+y)=f(x)+f(y).$$ It is clear that linear functions, i.e. functions of the form $f:x\mapsto cx$ where $c$ is constant, is a family of solutions. Discover the structure of this and other families of solutions by following the steps below.
+\begin{enumerate}[label=\alph*.]
+\item Show that when $f$ is a function with domain $\mathbb{Q}$, then linear functions are the only solutions to Cauchy's functional equation.
+\end{enumerate}
+
+A subset $A$ of $\mathbb{R}^2$ is called to be dense if any disk in $\mathbb{R}^2$, however small and wherever it is, contains a point from $A$.
+
+\begin{enumerate}[resume, label=\alph*.]
+\item Show that on $\mathbb{R}$, a solution to the Cauchy's functional equation is either linear or having the pathological property that the graph set $G:=\{(x,f(x))\,|\,x\in\mathbb{R}\}$ is dense in $\mathbb{R}^2$.
+\end{enumerate}
+
+The Hamel basis is a set $\{b_i\}_{i\in I}=\mathcal{B}\subset\mathbb{Q}$ such that for every $x\in\mathbb{R}$, it can be represented as a linear combination of the elements in $\mathcal{B}$, i.e. $x=\sum_{j=1}^n\lambda_jb_{i_j}$.
+
+\begin{enumerate}[resume, label=\alph*.]
+\item Prove that there exists non-linear solutions to Cauchy's functional equation on $\mathbb{R}$, assuming the Hamel basis exists.
+\end{enumerate}
+
+Two sets are said to be of the same cardinality if there exists a bijection between them. $A$ is said to be smaller than $B$ in the cardinality sense if an injection from $A$ to $B$ can be established but a surjection cannot.
+
+\begin{enumerate}[resume, label=\alph*.]
+\item Show that there are more nonlinear solutions than linear ones to the Cauchy's functional equation over $\mathbb{R}$.
+\end{enumerate}
+\end{enumerate}
+
+\end{CJK*}
+\end{document}

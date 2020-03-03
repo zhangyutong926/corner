@@ -1,0 +1,378 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{titling}
+\usepackage{authblk}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage[a4paper, portrait, margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{listings}
+ 
+\urlstyle{same}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1em}
+
+\title{On the Stateful-Monadic Purely-Functional Implementation of Gauss-Jordan Elimination}
+\date{November 2017}
+\author{Yutong Zhang\thanks{knight.of.lambda.calculus@gmail.com}}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+In linear algebra, Gaussian elimination (also known as row reduction) is an algorithm for solving systems of linear equations. The best, worst, and average time complexity of the algorithm are respectively $O(n^2)$, $O(n^2)$, and $O(n^3)$, which poses it as the second most efficient algorithm in solving linear systems thus far, with only the time complexity inferiority than the Diviser pour Régner algorithmic block matrix inverse. In a purely functional programming language, the one typicals of which is Haskell, an effective manner implementing this algorithm is with a higher-order structure in Category Theory, namely Monad. In this article shows one typical implementation of the Gaussian method.
+\end{abstract}
+
+\section{Introduction}
+\begin{lstlisting}[language=Haskell]
+module Main where
+
+import ApplicativeParser
+
+import Data.List
+import Data.Char
+
+import Control.Monad.State.Lazy
+\end{lstlisting}
+
+\section{Stateful-Monadic Matrices}
+Gauss-Jordan Elimination is a well-known method solving linear systems. In this work the algorithmic implementation is given and analyzed in order for the reader to understand the process of Gauss-Jordan Elimination solving linear systems.\footnote{For a more detailed explanation of Gauss-Jordan Elimination, the reader to encouraged to search and read, but since it is not the main topic of this work, it will not be elaborated anywhere in the thesis.}
+
+The type synonyma used in the implementation is defined as:
+\begin{lstlisting}[language=Haskell]
+type Number       = Rational
+type RowIndex     = Int
+type ColIndex     = Int
+type Vector       = [Number]
+type Row          = [Number]
+type Matrix       = [Row]
+type MatrixOper a = State Matrix a
+\end{lstlisting}
+And it is worth noticing that the \texttt{MatrixOper a} type synonym defines a State Monad, which forms that foundation of the following stateful-monadic matrix operations. It should be brought up here that the type of \texttt{MatrixOper a1} may sometimes be displayed by the compiler as \texttt{Control.Monad.State.Lazy.StateT Matrix Identity a}, and it is because of the unanimous nature of the implementation of Haskell Standard Library that seeks for the most generalized definition of Monads, and by doing so the State Monad is defined as an item in the Transformer Stack instead of a single Monad. The Haskell Standard Library guarantees the unanimous usage and typing behaviour of the compiler so the reader should not be surprised by this and should continue programming ignoring this implementation detail.
+
+The choice of \texttt{Rational} as the type of number in the matrix is evaluated carefully, since
+\begin{enumerate}
+\item
+It is impossible to have irrational numbers for the subscripts and coefficients of an ISO/IEC 80000-9 Chemical Formula\footnote{They are all in $\mathbb{N}^*$.}; and
+\item
+The arithmetic operations and fundamental functions, except radicals, form a closure on $\mathbb{Q}$,
+\end{enumerate}
+and the calculation requires CAS\footnote{Computer Algebra System. a.k.a. Symbolic Computation} in order to gather the exact, instead of the approximated, value for the coefficients.
+
+Following definitions are the basic Stateful-Monadic operations of the embedded state variable, which is, of course, the matrix operated upon.
+\begin{lstlisting}[language=Haskell]
+getRowS :: RowIndex -> MatrixOper Row
+getRowS a = do
+  matrix <- get
+  return $ matrix !! a
+
+setRowS :: RowIndex -> Row -> MatrixOper ()
+setRowS a r = do
+  matrix <- get
+  let (s1, (_:s2)) = splitAt a matrix
+  put $ s1 ++ [r] ++ s2
+
+getNumS :: RowIndex -> ColIndex -> MatrixOper Number
+getNumS a b = do
+  r <- getRowS a
+  return $ r !! b
+
+setNumS :: RowIndex -> ColIndex -> Number -> MatrixOper ()
+setNumS a b n = do
+  r <- getRowS a
+  let (s1, (_:s2)) = splitAt b r
+  setRowS a $ s1 ++ [n] ++ s2
+
+rowNumS :: MatrixOper RowIndex
+rowNumS = do
+  matrix <- get
+  return $ length matrix
+  
+colNumS :: MatrixOper ColIndex
+colNumS = do
+  (r1:_) <- get
+  return $ length r1
+\end{lstlisting}
+Correspondingly, without surprises, the 5 functions listed above are for extracting one single row, "modifying"\footnote{Since Haskell Programming Language is purely functional thus side-effectless, it is impossible to define the real modification action without breaking the constraint, in contrary to the usual idioms of imperative language, and the nominalization of modification here is just a metaphor elaborating the Monadic effect of the function.} one specific row, extracting a number from the matrix, "modifying" a number in the matrix, and count the number of the rows and columns of the matrix.\footnote{This is where it starts to get confusing to the programmers who are not familiar with the Functional Programming idiom Monad, and if this applies to the reader, the reader should stop reading and start finding additional materials on this topic. The author's recommendation will be \href{https://en.wikibooks.org/wiki/Haskell/Understanding_monads/State}{Haskell Wikibook/Understanding Monads/State}.}
+
+\section{Generating the Coefficient Form of Linear System from the AST of Chemical Formula}
+\texttt{foreach}, \texttt{rangeAllRowsS}, and \texttt{rangeAllColsS} are to provide a contracted form for the iteration of rows of matrices. It is used trivially in the cases below.
+\begin{lstlisting}[language=Haskell]
+foreach :: Functor f => f a -> (a -> b) -> f b
+foreach = flip fmap
+
+rangeAllRowsS :: MatrixOper [RowIndex]
+rangeAllRowsS = do
+  rowNum <- rowNumS
+  return $ [0 .. (rowNum - 1)]
+
+rangeAllColsS :: MatrixOper [RowIndex]
+rangeAllColsS = do
+  colNum <- colNumS
+  return $ [0 .. (colNum - 1)]
+\end{lstlisting}
+
+For a ISO/IEC 80000-9 Chemical Formula of form
+$$
+\sum_{i\in A} a_iM_{i\,b_i} \rightarrow \sum_{j\in B} a_jM_{j\,b_j} \quad (A \cap B = \emptyset)
+$$
+the corresponding linear system to be solved is of form
+$$
+\begin{cases}
+\displaystyle{\sum_{i\in A}}a_ib_i - \displaystyle{\sum_{j\in B}}a_jb_j = 0\quad \mathrm{for\,each\,distinct\,}M
+\end{cases}
+$$
+So the coefficient matrix form of the linear system is
+$$
+\left[
+\begin{array}{cccc}
+b_i & \cdots & -b_j & \cdots \\
+\vdots & \vdots & \vdots & \vdots \\
+\end{array}
+\right]
+\cdot
+\left[
+\begin{array}{c}
+a_i \\ \vdots
+\end{array}
+\right]
+=
+\left[
+\begin{array}{c}
+0 \\ \vdots
+\end{array}
+\right]
+\quad \mathrm{on\,each\,rows,\,for\,each\,distinct\,}M
+$$
+and the augmented matrix for this matrix will be
+$$
+\left[
+\begin{array}{cccc|c}
+b_i & \cdots & -b_j & \cdots & 0 \\
+\vdots & \vdots & \vdots & \vdots & \vdots \\
+1 & 0 & 0 & 0 & 1
+\end{array}
+\right]
+\quad \mathrm{on\,each\,rows,\,for\,each\,distinct\,}M
+$$
+The reader should notice the extra inhomogeneous equation added at the bottom row, which will keep all $a_i$s unfree (bounded).
+
+\texttt{emptyVector} and \texttt{emptyMatrix} are to generate 0-filled vectors and matrices with the given parameters on the row and column number. \texttt{NameRowMap} maps the chemical names to the row index of the matrix, with a corresponding function extracting information about the row index from it with the name of the chemical, namely \texttt{mapGet}. And \texttt{coeffMatrix} is to generate the coefficient form of the linear system, from the AST of the formula.
+\begin{lstlisting}[language=Haskell]
+emptyVector :: ColIndex -> Vector
+emptyVector m = replicate m 0
+
+emptyMatrix :: RowIndex -> ColIndex -> Matrix
+emptyMatrix n m = replicate n $ emptyVector m
+
+type NameRowMap = [(String, RowIndex)]
+
+nameRowMap :: Equation -> NameRowMap
+nameRowMap (Equation l r) =
+  foldr (\a b -> if all (\(x, _) -> x /= chemical a) b
+                 then (chemical a, 1):b
+                 else fmap (\r@(x, k) -> if x == chemical a
+                                         then (x, k + 1)
+                                         else r) b) [] $ l ++ r
+
+mapGet :: NameRowMap -> String -> Maybe RowIndex
+mapGet m s = if all (\(x, _) -> x /= s) m
+             then Nothing
+             else Just $ foldr (\(x, k) _ -> if x == s
+                                             then k
+                                             else 0) 0 m
+
+coeffMatrix :: Equation -> MatrixOper ()
+coeffMatrix eq@(Equation l r) = do
+  all <- rangeAllColsS
+  sequence $ foreach all $ \a -> do
+    let Term {..} = c !! a
+    let Just ri = mapGet map chemical
+    setNumS ri a $ fromIntegral subscript
+  return ()
+  where
+    r' = fmap (\(Term n s c) -> Term n s (-c)) r -- Use of Lens
+    c = l ++ r'
+    map = nameRowMap eq
+\end{lstlisting}
+It should be reminded that the code utilizes the GHC Extension, \textbf{RecordWildCards}, so if GHCi prints an error log entry like
+\begin{lstlisting}
+[1 of 1] Compiling Main
+                  ( ChemicalEquationBalancer/src/Main.hs, interpreted )
+
+ChemicalEquationBalancer/src/Main.hs:103:9: error:
+    Illegal `..' in record pattern
+    Use RecordWildCards to permit this
+Failed, modules loaded: none.
+\end{lstlisting}
+Please use the GHCi command \texttt{:set -XRecordWildCards} or add the extension to the build configuration file, \texttt{ChemicalEquationBalancer.cabal}'s \texttt{extensions} entry.
+
+And also it is worth noticing that, on the line written \texttt{r' = fmap (\\(Term n s c) -> Term n s (-c)) r}, it is possible to apply a ingenious technique that is to be used to extract then rebuild\footnote{In some context, this is called "modification" in purely functional programming languages.} the data structure entity called \textbf{Lens}, anf for more information on that, please check \href{https://hackage.haskell.org/package/lens}{lens: Lenses, Folds and Traversals | Hackage}.
+
+\section{Gauss-Jordan Elimination}
+There are 3 basic actions that could be done upon the matrix when performing Gauss-Jordan Elimination, namely interchanging two rows, multiplying one row and substituting it back, and adding one row with the product of another and a number then substituting it back. The three basic actions are conventionally denoted as $\mathbf{R}_1 \leftrightarrow \mathbf{R}_2$, $\alpha\mathbf{R}$, and $\mathbf{R}_1 + \alpha\mathbf{R}_2$, correspondingly, but in the code, they are denoted as \texttt{interchangeS}, \texttt{multiplyS}, and \texttt{multAddS}, correspondingly.\footnote{Conventionally, the value of a Stateful-Monadic type is denoted with a suffixed capitalized \textbf{S}, indicating the difference thereof from a normal unlifted value.}\footnote{Again, if the reader find theirself unable to understand the terminology and notation, it is recommended for them to seek for additional materials on the corresponding topics.}
+\begin{lstlisting}[language=Haskell]
+interchangeS :: RowIndex -> RowIndex -> MatrixOper ()
+interchangeS a b = do
+  r1 <- getRowS a
+  r2 <- getRowS b
+  setRowS a r2
+  setRowS b r1
+
+multiplyRow :: Row -> Number -> Row
+multiplyRow r k = fmap (* k) r
+
+multiplyS :: RowIndex -> Number -> MatrixOper ()
+multiplyS a k = do
+  r <- getRowS a
+  let r' = multiplyRow r k
+  setRowS a r'
+
+addRows :: Row -> Row -> Row
+addRows = zipWith (+)
+
+multAddS :: RowIndex -> Number -> RowIndex -> MatrixOper ()
+multAddS a k b = do
+  r1 <- getRowS a
+  r2 <- getRowS b
+  let r = addRows r1 $ multiplyRow r2 k
+  setRowS a r
+\end{lstlisting}
+
+The implementation of sorting rows according to the zeros before the pivot ascendingly should be done by the combinations of the basic Stateful-Monadic operations, but it is more convenient and efficient to implement this part with the plain-old Haskellic functional way.
+\begin{lstlisting}[language=Haskell]
+sortByPivotPos :: Matrix -> Matrix
+sortByPivotPos = sortBy (\a b -> let f = length . takeWhile (== 0)
+                                 in f a `compare` f b)
+
+sortPivotS :: MatrixOper ()
+sortPivotS = state $ \matrix -> ((), sortByPivotPos matrix)
+\end{lstlisting}
+
+\texttt{findPivot} and its lifted form \texttt{findPivotS} are to search for the pivot\footnote{The first non-zero number in a specific row} of a specific row.
+\begin{lstlisting}[language=Haskell]
+findPivot :: Row -> (Number, ColIndex)
+findPivot r = let (zeros, (pivot:x_)) = span (== 0) r
+              in (pivot, (length zeros))
+
+findPivotS :: RowIndex -> MatrixOper (Number, ColIndex)
+findPivotS a = do
+  r <- getRowS a
+  return $ findPivot r
+\end{lstlisting}
+
+The process of calculating the echelon form is defined as follow. The \textbf{echelon form} of a matrix is the form, acquired by finite times of composition of the 3 basic augmented matrix operation, with each pivot being to the left of the one below it and the empty cells filled with zeros. The echelon form for a specific row is acquired by sequentially subtracting the rows before it each times a coefficient, which is the one of the row on the corresponding column with the pivot of the previous one divided by the pivot of the previous one, which is \texttt{let coeff = - (p' / p)}.
+\begin{lstlisting}[language=Haskell]
+echelonRowS :: RowIndex -> MatrixOper ()
+echelonRowS a = do
+  r <- getRowS a
+  (rp, rpC) <- findPivotS a
+  sequence $ foreach [0 .. (a - 1)] $ \an -> do
+    rn <- getRowS an
+    (p, pC) <- findPivotS an
+    p' <- getNumS a pC
+    let coeff = - (p' / p)
+    multAddS a coeff an
+  return ()
+
+echelonS' :: MatrixOper ()
+echelonS' = do
+  all <- rangeAllRowsS
+  sequence $ foreach all $ \an -> do
+    echelonRowS an
+  return ()
+\end{lstlisting}
+
+If the concept of \texttt{sequence} and its position in composing Monadic computations are unclear to the reader, it might be helpful to review the type of the type-class instantiation \texttt{Traversable []} at \href{https://www.stackage.org/haddock/lts-9.14/base-4.9.1.0/Prelude.html#t:Traversable}{Traversable Docs}.
+
+\texttt{reverseRowsS} Stateful-Monadic action is to reverse the order of the rows\footnote{It is not to get the \textbf{reverse of the matrix}.}.
+\begin{lstlisting}[language=Haskell]
+reverseRowsS :: MatrixOper ()
+reverseRowsS = do
+  matrix <- get
+  put $ reverse matrix
+\end{lstlisting}
+
+The \textbf{pivot echelon form} of a matrix is vaguely defined, but in most of the cases, it represents the form of the matrix in which the the pivot of each row is the only non-zero number in its column, and this form is achieve by reversing the rows of the matrix then perform the echelon algorithm without sorting the rows again.
+\begin{lstlisting}[language=Haskell]
+pivotEchelonS :: MatrixOper ()
+pivotEchelonS = do
+  echelonS
+  reverseRowsS
+  echelonS'
+\end{lstlisting}
+
+The \textbf{reduced row echelon form} of a matrix is the form in which the matrix is not only in \textbf{pivot echelon form} but also all pivots of it are 1. This is acquired by multiplying each row with a coefficient that eliminates the pivot to 1, which is \texttt{1 / pivot}.
+\begin{lstlisting}[language=Haskell]
+reducedEchelonS :: MatrixOper ()
+reducedEchelonS = do
+  pivotEchelonS
+  all <- rangeAllRowsS
+  sequence $ foreach all $ \an -> do
+    (pivot, _) <- findPivotS an
+    multiplyS an (1 / pivot)
+  return ()
+\end{lstlisting}
+
+For a linear system in the coefficient matrix form,
+$$
+A\overrightarrow{x}=\overrightarrow{b}
+$$
+the goal is to find the unknown vector $\overrightarrow{x}$, which will be the value of the unknowns $x_1, x_2, \cdots x_n$. And in order to do so, the augmented matrix of the linear system is created by putting numbers into the form
+$$
+\left[
+\begin{array}{cccc|c}
+A_{1\,1} & A_{1\,2} & \cdots & A_{1\,n} & b_1 \\
+A_{2\,1} & A_{2\,2} & \cdots & A_{2\,n} & b_2 \\
+\vdots & \vdots & \vdots & \vdots & \vdots \\
+A_{m\,1} & A_{m\,2} & \cdots & A_{m\,n} & b_m \\
+\end{array}
+\right]
+$$
+And this is implemented by \texttt{augmentedMatrix}.
+\begin{lstlisting}[language=Haskell]
+augmentedMatrix :: Matrix -> Vector -> Matrix
+augmentedMatrix m v = fmap (\(r, n) -> r ++ [n]) $ zip m v
+\end{lstlisting}
+
+If there is at least one row in a matrix that is in \textbf{reduced row echelon form} has only one non-zero number on the rightmost cell, then the linear system is represents is inconsistent. An inconsistent linear system does not have any solution, and the function \texttt{isConsistent} will check if it is the case.
+\begin{lstlisting}[language=Haskell]
+isConsistent :: Matrix -> Bool
+isConsistent = all ((/= 0) . length)
+\end{lstlisting}
+
+The solution should be in the vector $\overrightarrow{x}$. The function \texttt{extractCoeffs} acquires that form a augmented matrix.
+\begin{lstlisting}[language=Haskell]
+extractCoeffs :: Matrix -> Vector
+extractCoeffs = fmap last
+\end{lstlisting}
+
+Now the algorithmic method of Gauss-Jordan Elimination should be obvious to the reader. The function \texttt{gauss} evaluates to a \texttt{Just v} if the linear system has one solution and it is \texttt{v}, and if the linear system is inconsistent, the result will be a \texttt{Nothing}.
+\begin{lstlisting}[language=Haskell]
+gauss :: Matrix -> Vector -> Maybe Vector
+gauss m v = solution
+  where
+    solution = if consistent
+               then Just $ extractCoeffs result
+               else Nothing
+    consistent = isConsistent result
+    result = execState reducedEchelonS augmented
+    augmented = augmentedMatrix m v
+\end{lstlisting}
+
+\section{Conclusion}
+\begin{lstlisting}[language=Haskell]
+gaussSample :: Matrix
+gaussSample = [[2, 0, 1, 3],
+               [2, 2, 0, 4],
+               [1, 0, 0, 1],
+               [1, 0, 0, 1]]
+
+main :: IO ()
+main = return ()
+\end{lstlisting}
+
+\end{document}

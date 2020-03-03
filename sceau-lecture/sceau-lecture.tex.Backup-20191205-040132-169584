@@ -1,0 +1,173 @@
+\documentclass[10pt]{article}
+\usepackage{xeCJK}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{enumitem}
+\usepackage{tikz-cd}
+\usepackage{array}
+\usepackage{makecell}
+\usepackage{tabularx}
+\usepackage[citestyle=authoryear,bibstyle=authortitle,sorting=ynt,backend=bibtex]{biblatex}
+\usepackage{geometry}
+\usepackage{multicol}
+\usepackage{titling}
+\addbibresource{template}
+\geometry{a4paper,scale=0.9}
+\newcounter{counter}
+\newcommand{\counter}{\refstepcounter{counter}{\thecounter} }
+
+\setlength{\parindent}{0cm}
+\setlength{\parskip}{1em}
+\newcommand*{\qedfill}{\hfill\ensuremath{\blacksquare}}
+
+\title{Differential Form and Characteristic Classes by Duan Haibao}
+\author{Compiled by the Mathematikapolis Organization}
+\begin{document}
+\maketitle
+\renewcommand{\setminus}{\mathbin{\backslash}}
+
+\section{Vector Bundle and Basic Notions}
+Vector bundles are a class of fundamental geometric objects that is used to construct spaces and manifolds in topology. It is also the geometric carrier of various kinds of characteristic class theories. In this chapter the notions related to them are reviewed and standards are settled.
+
+\subsection{The Basic Notions of Vector Bundles}
+Let $F^n$ be an $n$-dimensional topological vector space. Fix a topological space $B$ and a positive integer $n$, consider the product space $E=B\times F^n$ and the projection to the first factor $p:E\to B$, which is called the \textbf{$n$-dimensional trivial vector bundle} with base space $B$ and denoted as $\varepsilon_B^n$.
+
+Generally, a continuous map $p:E\to B$ determines a partition of $E$, i.e. $$E=\bigsqcup_{b\in B}E_b\quad\text{ where }\quad E_b=p^{-1}(b),b\in B.$$
+
+\textbf{Definition 1 (Vector Bundle).} A triple consisting of $E,B$, and a map $p:E\to B$ is called an \textbf{$n$-dimensional $F$-vector bundle} on $B$ if \begin{enumerate}\item For any $b\in B$, $E_b$ is an $n$-dimensional $F$-vector space;\item There exists an open cover $\{B_a\}_{a\in A}$ of $B$ and a family of homeomorphisms $\{\varphi_a:p^{-1}(B_a)\to B_a\times F^n\}_{a\in A}$ such that the restrictions $$\varphi_a\big|_{E_b}:E_b\to\{b\}\times F^n$$ are linear maps for all $b\in B_a$.\end{enumerate} The set $\{(B_a,\varphi_a)\}_{a\in A}$ is called a \textbf{trivialization} of the vector bundle.
+
+There are common terms regarding a vector bundle $\xi:E\overset{p}{\to}B$:\begin{itemize}\item $\dim\xi=\dim_FE_b$ is called the \textbf{dimension} of $xi$;\item $B$ is called the \textbf{base space} of $\xi$;\item $E$ is called the \textbf{total space} of $\xi$; and\item $E_b$ is called the fiber on the point $b\in B$.\end{itemize}
+
+The continuous map \begin{align*}\sigma:B&\to E\\b&\mapsto 0\in E_b\end{align*} is called the \textbf{zero section} of the bundle $\xi:E\overset{p}{\to}B$. This defines a subspace $$E^0=E\setminus\operatorname{Im}\sigma=\bigsqcup_{b\in B}(E_b\setminus\{0\}).$$
+
+\colorbox{red!30}{\textbf{Proposition S\counter.}} The fibers $E_b$ of a vector bundle are topological vector spaces.
+\begin{proof}
+For $b\in B_a$ and $e,e'\in E_b$, we have \begin{align*}e+e'&=(\varphi_a^{-1}\circ\varphi_a)(e+e')\\&=(\varphi_a^{-1}\circ\varphi_a\big|_{E_b})(e+e')\\&=\varphi_a^{-1}(\varphi_a\big|_{E_b}(e)+\varphi_a\big|_{E_b}(e')),\end{align*} which is continuous. For $r\in F$ and the scalar multiplication, the argument is similar.
+\end{proof}
+
+\colorbox{blue!30}{\textbf{Problem 1.}} Prove that the pair of maps $(p:E\to B,\sigma:B\to E)$ as defined above is a homotopic inverse pair, i.e. $p\circ\sigma\simeq\operatorname{Id}_B$ and $\sigma\circ p\simeq\operatorname{Id}_E$ (in fact, $p\circ\sigma=\operatorname{Id}_B$).
+\begin{proof}
+That $p\circ\sigma=\operatorname{Id}_B$ is clear from the definition of the zero section. That $\sigma\circ p\simeq\operatorname{Id}_E$ can be deduced by considering the homotopy \begin{align*}A:\sigma\circ p\leftrightarrow\operatorname{Id}_E:I\times E&\to E\\(t,e)&\mapsto t\cdot(\sigma\circ p)(e)+(1-t)\cdot e=(1-t)\cdot e,\end{align*} which is continuous since $E_{p(e)}$ is a topological vector space.
+\end{proof}
+
+\colorbox{red!30}{\textbf{Definition 2 (Morphism between Bundles).}} A \textbf{morphism} from vector bundle $\xi:E\overset{p}{\to}B$ to $\eta:E'\overset{p'}{\to}B$ is a continuous map $f:E\to E'$ such that \begin{enumerate}\item The diagram
+$$\begin{tikzcd}
+E \arrow[rd, "p"'] \arrow[rr, "f"] &   & E' \arrow[ld, "p'"] \\
+                                   & B &                    
+\end{tikzcd}$$
+commutes;
+\item For all $b\in B$, $f\big|_{E_b}$ is a map $E_b\to E'_{b}$ and it's a linear map.
+\end{enumerate}
+If $f$ above is a homeomorphism, then $f^{-1}$ is also a bundle morphism, in which case $\xi$ and $\eta$ are called \textbf{equivalent bundles}. Denote the set of all $n$-dimensional $F$-vector bundles modulo this equivalence relation with $\mathrm{Vect}_F^n(B)$.
+
+\textbf{Definition 3 (Euclidean Metric).} Let $\xi:E\overset{p}{\to}B$ be an $n$-dimensional real vector bundle, then an \textbf{Euclidean metric} on $\xi$ is a continuous function $Q:E\to\mathbb{R}$ such that for all $b\in B$, $Q_b=Q\big|_{E_b}:E_b\to\mathbb{R}$ is a positive-definite quadratic form. Thus let \begin{align*}H_b:E_b\times E_b&\to\mathbb{R}\\(u,v)&\mapsto\frac{1}{2}(Q_b(u+v)-Q_b(u)-Q_b(v))\end{align*} be the associated bilinear form of the Euclidean metric: it is bilinear, symmetric, and non-degenerate, an inner product.
+
+\colorbox{red!30}{\textbf{Proposition.}} If $B$ is paracompact and Hausdorff, then any real $n$-dimensional vector bundle $\xi:E\overset{p}{\to}B$ admits an Euclidean metric.
+\begin{proof}
+Define \begin{align*}f_n:\mathbb{R}^n&\to\mathbb{R}\\(x_1,\dots,x_n)&\mapsto x_1^2+\cdots+x_n^2.\end{align*} Let $\{(B_a,\varphi_a)\}_{a\in A}$ be a trivialization of the bundle. Define $\hat{Q}_a=f_n\circ\pi_2\circ\varphi_a$ in which $pi_2$ is the projection onto the second factor. Since $B$ is a paracompact and Hausdorff space, there exists (by the axiom of choice) a locally finite partition of unity subordinate to the open cover $\{B_a\}_{a\in A}$, i.e. $$\{\lambda_a:B\to[0,1]\,\big|\,a\in A\}.$$ From the partition of unity, an Euclidean metric is defined to be \begin{align*}Q:E&\to R\\e&\mapsto\sum_{a\in\{a\in A\,|\,p(e)\in B_a\}}\lambda_a(p(e))\cdot\hat{Q}_a(e).\end{align*}
+\end{proof}
+
+\subsection{Examples of Vector Bundle}
+\textbf{Example 1.} Let $M$ be an $n$-dimensional $C^\infty$ manifold. Its tangent bundle $(TM, M, p)$ is a real $n$-dimensional vector bundle on $M$. An Euclidean metric thereof is also called a \textbf{Riemannian metric}.
+
+\textbf{Example 2.} Let $M\subseteq\mathbb{R}^m$ an $n$-dimensional $C^\infty$ submanifold. For any $x\in M$, let $M_x$ be the tangent plane of $M$ at $x$ ($\dim M_x=n$) and $E_x$ be the normal plane ($\dim E_x=m-n$), then we have (1) the tangent bundle $TM=\bigsqcup_{x\in M}M_x$ and the normal bundle $\gamma(M)=\bigsqcup_{x\in M}E_x$ with base space $M$ and the obvious projections. The \textbf{first fundamental form} of $M$ is defined as $I:TM\to\mathbb{R}:v\mapsto\lVert v\rVert^2$.
+
+\textbf{Example 3.} On $B$, $1$-dimensional real (resp. complex) vector bundles are also called real (resp. complex) line bundles. Consider the following two real line bundles on $B=S^1$. \begin{align*}
+\xi&:E=[0,1]\times\mathbb{R}\big/(0,v)\sim(1,v)\overset{p}{\to}S^1;\\
+\eta&:E'=[0,1]\times\mathbb{R}\big/(0,v)\sim(1,-v)\overset{p}{\to}S^1.
+\end{align*}
+$E$ is homeomorphic to the open cylinder and $E'$ to the open M\"obius stripe.
+
+\colorbox{red!30}{\textbf{Definition S\counter (Orientation Bundle of a Vector Bundle).}} Assume we have a vector bundle $\eta:E\overset{p}{\to}B$ and a choice of trivialization $\{(U_a,\phi_a)\}_{a\in A}$. We define the \textbf{orientation bundle} (a fiber bundle, not a vector bundle) of $\eta$, $\hat{\eta}=\langle\hat{E},B,q,\pm1\rangle$ as follows. First, the underlying set of the total space is defined to be $$\hat{E}=\bigsqcup_{b\in B}\left(^{F_{\mathrm{GL}}(E_b)}\big/_{\mathrm{GL}^+}\right);$$ and the base space $\hat{B}=B$. Given an open set $B'\subseteq U_a$ for some $a$, define $$\mu_{B'}={\displaystyle\left(\bigsqcup_{b'\in B'}F_{\mathrm{GL}}(E_{b'})\right)}\Big/{\sim}$$ where $e\sim e'$ if and only if there exists $g^+\in\mathrm{GL}^+$ such that $(\varphi_a(e))_2\cdot g^+=(\varphi_a(e'))_2$; for $b'\in B'$, define a pseudo-inclusion map \begin{align*}\psi^{B'}_{b'}:\mu_B&\to(b',-)\in\hat{\eta}\\\nu&\mapsto[(\beta,\cdots)\in\mu_{B'}\,\big|\,\beta=b']\end{align*} and define $U(\mu_{B'})$ to be the set of all $\mu_{b'}\in\hat{\eta}$ such that $b'\in B'$ and $\mu_{b'}=\psi^{B'}_{b'}(\mu_{B'})$. Topologizing $\hat{E}$ with the basis of the topology being the sets $U(\mu_{B'})$, indexed over all possible $B'$, a projection $q:\hat{\eta}\to B$ is just a projection into the first factor.
+
+\colorbox{red!30}{\textbf{Lemma S\counter.}} The orientation bundle of any vector bundle is a two-sheeted covering space thereof.
+\begin{proof}
+Trivial since $$\left|^{F_{\mathrm{GL}}(E_b)}\big/_{\mathrm{GL}^+}\right|=|\mathrm{GL}:\mathrm{GL}^+|=2.$$
+\end{proof}
+
+\colorbox{red!30}{\textbf{Lemma S\counter (Orientability of Orientation Bundle).}} The orientation bundle of any vector bundle with connected and compact base space is orientable.
+\begin{proof}
+Choose a finite open cover $U_i$ and its corresponding family of trivialization maps $\varphi_i:p^{-1}(U_i)\to B\times F^n$. Consider the intersection graph of $U_i$, which is clearly connected since the base space itself is connected, thus if we have a procedure to glue $\mu_{B'_k}$ and $\mu_{B'_l}$ together, we will have a method to create two global sections of the orientation bundle, which results in an assignment of the $\pm1$ thereto that is continuous, as required by the orientability condition for fiber bundle, i.e. fiberwise orientation-preserving trivialization maps. And indeed we have: On the intersection of two sets $U_i,U_j$ in the open cover, two equivalence classes $[e]\in\mu_{U_i},[e']\in\mu_{U_j}$ are equivalent and to be merged if and only if $(\phi_i(e))_2\cdot g^+=(\phi_j(e'))_2$ for some $g^+\in\mathrm{GL}^+$, and we are done.
+\end{proof}
+
+\colorbox{red!30}{\textbf{Definition S\counter (Orientation of Vector Bundle).}} If the frame bundle $F(\xi)$ as a $\mathrm{GL}$-principal bundle has a reduction to a $\mathrm{GL}^+$-bundle, then the vector bundle $\xi$ is orientable.
+
+\colorbox{red!30}{\textbf{Proposition S\counter (Criterion for Orientability of Vector Bundle).}} Let $\eta:E\overset{p}{\to}B$ a vector bundle with $B$ connected, then $\eta$ is orientable if and only if the total space $\hat{E}$ of the orientation bundle $\hat{\eta}$ has two connected components.
+\begin{proof}
+If $B$ is connected, $\hat{E}$ has either one or two component(s) since it's a two-sheeted covering space of $B$, If it has two, then they are each mapped homeomorphically to $B$ by the covering projection defined above, splitting the fibers into 2 classes: voil\`a, two reduction of the frame bundle from $\mathrm{GL}$ to $\mathrm{GL}^+$. Conversely, if $\eta$ is orientable, it has a reduction of the frame bundle of the kind aforementioned whose complement in the frame bundle is also such a reduction. These two reductions of the frame bundle correspond to the two components of the orientation bundle which are disconnected since the reductions themselves are disjoint, open in $\hat{E}$, and non-empty (for $\mathrm{GL}^+$ acts freely on them).
+\end{proof}
+
+\colorbox{red!30}{\textbf{Lemma S\counter.}} Trivial bundle is orientable.
+\begin{proof}
+Trivial.
+\end{proof}
+
+\colorbox{red!30}{\textbf{Remark S\counter.}} To prove unorientability, one proceed with constructing a path in the base space and a continuous function assigning to each point on the path an element of $\hat{E}$ (an element of the fiber of the frame bundle at that point suffices), then this is a path in $\hat{E}$ since the lifting of path in base space along continuous map is always a path in the covering space. This path, should the endpoints be in different sheets, then connects the two sheets and gives the unorientability.
+
+\colorbox{blue!30}{\textbf{Problem 2.}} Prove that $\xi\not\simeq\eta$.
+\begin{proof}
+Referring to Remark S6, we give a path connecting the two sheets of the covering space $\hat{E}$ at point $\frac{\pi}{2}$. The path is as follow: the end points are both $(0,1)$ in the base space and $[\frac{\pi}{2},1],[\frac{\pi}{2},-1]$ in the covering space, going counterclockwise once on the base space, assigning $[b,1]$ on $\frac{\pi}{2}<b<1$, $[1,1]=[0,-1]$ on $b=0$, and $[b,-1]$ on $0<b<\frac{\pi}{2}$. On the other hand, $\xi$ is isomorphic to the trivial bundle, which is orientable. Being an invariant of vector bundle morphism, orientability distinguishes these two bundles up to isomorphism.
+\end{proof}
+
+\textbf{Example 4 (Hopf Line Bundle).} Let $F\mathbb{P}^{n-1}$ be the space of lines in ${F}^n$ passing through the origin; this is called the $(n-1)$-dimensional $F$-projective space. Let $$E=\{(l,v)\in F\mathbb{P}^{n-1}\times F\,\big|\,v\in l\}\quad\quad\begin{aligned}p:E&\to F\mathbb{P}^{n-1}\\(l,v)&\mapsto l\end{aligned},$$ then this forms an $F$-line bundle on $F\mathbb{P}^{n-1}$, which is called the Hopf line bundle on $F\mathbb{P}^{n-1}$, denoted as $\gamma_F^{n-1}$. Specifically, \begin{itemize}\item $\gamma_\mathbb{R}^{n-1}$ is the real Hopf line bundle on $\mathbb{RP}^{n-1}$;$\dim_{\mathbb{R}}\gamma_\mathbb{R}^{n-1}=1$;\item $\gamma_\mathbb{C}^{n-1}$ is the complex Hopf line bundle on $\mathbb{CP}^{n-1}$;$\dim_{\mathbb{R}}\gamma_\mathbb{C}^{n-1}=2$;\item $\gamma_\mathbb{H}^{n-1}$ is the quaternionic Hopf line bundle on $\mathbb{HP}^{n-1}$;$\dim_{\mathbb{R}}\gamma_\mathbb{H}^{n-1}=4$.\end{itemize}
+
+\colorbox{red!30}{\textbf{Fact S\counter (Sphere Bundle over $\mathbb{CP}^n$).}} TODO
+
+\colorbox{red!30}{\textbf{Fact S\counter (CW structure of $\mathbb{CP}^n$).}} TODO
+
+\colorbox{blue!30}{\textbf{Problem 3.}} Prove that $\gamma^n_\mathbb{R}\not\simeq\mathbb{RP}^{n-1}\times\mathbb{R}$ and that  $\gamma^n_\mathbb{C}\not\simeq\mathbb{CP}^{n-1}\times\mathbb{C}$.
+\begin{proof}
+Similar to Problem 2, starting and ending at $$A=\{x\in\mathbb{R}^{n}\,\big|\,x_1\in\mathbb{R},x_2=0,\dots,x_{n}=0\}$$ in the base space and $(A,1),(A,-1)$ respectively in the covering space, the path goes counterclosewise in the $X_1OX_2$ plane, with the continuous function assigning $(b,1)$ until is goes to $(A,-1)$. With the complex Hopf line bundle, this doesn't work anymore since it is orientable:. To that end, to disprove the isomorphism, we need to explicitly compute the homology groups of the two. TODO
+\end{proof}
+
+\textbf{Example 5 (Canonical Bundle on Grassmannian Manifold).} Let $\mathrm{Gr}_{n,k}(F)$ be the space of $k$-dimensional subspaces in $F^n$. The \textbf{Grassmannian Manifold} is defined to be \begin{itemize}\item\textbf{Real Grassmannian Manifold:} $\mathrm{Gr}_{n,k}(\mathbb{R})=\displaystyle\frac{O^+(n)}{O^+(k)\times O^+(n-k)}$;\item\textbf{Complex Grassmannian Manifold:} $\mathrm{Gr}_{n,k}(\mathbb{C})=\displaystyle\frac{U(n)}{U(k)\times U(n-k)}$;\item\textbf{Quaternionic Grassmannian Manifold:} $\mathrm{Gr}_{n,k}(\mathbb{H})=\displaystyle\frac{Sp(n)}{Sp(k)\times Sp(n-k)}$.\end{itemize} Let $$E_{n,k}=\{(l,v)\in \mathrm{Gr}_{n,k}(F)\times F^n\,\big|\,v\in l\}\quad\quad\begin{aligned}p:E_{n,k}&\to\mathrm{Gr}_{n,k}(F)\\(l,v)&\mapsto l\end{aligned}.$$ $(E_{n,k},\mathrm{Gr}_{n,k}(F),p)$ is a $k$-dimensional $F$-vector bundle on $\mathrm{Gr}_{n,k}(F)$, denoted as $\gamma_{n,k}(F)$ and read as the \textbf{tautological bundle} on $\mathrm{Gr}_{n,k}(F)$; and that $$\dim_F\gamma_{n,k}(F)=k\quad\dim_{\mathbb{R}}\gamma_{n,k}(\mathbb{R})=k\quad\dim_{\mathbb{R}}\gamma_{n,k}(\mathbb{C})=2k\quad\dim_{\mathbb{R}}\gamma_{n,k}(\mathbb{H})=4k.$$
+
+\subsection{Constructs of Vector Bundle}
+In this section, vector bundle means real vector bundle; there exists a completely parallel constructs for the complex ones.
+
+\begin{enumerate}
+\item \textbf{Restriction:} With known vector bundle $\xi:E\overset{p}{\to}B$ and subspace $X\subseteq B$, and $p\big|_X:p^{-1}(X)\to X$ being the restriction map, the triple $\xi\big|_X=(p^{-1}(X),X,p)$ is a vector bundle, called the \textbf{restriction bundle of $\xi$ on $X$}.
+\item \textbf{Product:} With two known vector bundles $\xi:E\overset{p}{\to}B$ and $\eta:E'\overset{p'}{\to}B$, the product map $p\times p':E\times E'\to B\times B'$ is a vector bundle on the product space $B\times B'$, denoted as $\xi\times\eta$ and read as the \textbf{product bundle} of $\xi$ and $\eta$.
+\item \colorbox{red!30}{\textbf{Pullback:}} With known vector bundle $\xi:E\overset{p}{\to}B$ and a continuous map $f:X\to B$, let $$\begin{aligned}p_f:E_f=\{(x,e)\in X\times E\,\big|\,e\in E_{f(x)}\}&\to X\\(x,e)&\mapsto x\end{aligned}\quad\text{ and }\quad\begin{aligned}\hat{f}:E_f&\to E\\(x,e)&\mapsto e\end{aligned},$$ then the diagram 
+$$\begin{tikzcd}
+E_f \arrow[dd, "p_f"'] \arrow[rr, "\hat{f}"] &  & E \arrow[dd, "p"] \\
+                                             &  &                   \\
+X \arrow[rr, "f"']                           &  & B                
+\end{tikzcd}$$
+commutes. In the diagram, \begin{enumerate}\item $f^*\xi:E_f\overset{p_f}{\to}X$ is a vector bundle on $X$ which is called the pullback bundle of $f$;\item The induced map $\hat{f}$ is a bundle morphism.\end{enumerate}
+\item \textbf{Direct Sum (Coproduct):} With two known vector bundles on the same space $B$, $\xi:E\overset{p}{\to}B$ and $\eta:E'\overset{p'}{\to}B$, let \begin{align*}\Delta:B&\to B\times B\\b&\mapsto(b,b)\end{align*} the diagonal embedding, then the pullback bundle $\Delta^*(\xi\times\eta)$ is called the \textbf{direct sum (coproduct)}, denoted as $\xi\oplus\eta$.
+\end{enumerate}
+
+\colorbox{red!30}{\textbf{Remark S\counter.}} The category of $n$-dimensional $F$-vector bundles, $\mathrm{Vect}_n(F)$ is not preabelian, since the kernel of a morphism from the trivial line bundle on $\mathbb{R}$ to itself can have a "jump of rank" (with the language of Vakil) and thus have no kernel. On the other hand, according to the constructs aforementioned, this category is additive, and thus an important consequence is that the finite products and coproducts coincide.
+
+\begin{enumerate}[resume]
+\item \textbf{Subbundle and Complement Bundle:} With known vector bundle $\xi:E\overset{p}{\to}B$, if $E$ has a subspace $E'\subseteq E$ such that the composition $q:E'\overset{i}{\to}E\overset{p}{\to}B$ is another vector bundle, then $\eta=(E',B,q)$ is called a \textbf{subbundle} of $\xi$, denoted $\eta\subseteq\xi$. If $\eta\subseteq\xi$, then a vector bundle $\mu$ such that $\eta\oplus\mu=\xi$ is called the \textbf{complement bundle} of the subbundle $\eta$.
+\end{enumerate}
+
+\colorbox{red!30}{\textbf{Proposition S\counter (Existence of Complement Bundle).}} Complement bundle $\mu$ exists for every pair $\eta\subseteq\xi$.
+\begin{proof}
+Each of the fiber on a bundle can be made into an inner product space by the proposition under Definition 3. Since these fibers are finite dimensional the subspaces thereof are always closed. Take the orthogonal complement of each fiber of $E'_b\subseteq E_\eta$ with respect to the corresponding $E_b\subseteq E_\xi$ and let it be $E^\perp_b\subseteq E_\mu$ and we have $E'_b\oplus E^\perp_b=E_b$ by the property of the orthogonal complement of subspace of inner product space; with the appropriate structures adjoined, $\mu$ becomes a vector bundle that happens to be the complement bundle desired.
+\end{proof}
+
+\newcommand{\Hom}{\operatorname{Hom}}
+\begin{enumerate}[resume]
+\item \textbf{$\mathbf{Hom}$ bundle:} With two known vector bundles $$\xi:E\overset{p}{\to}B\quad\text{ and }\quad\eta:E'\overset{p'}{\to}B,$$ let $$\Hom(\xi,\eta):\Hom(E,E')=\bigsqcup_{b\in B}\Hom(E_b,E'_b)\to B,$$ then it's a vector bundle and $\dim\Hom(\xi,\eta)=\dim\xi\cdot\dim\eta$.
+\end{enumerate}
+
+\colorbox{red!30}{\textbf{Proposition (Properties of $\mathbf{Hom}$ bundle).}} \begin{enumerate}
+\item 
+\item 
+\item 
+\end{enumerate}
+\begin{proof}
+    
+\end{proof}
+
+\subsection{Tangent Bundle of $S^{n-1}$ and $F\mathbb{P}^n$}
+
+\section{The Thom Isomorphism Theorems}
+
+\end{document}

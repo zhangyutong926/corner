@@ -1,0 +1,105 @@
+\section{The structure sheaf of an affine scheme}
+
+\begin{exercise}
+  We have~$\vanishing(f)=\left\{ [\mathfrak{p}]\in\Spec A\,|\,f\in\mathfrak{p} \right\}$, functions not vanishing outside~$\vanishing(f)$ are by~\autoref{exercise:45e} correspond to~$g$ such that~$f^n\in(g)$. Therefore the localisation~$\mathcal{O}_{\Spec A}(\distinguished(f))$ consists of fractions such that the denominator is an element of the principal ideal~$(g)$ such that~$f^n\in(g)$. Remark that this is obviously a multiplicative set and the isomorphism is given by the result of~\autoref{exercise:45e}.
+\end{exercise}
+
+\begin{exercise}
+  This really boils down to judiciously replacing~$A$ by~$A_f$. We obtain:
+  \begin{quote}
+    We check identity on the base. Suppose that~$\Spec A_f=\bigcup_{i\in I}\distinguished(f_i)$ where~$i$ runs over some index set~$I$. Then there is some finite subset of~$I$, which we name~$\left\{ 1,\ldots,n \right\}$, such that~$\Spec A_f=\bigcup_{i=1}^n\distinguished(f_i)$, \ie,~$(f_1,\ldots,f_n)=A_f$ (quasicompactness of~$\Spec A_f$, \autoref{exercise:45c}).
+
+    Suppose we are given~$s\in A_f$ such that~$\res_{\Spec A_f,\distinguished(f_i)}s=0$ in~$A_{f_i}$ for all~$i$. We wish to show that~$s=0$. The fact that~$\res_{\Spec A_f,\distinguished(f_i)}s=0$ in~$A_{f_i}$ implies that there is some~$m$ such that for each~$i\in\left\{ 1,\ldots,n \right\}$, ~$f_i^ms=0$. Now~$(f_1^m,\ldots,f_n^m)=A_f$, for example, from
+    \begin{equation}
+      \Spec A_f=\bigcup_{i=1}^n\distinguished(f_i)=\bigcup_{i=1}^n\distinguished(f_i^m),
+    \end{equation}
+    so there are~$r_i\in A_f$ with~$\sum_{i=1}^nr_if_i^m=1$ in~$A_f$, from which
+    \begin{equation}
+      s=\left( \sum_{i=1}^nr_if_i^m \right)s=\sum_{i=1}^nr_i(f_i^ms)=0.
+    \end{equation}
+    Thus we have checked the ``base identity'' axiom for~$\Spec A_f$.
+  \end{quote}
+\end{exercise}
+
+\begin{exercise}
+  \label{exercise:51c}
+  Again, replacing~$A$ with~$A_f$, open covers of~$\Spec A$ with open covers of the open subspace~$\Spec A_f$ and copying the entire proof suffices. Only three occurences of~$A$ should be replaced with~$A_f$
+\end{exercise}
+
+\begin{exercise}
+  \label{exercise:51d}
+  We have to redo Theorem~5.1.2, but now for this more general construction\todo{\autoref{exercise:51d}: prove that~$\tilde{M}$ is a sheaf}.
+\end{exercise}
+
+
+\section{Visualing schemes II: nilpotents}
+
+There are no exercises in this section.
+
+
+\section{Definition of schemes}
+
+\begin{exercise}
+  If~$f\colon A'\to A$ is a isomorphism of rings, the induced affine schemes are obviously isomorphic too: the underlying spaces are homeomorphic (the vanishing sets are ``equal'' by the isomorphism) and we can put the induced isomorphism for every localization that occurs in the corresponding sheaves.
+
+  If~$f\colon\Spec A\to\Spec A'$ is an isomorphism of affine schemes, the rings of global sections are isomorphic. Now this is a bijection because the rings~$A$ and~$A'$ determine everything there is to know about these ringed spaces and their isomorphisms.
+\end{exercise}
+
+\begin{exercise}
+  We have the homeomorphism between~$\distinguished(f)$ and~$\Spec A_f$ by Section~4.5. Now the sheaves are isomorphic too: the restriction~$\mathcal{O}_{\Spec A}|_{\distinguished(f)}$ has~$\sections(\distinguished(f),\mathcal{O}_{\Spec A})=A_f$ as global ring of sections which induces the desired isomorphism.
+\end{exercise}
+
+\begin{exercise}
+  \label{exercise:53c}
+  Consider~$p\in U\subseteq X$. Take~$V$ a neighbourhood of~$p$ such that~$(V,\mathcal{O}_X|_V)$ is an affine scheme, \ie, is isomorphic to~$(\Spec A,\mathcal{O}_{\Spec A})$ for some ring~$A$. Now consider the restriction of~$\mathcal{O}_{\Spec A}$ to~$U\cap V$ which is again an affine scheme\todo{\autoref{exercise:53c}: an open subscheme of an affine scheme is again affine, but formalize this please}.
+\end{exercise}
+
+\begin{exercise}
+  By definition of a scheme we have for~$U\subseteq X$ open that~$(U,\mathcal{O}_X|_U)$ is an affine scheme, which induces the Zariski topology on~$U$. Now all the restrictions are given from that point, so we just have to take arbitrary unions of open sets regarding every open~$U$ to obtain all open sets in~$X$.
+\end{exercise}
+
+\begin{exercise}
+  \begin{enumerate}
+    \item Everything follows from~\autoref{exercise:46t}: we have the homeomorphism~$\coprod_{i=1}^n\Spec A_i\to\Spec\prod_{i=1}^nA_i$ which gives us that the finite disjoint union is isomorphic to the spectrum of a finite product of rings, which is an affine scheme, just take~$A=\prod_{i=1}^nA_i$ in the definition of the affine scheme~$\coprod_{i=1}^n\Spec A_i$.
+
+    \item By~\autoref{exercise:46d}\ref{enumerate:46d-a} we have that affine schemes are quasicompact, but the infinite disjoint union can be covered by taking the (affine) opens~$\Spec A_i$, which are by definition disjoint but open. We've obtained an infinite cover that cannot be reduced.\qedhere
+  \end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+  The stalk in~$[\mathfrak{p}]$ is defined as the direct limit of the sections over all open subsets containing~$[\mathfrak{p}]$. These open sets are generated by the~$\distinguished(f)$ for~$f\notin\mathfrak{p}$. The sections over these sets are the localizations~$A_f$. In the direct system these will be identified accordingly, but because~$\mathfrak{p}$ is prime, one will never obtain a localization at an element of~$\mathfrak{p}$. Yet all elements in~$A\setminus\mathfrak{p}$ \emph{will} be inverted.
+  
+  The localization at a prime ideal on the other hand is the localization at the complement~$A\setminus\mathfrak{p}$. We obtain the desired result.
+\end{exercise}
+
+
+\section{Three examples}
+
+\begin{exercise}
+  The set~$X$ is given by~$\coprod_iX_i/{\sim}$ where~$\sim$ identifies homeomorphic open sets by the isomorphisms of ringed spaces~$f_{i,j}X_{i,j}\to X_{j,i}$ and~$X_i$ is the underlying topological space of the ringed space\footnote{Just to be completey unambiguous.}. This immediately induces a topology on the obtained set~$X$.
+
+  Now for the sections of the sheaf: open sets are arbitrary unions of open sets in each~$X_i$, where identification can take place. A section is nothing more but pasting sections together, which by the isomorphisms~$f_{i,j}$ and the cocycle condition is completely valid. We have defined a scheme~$X$ such that every scheme~$X_i$ is an open subscheme, the isomorphic parts are glued together in the canonical way, everything is unique up to unique isomorphism as there hasn't been any possible choice.
+\end{exercise}
+
+\begin{exercise}
+  The only point in which sections over~$U$ and~$V$ can disagree are the origins. Sections over~$U$ and~$V$ lie in the rings~$k[t,1/t]$ and~$k[u,1/u]$ which are identified by~$t\mapsto u$. So for functions to agree they have to be equal under this identification and be defined on the part that is not identified. But an element of~$k[t,1/t]$ extends to~$\mathbb{A}_k^1$ if and only if it is defined in the origin, so we only have polynomials to choose from! Therefore~$\sections(X,\mathcal{O}_X)\cong k[t]$. But if the scheme were affine, we'd have~$X=\Spec k[t]$, a contradiction as we obviously have two origins.
+\end{exercise}
+
+\begin{exercise}
+  \label{exercise:54c}
+  Is there something special about the definition\todo{\autoref{exercise:54c}: define affine plane with doubled origin}?
+
+  Two affine open sets with a non-affine open intersection are given by taking~$U$ and~$V$ and adding the respective origins. We have that these open subsets are affine, being isomorphic to~$\Spec k[x,y]$ yet their intersection is~$\mathbb{A}_k^2\setminus\left\{ (0,0) \right\}$ which is not affine by the previous remarks.
+\end{exercise}
+
+\begin{exercise}
+  Because we're considering the restrictions to the intersections of the isomorphisms, we have~$x_{i/j}x_{j/k}x_{k/i}=1$ which gives us the desired cocycle condition. I might have to phrase this a little bit more concretely though.
+\end{exercise}
+
+\begin{exercise}
+  Like in Proposition~5.4.8 where we've proved that~$\mathbb{P}_k^1$ is not affine we can take two affine open sets and we have that a section on their overlap are polynomials in the~$x_i$, adding~$1/x_i$ in one open set and~$1/x_j$ in the other. Now we have~$f(x_1,\ldots,x_n,1/x_i)=g(x_1,\ldots,x_n,1/x_j)$ (so~$x_j$ isn't inverted in~$f$ and~$x_i$ not in~$g$), so we only have the constant functions as sections over two affine open subsets. This extends to the global sections.
+\end{exercise}
+
+\begin{exercise}
+  A point~$[a_0;\ldots;a_n]$ in~$\mathbb{P}_k^n$ such that not all the~$a_i$ are zero is contained in every affine open subset~$U_j$ where~$a_j\neq 0$, by considering it to be the point~$(a_0/a_j,\ldots,a_{j-1}/a_j,a_{j+1}/a_j,\ldots,a_n/a_j)$ in~$\mathbb{A}_k^n$ which is compatible under the isomorphisms. Now the~$\lambda\in k^{\times}$ all vanish under these fractions, we never divide by zero, so these points are identified.
+\end{exercise}
